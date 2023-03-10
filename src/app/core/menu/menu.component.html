@@ -1,17 +1,37 @@
-<div class="main-menu">
+<div class="menu">
   <div class="logo">
-    <a href=""> <img src="assets/logo.png" alt=""> </a>
+    <a href="">
+      <img src="assets/logo.png" alt="">
+      <span class="title">{{title | uppercase}}</span>
+    </a>
   </div>
+
+  <div class="toggle-button">
+    <label for="chkbox" href="" class="links"><i class="fa fa-bars"></i></label>
+  </div>
+
+  <input type="checkbox" id="chkbox">
+
   <div class="nav-bar">
     <ul class="nav-links">
-      <li><a href="">Home</a></li>
-      <li><a href="">About Us</a></li>
-      <li><a href="">Contact Us</a></li>
+      <li><a class="links" href="">Home</a></li>
+      <li><a class="links" href="">About Us</a></li>
+      <li><a class="links" href="">Contact Us</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle links" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Masters
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
+  <span class="spacer"></span>
   <div class="login">
     <button class="btn btn-sm btn-success">Login</button>
     <button class="ms-1 btn btn-sm btn-success">Logout</button>
   </div>
-
 </div>

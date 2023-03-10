@@ -1,0 +1,107 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 10px;
+  background-image: linear-gradient(rgb(18, 69, 105), rgb(97, 147, 183));
+}
+
+.logo {
+  margin: 2px;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.title {
+  margin-left: 2px;
+  font-weight: bold;
+  color: white;
+}
+
+.title:hover {
+  color: red;
+  transition: 0.5s;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  list-style: none;
+}
+
+.links {
+  text-decoration: none;
+  color: white;
+}
+
+.links:hover {
+  color: red;
+  transition: 0.5s;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.login {
+  margin-right: 10px;
+}
+
+.login button:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
+}
+
+.toggle-button {
+  display: none;
+}
+
+#chkbox {
+  display: none;
+}
+
+
+@media screen and (max-width:767px) {
+  .menu {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .toggle-button {
+    order: 0;
+    display: block;
+    margin-left: 5px;
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .spacer {
+    order: 2;
+  }
+
+  .login {
+    order: 3;
+  }
+
+  .nav-links {
+    flex-direction: column;
+  }
+
+  .nav-bar {
+    width: 100%;
+    order: 4;
+    display: none;
+  }
+
+  #chkbox:checked+.nav-bar {
+    display: block;
+  }
+
+
+}
