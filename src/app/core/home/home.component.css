@@ -1,0 +1,27 @@
+.wrapper {
+  background-color: snow;
+  margin-top: 64px;
+}
+
+.content {
+  width: 100%;
+}
+
+img {
+  height: 300px;
+  width: 100%;
+  opacity: 0.7;
+}
+
+.caption {
+  position: fixed;
+  color: chocolate;
+  top: 120px;
+  left: 20px;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.caption h2 {
+  margin-left: 20px;
+}
