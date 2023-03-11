@@ -7,7 +7,7 @@
 }
 
 form {
-  box-shadow: 10px 10px 5px 0px lightgray;
+  box-shadow: 10px 10px 10px 0px lightgray;
 }
 
 .page-header {
@@ -20,6 +20,7 @@ form {
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;
   padding: 10px 10px 10px 10px;
+  color: chocolate;
 }
 
 .page-footer {
