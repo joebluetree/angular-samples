@@ -10,7 +10,7 @@ import { AUTH_FEATURE_NAME, authReducer } from './store/auth.store';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutusComponent },
   { path: 'contactus', component: ContactusComponent },
