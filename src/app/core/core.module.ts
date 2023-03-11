@@ -7,13 +7,14 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { AUTH_FEATURE_NAME, authReducer } from './store/auth.store';
-
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutusComponent },
   { path: 'contactus', component: ContactusComponent },
+  { path: 'login', component: LoginComponent },
 ]
 
 @NgModule({
@@ -21,7 +22,8 @@ const routes: Routes = [
     MenuComponent,
     HomeComponent,
     ContactusComponent,
-    AboutusComponent
+    AboutusComponent,
+    LoginComponent
   ],
   imports: [
     SharedModule,
