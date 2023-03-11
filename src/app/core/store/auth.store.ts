@@ -4,7 +4,7 @@ import { iUser } from '../models/user';
 //actions
 export const auth_login = createAction(
   '[Auth] Login',
-  props<iUser>()
+  props<{ user: iUser }>()
 );
 export const auth_logout = createAction('[Auth] Logout')
 
