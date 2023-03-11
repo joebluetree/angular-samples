@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -21,7 +21,7 @@ const routes: Routes = [
     AboutusComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     RouterModule.forRoot(routes)
   ],
   exports: [
