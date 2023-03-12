@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { auth_login } from '../store/auth/auth.store';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +12,15 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor() {
+  constructor(private store: Store) {
     this.loginForm = new FormGroup({
-      code: new FormControl(''),
-      password: new FormControl('')
+      code: new FormControl('Samantha'),
+      password: new FormControl('Samantha')
     })
+  }
+
+  login() {
+    this.store.dispatch(auth_login(this.loginForm.value))
   }
 
 }

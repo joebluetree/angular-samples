@@ -6,11 +6,13 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
-import { AUTH_FEATURE_NAME, authReducer } from './store/auth.store';
+import { AUTH_FEATURE_NAME, authReducer } from './store/auth/auth.store';
 import { LoginComponent } from './login/login.component';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth/auth.effects';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutusComponent },
   { path: 'contactus', component: ContactusComponent },
@@ -28,7 +30,8 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forRoot(routes),
-    StoreModule.forFeature(AUTH_FEATURE_NAME, authReducer)
+    StoreModule.forFeature(AUTH_FEATURE_NAME, authReducer),
+    EffectsModule.forFeature([AuthEffects]),
   ],
   exports: [
     MenuComponent,

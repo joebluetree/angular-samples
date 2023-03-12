@@ -31,7 +31,11 @@
   </div>
   <span class="spacer"></span>
   <div class="login">
-    <button class="btn btn-sm btn-success">Login</button>
-    <button class="ms-1 btn btn-sm btn-success">Logout</button>
+    <ng-container *ngIf="isLoggedOut$ | async as isLoggedOut">
+      <button class="btn btn-sm btn-success" routerLink="/login">Login</button>
+    </ng-container>
+    <ng-container *ngIf="isLoggedIn$ | async as isLoggedIn">
+      <button class="ms-1 btn btn-sm btn-success" (click)="logout()">Logout</button>
+    </ng-container>
   </div>
 </div>
