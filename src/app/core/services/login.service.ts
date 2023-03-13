@@ -16,13 +16,13 @@ export class LoginService {
   login(login: any) {
     console.log('login calling backend');
     const params = new HttpParams()
-      .set("username", login.code)
+      .set("code", login.code)
+      .set("password", login.password)
     const options = {
       params: params
     }
-    return this.http.get(this.gs.getUrl('/users'), options).pipe(
-      map((user: any) => user[0])
-    );
+    return this.http.get(this.gs.getUrl('/Auth/Login'), options);
+
   }
 
 }

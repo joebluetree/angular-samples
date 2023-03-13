@@ -14,7 +14,7 @@ export const auth_login_success = createAction(
 
 export const auth_login_failure = createAction(
   '[Auth] Login Failure',
-  props<{ error: string | undefined }>()
+  props<{ error: string }>()
 );
 
 export const auth_logout = createAction('[Auth] Logout')
@@ -28,7 +28,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   user: undefined,
-  error: undefined
+  error: ''
 }
 
 export const authReducer = createReducer<AuthState>(
@@ -37,7 +37,7 @@ export const authReducer = createReducer<AuthState>(
     console.log('login success ', payload);
     return {
       user: payload.user,
-      error: undefined
+      error: ''
     }
   }),
   on(auth_login_failure, (state, payload) => {
@@ -73,7 +73,7 @@ export const selectUserName = createSelector(
 
 export const selectLoginError = createSelector(
   authFeatuerSelector,
-  (authState) => authState?.error
+  (authState) => authState.error
 );
 
 

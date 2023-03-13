@@ -16,20 +16,22 @@ export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(private store: Store<AuthState>, private router: Router) {
+
     this.loginError$ = this.store.select(selectLoginError)
     this.loginForm = new FormGroup({
-      code: new FormControl('Samantha'),
-      password: new FormControl('Samantha')
+      code: new FormControl('joy'),
+      password: new FormControl('joy123')
     })
 
   }
 
   login() {
+    console.log('login ');
     this.store.dispatch(auth_login(this.loginForm.value))
   }
 
   cancel() {
-    this.store.dispatch(auth_login_failure({ error: undefined }))
+    this.store.dispatch(auth_login_failure({ error: '' }))
     this.loginForm.reset();
     this.loginForm.setValue({
       code: '',

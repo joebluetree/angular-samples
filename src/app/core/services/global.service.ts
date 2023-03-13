@@ -6,7 +6,11 @@ import { Injectable } from '@angular/core';
 export class GlobalService {
 
   url = "https:/jsonplaceholder.typicode.com";
-  constructor() { }
+
+  constructor() {
+    this.url = "https:/jsonplaceholder.typicode.com";
+    this.url = "http://localhost:5153";
+  }
 
   public getUrl(path: string = '') {
     let sep = path.startsWith("/") ? "" : "/";
