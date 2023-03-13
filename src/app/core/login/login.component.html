@@ -30,12 +30,17 @@
       <div class="row page-footer">
         <div class="col-sm-12 text-center">
           <button class="btn btn-sm btn-success" (click)="login()">Login</button>
-          <button class="btn btn-sm btn-success ms-1">Cancel</button>
+          <button class="btn btn-sm btn-success ms-1" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+
+      <div class="row page-error" *ngIf="loginError$ | async as error">
+        <div class="col-sm-12 text-center">
+          <label for="" class="text-danger">{{error}}</label>
         </div>
       </div>
 
     </div>
-
 
   </form>
 
