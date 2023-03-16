@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { selectIsLogin, selectIsLogout, auth_logout, selectUserName, AuthState } from '../store/auth/auth.store';
 import { Router } from '@angular/router';
 
@@ -21,15 +21,11 @@ export class MenuComponent {
     private router: Router
   ) {
 
-    this.isLoggedIn$ = this.store.select(selectIsLogin).pipe(
-      tap(v => console.log(v))
-    );
-
-    this.isLoggedOut$ = this.store.select(selectIsLogout).pipe(
-      tap(v => console.log(v))
-    );
-
+    this.isLoggedIn$ = this.store.select(selectIsLogin);
+    this.isLoggedOut$ = this.store.select(selectIsLogout);
     this.userName$ = this.store.select(selectUserName);
+
+
 
   }
 
@@ -37,7 +33,6 @@ export class MenuComponent {
   }
 
   ngOnDestroy(): void {
-
   }
 
   logout() {

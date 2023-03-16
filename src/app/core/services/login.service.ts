@@ -21,7 +21,7 @@ export class LoginService {
     const options = {
       params: params
     }
-    return this.http.get(this.gs.getUrl('/Auth/Login'), options);
+    return this.http.get(this.gs.getUrl('api/Auth/Login'), options);
 
   }
 
