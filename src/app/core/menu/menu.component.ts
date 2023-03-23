@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { auth_logout } from '../store/auth/auth.actions';
-import { CoreState, selectIsLogin, selectIsLogout, selectUserName } from '../store/index';
+import { selectIsLogin, selectIsLogout, selectUserName } from '../store/auth/auth.selector';
+import { CoreState } from '../store/index';
 
 @Component({
   selector: 'app-menu',
@@ -26,9 +27,6 @@ export class MenuComponent {
     this.isLoggedIn$ = this.store.select(selectIsLogin);
     this.isLoggedOut$ = this.store.select(selectIsLogout);
     this.userName$ = this.store.select(selectUserName);
-
-
-
   }
 
   ngOnInit(): void {

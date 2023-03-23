@@ -1,5 +1,6 @@
 import { AuthState, authReducer } from './auth/auth.store';
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+import { core } from '@angular/compiler';
 
 export interface CoreState {
   auth: AuthState
@@ -13,25 +14,10 @@ export const CORE_FEATURE_NAME = "core";
 
 export const CoreFeatureSelector = createFeatureSelector<CoreState>(CORE_FEATURE_NAME);
 
+export const AuthStateSelector = createSelector(
+  CoreFeatureSelector,
+  (coreSelectore) => coreSelectore.auth
+);
+
 // selectors
 
-
-export const selectIsLogin = createSelector(
-  CoreFeatureSelector,
-  (coreState) => coreState.auth.user ? true : false
-);
-
-export const selectIsLogout = createSelector(
-  selectIsLogin,
-  (isLoggedIn) => !isLoggedIn
-);
-
-export const selectUserName = createSelector(
-  CoreFeatureSelector,
-  (authState) => authState.auth.user?.user_name
-);
-
-export const selectLoginError = createSelector(
-  CoreFeatureSelector,
-  (authState) => authState.auth.error
-);
