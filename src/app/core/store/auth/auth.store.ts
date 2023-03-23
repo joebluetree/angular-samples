@@ -1,23 +1,6 @@
-import { createAction, createFeatureSelector, createReducer, createSelector, on, props } from '@ngrx/store';
+import { createFeatureSelector, createReducer, createSelector, on, props } from '@ngrx/store';
 import { iUser } from '../../models/user';
-
-//actions
-export const auth_login = createAction(
-  '[Auth] Login',
-  props<{ code: string, password: string }>()
-);
-
-export const auth_login_success = createAction(
-  '[Auth] Login Success',
-  props<{ user: iUser }>()
-);
-
-export const auth_login_failure = createAction(
-  '[Auth] Login Failure',
-  props<{ error: string }>()
-);
-
-export const auth_logout = createAction('[Auth] Logout')
+import { auth_login_success, auth_login_failure, auth_logout } from './auth.actions';
 
 // reducers
 
@@ -34,7 +17,7 @@ const initialState: AuthState = {
 export const authReducer = createReducer<AuthState>(
   initialState,
   on(auth_login_success, (state, payload) => {
-    console.log('login success ', payload);
+    console.log('login success ', payload.user);
     return {
       user: payload.user,
       error: ''
@@ -52,28 +35,5 @@ export const authReducer = createReducer<AuthState>(
   }),
 )
 
-// selectors
-export const AUTH_FEATURE_NAME = "auth";
-const authFeatuerSelector = createFeatureSelector<AuthState>(AUTH_FEATURE_NAME);
-
-export const selectIsLogin = createSelector(
-  authFeatuerSelector,
-  (authState) => authState.user ? true : false
-);
-
-export const selectIsLogout = createSelector(
-  selectIsLogin,
-  (isLoggedIn) => !isLoggedIn
-);
-
-export const selectUserName = createSelector(
-  authFeatuerSelector,
-  (authState) => authState.user?.user_name
-);
-
-export const selectLoginError = createSelector(
-  authFeatuerSelector,
-  (authState) => authState.error
-);
 
 

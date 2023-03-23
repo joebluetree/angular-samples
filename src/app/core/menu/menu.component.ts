@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectIsLogin, selectIsLogout, auth_logout, selectUserName, AuthState } from '../store/auth/auth.store';
+
 import { Router } from '@angular/router';
+import { auth_logout } from '../store/auth/auth.actions';
+import { CoreState, selectIsLogin, selectIsLogout, selectUserName } from '../store/index';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +19,7 @@ export class MenuComponent {
   userName$: Observable<string | undefined>;
 
   constructor(
-    private store: Store<AuthState>,
+    private store: Store<CoreState>,
     private router: Router
   ) {
 

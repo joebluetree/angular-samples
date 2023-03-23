@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AuthState, auth_login, selectLoginError, auth_login_failure } from '../store/auth/auth.store';
+import { auth_login, auth_login_failure } from '../store/auth/auth.actions';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthState } from '../store/auth/auth.store';
+import { selectLoginError } from '../store/index';
 
 @Component({
   selector: 'app-login',
