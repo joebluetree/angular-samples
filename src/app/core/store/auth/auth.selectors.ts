@@ -1,6 +1,11 @@
 import { createSelector } from '@ngrx/store';
-import { AuthStateSelector } from '../index';
+import { CoreFeatureSelector } from '../index';
 
+
+export const AuthStateSelector = createSelector(
+  CoreFeatureSelector,
+  (coreSelectore) => coreSelectore.auth
+);
 
 export const selectIsLogin = createSelector(
   AuthStateSelector,

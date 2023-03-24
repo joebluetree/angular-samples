@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { auth_logout } from '../store/auth/auth.actions';
-import { selectIsLogin, selectIsLogout, selectUserName } from '../store/auth/auth.selector';
+import { selectIsLogin, selectIsLogout, selectUserName } from '../store/auth/auth.selectors';
 import { CoreState } from '../store/index';
 
 @Component({

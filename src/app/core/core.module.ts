@@ -9,7 +9,10 @@ import { StoreModule } from '@ngrx/store';
 import { LoginComponent } from './login/login.component';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth/auth.effects';
-import { coreReducers } from './store/index';
+import { coreReducers, CORE_FEATURE_NAME } from './store/index';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { httpInterceptor } from './http.interceptor';
+import { ProgressScreenComponent } from './progress-screen/progress-screen.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -25,17 +28,22 @@ const routes: Routes = [
     HomeComponent,
     ContactusComponent,
     AboutusComponent,
-    LoginComponent
+    LoginComponent,
+    ProgressScreenComponent
   ],
   imports: [
     SharedModule,
     RouterModule.forRoot(routes),
-    StoreModule.forFeature('core', coreReducers),
+    StoreModule.forFeature(CORE_FEATURE_NAME, coreReducers),
     EffectsModule.forFeature([AuthEffects]),
   ],
   exports: [
     MenuComponent,
+    ProgressScreenComponent,
     RouterModule
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true }
   ]
 })
 export class CoreModule { }

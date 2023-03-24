@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { GlobalService } from './global.service';
 
 @Injectable({
@@ -8,9 +8,14 @@ import { GlobalService } from './global.service';
 })
 export class LoginService {
 
+  private _loadScreen: Subject<Boolean> = new Subject<Boolean>();
+  public readonly loadScreen$ = this._loadScreen.asObservable();
+
+
   constructor(
     private gs: GlobalService,
     private http: HttpClient) {
+
   }
 
   login(login: any) {
@@ -22,7 +27,17 @@ export class LoginService {
       params: params
     }
     return this.http.get(this.gs.getUrl('api/Auth/Login'), options);
-
   }
+
+  public showScreen() {
+    console.log('show screen');
+    this._loadScreen.next(true);
+  }
+  public hideScreen() {
+    console.log('hide screen');
+    this._loadScreen.next(false);
+  }
+
+
 
 }

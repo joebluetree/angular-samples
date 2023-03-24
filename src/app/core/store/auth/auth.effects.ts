@@ -15,7 +15,6 @@ export class AuthEffects {
       ofType(auth_login),
       switchMap(user => this.loginService.login(user).pipe(
         tap((user: any) => {
-          console.log("tap Error ", user);
           if (user == undefined) {
             this.store.dispatch(auth_login_failure({ error: 'Login Error' }));
           }
@@ -28,12 +27,12 @@ export class AuthEffects {
               user_email: user.user_email,
               user_password: ''
             }
+            localStorage.setItem("token", JSON.stringify(user));
             this.store.dispatch(auth_login_success({ user: _user }));
             this.router.navigate(['/home']);
           }
         }),
         catchError((err) => {
-          console.log("catch error ", err);
           this.store.dispatch(auth_login_failure({ error: err.error }));
           return of(err.error);
         })
