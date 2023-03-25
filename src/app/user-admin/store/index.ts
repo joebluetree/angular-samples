@@ -1,5 +1,7 @@
+
 import * as fromModules from './module/module.reducer';
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+
 
 export interface UserAdminState {
   modulem: fromModules.ModuleState
