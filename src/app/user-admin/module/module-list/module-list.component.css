@@ -1,0 +1,12 @@
+.box {
+  border: 1px solid lightgray;
+}
+
+.page-header {
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  gap: 6px;
+  color: chocolate;
+  margin: 65px 1px 0px 1px;
+}

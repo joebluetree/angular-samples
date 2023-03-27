@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./module-edit.component.css']
 })
 export class ModuleEditComponent {
+
+  constructor(private location: Location) {
+  }
+
+
+  return2Parent() {
+    this.location.back();
+  }
 
 }

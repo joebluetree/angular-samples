@@ -9,7 +9,8 @@ import { ModuleEffects } from './store/module/module.effects';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'moduleList', component: ModuleListComponent }
+  { path: 'moduleList', component: ModuleListComponent },
+  { path: 'moduleEdit', component: ModuleEditComponent }
 ]
 
 @NgModule({
