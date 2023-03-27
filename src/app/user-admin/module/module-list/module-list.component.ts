@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { module_load_records } from '../../store/module/module.actions';
 
 @Component({
   selector: 'app-module-list',
@@ -7,7 +9,13 @@ import { Component } from '@angular/core';
 })
 export class ModuleListComponent {
 
-  constructor() {
+  constructor(private store: Store) {
+    this.loadList();
+  }
+
+
+  loadList() {
+    this.store.dispatch(module_load_records())
   }
 
 }

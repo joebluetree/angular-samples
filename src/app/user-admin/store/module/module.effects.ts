@@ -13,7 +13,10 @@ export class ModuleEffects {
     return this.actions$.pipe(
       ofType(module_load_records),
       switchMap(() => this.service.getList()),
-      tap((result: iModulem[]) => this.store.dispatch(module_load_success({ records: result })))
+      tap((result: iModulem[]) => {
+        console.log('Module List', result);
+        return this.store.dispatch(module_load_success({ records: result }));
+      })
     )
   }, { dispatch: false });
 

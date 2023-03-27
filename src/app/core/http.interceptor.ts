@@ -29,7 +29,8 @@ export class httpInterceptor implements HttpInterceptor {
     let _request: HttpRequest<unknown>;
 
     if (token != undefined) {
-      _headers = request.headers.set('Authorization', 'bearer ' + token.token)
+      _headers = request.headers;
+      _headers = _headers.append('Authorization', 'bearer ' + token.user_token)
     }
 
     let isAllowAnonymous = this.anonymousApis.reduce((acc, value) => {

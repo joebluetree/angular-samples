@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutusComponent },
   { path: 'contactus', component: ContactusComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'module', loadChildren: () => import('../user-admin/user-admin.module').then(m => m.UserAdminModule) },
 ]
 
 @NgModule({
