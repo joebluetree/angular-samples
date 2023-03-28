@@ -1,17 +1,16 @@
-
 import * as fromModules from './module/module.reducer';
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
 
 export interface UserAdminState {
-  modulem: fromModules.ModuleState
+  modulemState: fromModules.ModuleState
 }
 
 export const reducers: ActionReducerMap<UserAdminState> = {
-  modulem: fromModules.moduleReducer
+  modulemState: fromModules.moduleReducer
 }
 
-export const moduleFeatureName = 'useradmin'
+export const UserAdminFeatureName = 'useradmin';
 
-export const moduleFeature = createFeatureSelector<UserAdminState>(moduleFeatureName);
+export const userAdminFeature = createFeatureSelector<UserAdminState>(UserAdminFeatureName);
 

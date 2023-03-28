@@ -19,7 +19,6 @@ export class AuthEffects {
             this.store.dispatch(auth_login_failure({ error: 'Login Error' }));
           }
           else {
-            console.log(user);
             const _user: iUser = {
               user_id: user.user_id,
               user_code: user.user_code,

@@ -24,4 +24,15 @@ export class ModuleService {
     return this.http.get<iModulem>('api/module/getRecord', options);
   }
 
+  public save(record: iModulem) {
+
+    const params = {
+      'id': 10
+    }
+    const options = {
+      params: params
+    }
+    return this.http.post<iModulem>(this.gs.getUrl('/api/module/SaveAsync'), record, options);
+  }
+
 }

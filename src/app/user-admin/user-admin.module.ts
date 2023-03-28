@@ -3,7 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ModuleListComponent } from './module/module-list/module-list.component';
 import { ModuleEditComponent } from './module/module-edit/module-edit.component';
 import { StoreModule } from '@ngrx/store';
-import { moduleFeatureName, reducers } from './store';
+import { UserAdminFeatureName, reducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { ModuleEffects } from './store/module/module.effects';
 import { Routes, RouterModule } from '@angular/router';
@@ -21,7 +21,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(moduleFeatureName, reducers),
+    StoreModule.forFeature(UserAdminFeatureName, reducers),
     EffectsModule.forFeature([ModuleEffects])
   ]
 })

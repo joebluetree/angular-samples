@@ -2,6 +2,10 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { module_load_records } from '../../store/module/module.actions';
+import { Observable, tap } from 'rxjs';
+import { iModulem } from '../../models/imodulem';
+import { moduleSelector } from '../../store/module/module.selectors';
+
 
 @Component({
   selector: 'app-module-list',
@@ -10,13 +14,15 @@ import { module_load_records } from '../../store/module/module.actions';
 })
 export class ModuleListComponent {
 
+  records$: Observable<iModulem[]>;
+
   constructor(private store: Store,
     private location: Location) {
-    this.loadList();
+    this.records$ = this.store.select(moduleSelector);
   }
 
 
-  loadList() {
+  serach() {
     this.store.dispatch(module_load_records())
   }
 
