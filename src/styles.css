@@ -6,11 +6,16 @@ body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-size: small;
+  font-size: 14px;
 }
-
 
 .error-text {
   font-size: smaller;
   color: chocolate;
+}
+
+.link {
+  cursor: pointer;
+  color: chocolate;
+  text-decoration: underline;
 }

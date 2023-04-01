@@ -7,6 +7,7 @@ import { UserAdminFeatureName, reducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { ModuleEffects } from './store/module/module.effects';
 import { Routes, RouterModule } from '@angular/router';
+import { ModuleSearchComponent } from './module/module-search/module-search.component';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ModuleListComponent,
-    ModuleEditComponent
+    ModuleEditComponent,
+    ModuleSearchComponent
   ],
   imports: [
     SharedModule,

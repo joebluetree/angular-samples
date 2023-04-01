@@ -21,18 +21,19 @@ export class ModuleService {
     const options = {
       params: param
     }
-    return this.http.get<iModulem>('api/module/getRecord', options);
+    return this.http.get<iModulem>(this.gs.getUrl('api/module/getRecordAsync'), options);
   }
 
-  public save(record: iModulem) {
+  public save(id: number, record: iModulem) {
 
     const params = {
-      'id': 10
+      'id': id
     }
     const options = {
       params: params
     }
     return this.http.post<iModulem>(this.gs.getUrl('/api/module/SaveAsync'), record, options);
+
   }
 
 }

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { module_load_records, module_load_success } from './module.actions';
+import { module_load_records, module_load_success, module_update_search } from './module.actions';
 import { ModuleService } from '../../services/module.service';
-import { switchMap, tap } from 'rxjs';
+import { switchMap, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { iModulem } from '../../models/imodulem';
+import { iModulem, iModulem_Search } from '../../models/imodulem';
+import { ModuleState } from './module.reducer';
+import { modulePage, moduleSearch_Record } from './module.selectors';
+
 
 @Injectable()
 export class ModuleEffects {
@@ -12,7 +15,16 @@ export class ModuleEffects {
   mouelList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(module_load_records),
-      switchMap(() => this.service.getList()),
+      withLatestFrom(
+        this.store.select(moduleSearch_Record),
+        this.store.select(modulePage)
+      ),
+      switchMap(([action, search_record, page]) => {
+        console.log('action', action.action);
+        console.log('search record ', search_record);
+        console.log('search page ', page);
+        return this.service.getList();
+      }),
       tap((result: iModulem[]) => {
         console.log('Module List', result);
         return this.store.dispatch(module_load_success({ records: result }));
@@ -24,7 +36,7 @@ export class ModuleEffects {
   constructor(
     private actions$: Actions,
     private service: ModuleService,
-    private store: Store
+    private store: Store<ModuleState>
   ) {
   }
 }

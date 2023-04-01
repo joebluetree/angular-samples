@@ -1,46 +1,37 @@
 <div class="page-header box">
   <h5>Module List</h5>
-  <button class="btn btn-success btn-sm" routerLink="/module/moduleEdit">Add</button>
+  <button class="btn btn-success btn-sm" routerLink="/module/moduleEdit" [queryParams]="{id :0}">Add</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
-
 <div class="page-search box">
+  <ng-container *ngIf="(search_record$ | async) as record">
+    <app-module-search [input]="record" (output)="search($event)"></app-module-search>
+  </ng-container>
 
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">Name</label>
-        <div class="col-sm-8">
-          <input class="form-control form-control-sm" type="text">
-        </div>
-      </div>
-    </div>
+</div>
 
-    <div class="col-sm-6">
-      <div class="form-group row">
-        <div class="col-sm-12">
-          <button class="btn btn-sm btn-success" (click)="serach()">Search</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<div class="page-pagination">
+  <app-page (pageEvents)="pageEvents($event)"></app-page>
 </div>
 
 
 <div class="page-body box">
   <div class="table-responsive">
     <table class="table table-sm table-hover table-bordered table-striped table-condensed">
-      <thead class="bg-info">
+      <thead class="table-success">
         <tr>
+          <th>Edit</th>
           <th>Name</th>
           <th>Visible</th>
           <th>Order</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rec  of records$ |async">
+        <tr *ngFor="let rec  of records$ |async" (click)="selectRow(rec.module_id)"
+          [ngClass]="{'table-info' : rec.module_id == (selectedRowId$ | async) }">
+          <td (click)="selectRow(rec.module_id)" class="link" routerLink="/module/moduleEdit"
+            [queryParams]="{id :rec.module_id}">Edit</td>
           <td>{{rec.module_name}}</td>
           <td>{{rec.module_is_installed}}</td>
           <td>{{rec.module_order}}</td>
@@ -48,4 +39,8 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="page-pagination">
+  <app-page></app-page>
 </div>

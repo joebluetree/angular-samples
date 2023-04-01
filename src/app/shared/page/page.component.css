@@ -1,0 +1,10 @@
+.pagination {
+  margin-bottom: 0px;
+  padding: 2px;
+}
+
+.page-link {
+  color: chocolate;
+  font-weight: bold;
+  font-size: 10px !important;
+}
