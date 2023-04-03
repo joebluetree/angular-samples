@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
+import { iPage } from 'src/app/shared/models/ipage';
 
 
 export const module_load_records = createAction(
@@ -9,7 +10,7 @@ export const module_load_records = createAction(
 
 export const module_load_success = createAction(
   '[Module Master] Load Success',
-  props<{ records: iModulem[] }>()
+  props<{ records: iModulem[], page: iPage }>()
 );
 
 export const module_load_failure = createAction(

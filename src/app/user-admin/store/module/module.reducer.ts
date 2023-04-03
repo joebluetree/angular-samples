@@ -1,4 +1,4 @@
-import { createReducer, on, createSelector, select } from '@ngrx/store';
+import { createReducer, on, createSelector, select, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iModulem, iModulem_Search } from '../../models/imodulem';
 import { module_load_success, module_load_failure, module_update_selected_rowid, module_update_search } from './module.actions';
@@ -18,15 +18,15 @@ const adapter: EntityAdapter<iModulem> = createEntityAdapter<iModulem>({
 
 export const initialState: ModuleState = adapter.getInitialState({
   selectid: 0,
-  search_record: { module_name: '', module_is_installed: 'NA', user_action: '' },
-  page: { action: '', page_current: 0, page_count: 0, page_rows: 0, page_rows_total: 0 },
+  search_record: <iModulem_Search>{ module_name: '', module_is_installed: 'NA' },
+  page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 5, rows: 0 },
   error: ''
 });
 
 export const moduleReducer = createReducer<ModuleState>(
   initialState,
   on(module_load_success, (state, action) => {
-    return adapter.setAll(action.records, { ...state, error: '' });
+    return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
   on(module_load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
@@ -41,7 +41,5 @@ export const moduleReducer = createReducer<ModuleState>(
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
 
-
-
-
-
+export const ModuleFeatureName = 'moduleState';
+export const moduleFeature = createFeatureSelector<ModuleState>(ModuleFeatureName);

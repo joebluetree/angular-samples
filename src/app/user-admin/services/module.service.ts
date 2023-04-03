@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { iModulem } from '../models/imodulem';
+import { iModulem, iModulem_Search } from '../models/imodulem';
 import { GlobalService } from '../../core/services/global.service';
+import { iPage } from 'src/app/shared/models/ipage';
 
 @Injectable({ providedIn: 'root' })
 export class ModuleService {
@@ -11,8 +12,9 @@ export class ModuleService {
     private gs: GlobalService) {
   }
 
-  public getList() {
-    return this.http.get<iModulem[]>(this.gs.getUrl('/api/module/GetListAsync'));
+  public getList(action: string, search_record: iModulem_Search, page: iPage) {
+    const data = { 'action': action, ...search_record, ...page }
+    return this.http.post<any>(this.gs.getUrl('/api/module/GetListAsync'), data);
   }
 
   public getRecord(id: number) {

@@ -1,6 +1,6 @@
 export interface iPage {
-  page_current: number;
-  page_count: number;
-  page_rows: number;
-  page_rows_total: number;
+  currentPageNo: number;
+  pages: number;
+  pageSize: number;
+  rows: number;
 }

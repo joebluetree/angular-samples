@@ -1,4 +1,4 @@
-import { moduleSearch_Record, moduleSelectedRowId } from './../../store/module/module.selectors';
+import { modulePage, moduleSearch_Record, moduleSelectedRowId } from './../../store/module/module.selectors';
 import { JsonPipe, Location } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -19,23 +19,30 @@ export class ModuleListComponent {
   search_record$: Observable<iModulem_Search>;
   records$: Observable<iModulem[]>;
   selectedRowId$: Observable<number>;
+  page$: Observable<iPage>;
 
   constructor(private store: Store,
     private location: Location) {
+
     this.records$ = this.store.select(moduleSelector);
+
     this.search_record$ = this.store.select(moduleSearch_Record).pipe(
       tap(v => console.log(v))
     );
+
     this.selectedRowId$ = this.store.select(moduleSelectedRowId);
+
+    this.page$ = this.store.select(modulePage);
+
   }
 
   search(search_record: iModulem_Search) {
     this.store.dispatch(module_update_search({ search_record: search_record }))
-    this.pageEvents('search');
+    this.pageEvents({ 'action': 'search' });
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(module_load_records({ action: _action }))
+    this.store.dispatch(module_load_records({ action: _action.action }))
   }
 
   selectRow(_id: number) {

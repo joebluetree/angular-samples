@@ -1,10 +1,7 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { userAdminFeature } from '../index';
-import { selectAll } from './module.reducer';
+import { ModuleState, moduleFeature, selectAll } from './module.reducer';
 
-export const moduleFeature = createSelector(
-  userAdminFeature, (f) => f.modulemState
-)
 
 export const moduleSelector = createSelector(
   moduleFeature, selectAll

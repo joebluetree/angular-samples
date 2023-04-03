@@ -11,8 +11,8 @@
 
 </div>
 
-<div class="page-pagination">
-  <app-page (pageEvents)="pageEvents($event)"></app-page>
+<div class="page-pagination" *ngIf="(page$ | async) as page">
+  <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
 </div>
 
 
@@ -41,6 +41,6 @@
   </div>
 </div>
 
-<div class="page-pagination">
-  <app-page></app-page>
+<div class="page-pagination" *ngIf="(page$ | async) as page">
+  <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
 </div>
