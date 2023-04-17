@@ -53,4 +53,5 @@ export class GlobalService {
         return acc;
       }, Object.create(null));
   }
+
 }
