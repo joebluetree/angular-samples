@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageComponent } from './page/page.component';
+import { TextInputComponent } from './controls/text-input/text-input.component';
 
 @NgModule({
   declarations: [
-    PageComponent
+    PageComponent,
+    TextInputComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { PageComponent } from './page/page.component';
     HttpClientModule,
 
     PageComponent,
+    TextInputComponent,
   ]
 })
 export class SharedModule { }

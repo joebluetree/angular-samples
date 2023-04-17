@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { EMPTY } from 'rxjs';
+
 import {
   HttpRequest,
   HttpHandler,
@@ -6,8 +8,8 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { finalize, Observable } from 'rxjs';
-import { iUser } from './models/user';
 import { LoginService } from './services/login.service';
+import { GlobalService } from './services/global.service';
 
 @Injectable()
 export class httpInterceptor implements HttpInterceptor {
@@ -19,6 +21,7 @@ export class httpInterceptor implements HttpInterceptor {
   ];
 
   constructor(
+    private gs: GlobalService,
     private loginService: LoginService
   ) { }
 
@@ -27,6 +30,7 @@ export class httpInterceptor implements HttpInterceptor {
     let token: any = JSON.parse(localStorage.getItem('token') || '{}');
     let _headers;
     let _request: HttpRequest<unknown>;
+
 
     if (token != undefined) {
       _headers = request.headers;
@@ -39,6 +43,15 @@ export class httpInterceptor implements HttpInterceptor {
         _acc = true;
       return _acc;
     }, false);
+
+    if (!isAllowAnonymous) {
+      if (token != undefined) {
+        if (!this.gs.IsValidToken(token)) {
+          alert('Token Expired');
+          return EMPTY;
+        }
+      }
+    }
 
     if (isAllowAnonymous) {
       _request = request.clone();

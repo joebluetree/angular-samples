@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModuleService } from '../../services/module.service';
 import { iModulem } from '../../models/imodulem';
 import { ActivatedRoute } from '@angular/router';
-
+import { GlobalService } from '../../../core/services/global.service';
 
 @Component({
   selector: 'app-module-edit',
@@ -15,6 +15,7 @@ export class ModuleEditComponent {
   id = 0;
   mform: FormGroup;
   constructor(
+    private gs: GlobalService,
     private service: ModuleService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -22,7 +23,7 @@ export class ModuleEditComponent {
     this.mform = this.fb.group({
       module_id: [0],
       module_name: ['', [Validators.required, Validators.maxLength(60)]],
-      module_is_installed: ['Y'],
+      module_is_installed: [true],
       module_order: ['', [Validators.required, Validators.minLength(1)]],
     })
   }
@@ -59,6 +60,7 @@ export class ModuleEditComponent {
     return this.mform.controls[ctrlName];
   }
 
+
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
@@ -74,7 +76,12 @@ export class ModuleEditComponent {
         if (data.module_id == 0) {
           this.id = v.module_id;
           this.mform.patchValue({ module_id: this.id });
-        }
+          //this.gs.editUrlParam('id', this.id.toString(), true);
+          const param = {
+            id: this.id.toString()
+          };
+          this.gs.updateURL(param);
+        };
       },
       error: (e) => {
         console.log(e);

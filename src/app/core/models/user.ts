@@ -1,4 +1,3 @@
-
 export interface iUser {
   user_id: number;
   user_code: string;
