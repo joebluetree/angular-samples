@@ -36,6 +36,7 @@ export class GlobalService {
   }
 
   public decodeToken(token: string) {
+
     const _decodeToken = (token: string) => {
       try {
         return JSON.parse(window.atob(token));
@@ -43,6 +44,7 @@ export class GlobalService {
         return;
       }
     };
+
     return token
       .split('.')
       .map(token => _decodeToken(token))
@@ -51,6 +53,4 @@ export class GlobalService {
         return acc;
       }, Object.create(null));
   }
-
-
 }
