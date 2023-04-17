@@ -26,8 +26,6 @@ export class GlobalService {
     this.location.replaceState(location.pathname, qs.toString())
   }
 
-
-
   public IsValidToken(token: any) {
     const decodedToken = this.decodeToken(token.user_token);
     let bRet = true;
