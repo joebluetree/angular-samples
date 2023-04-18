@@ -1,12 +1,11 @@
 import { modulePage, moduleSearch_Record, moduleSelectedRowId } from './../../store/module/module.selectors';
-import { JsonPipe, Location } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { module_load_records, module_update_search, module_update_selected_rowid } from '../../store/module/module.actions';
+import { module_load_records, module_delete, module_update_search, module_update_selected_rowid } from '../../store/module/module.actions';
 import { Observable, tap } from 'rxjs';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
 import { moduleSelector } from '../../store/module/module.selectors';
-import { NgForm } from '@angular/forms';
 import { iPage } from 'src/app/shared/models/ipage';
 
 @Component({
@@ -49,6 +48,11 @@ export class ModuleListComponent {
     this.store.dispatch(module_update_selected_rowid({ id: _id }));
   }
 
+  deleteRow(_id: number) {
+    if (!confirm('Delete y/n'))
+      return;
+    this.store.dispatch(module_delete({ id: _id }));
+  }
 
   return2Parent() {
     this.location.back();

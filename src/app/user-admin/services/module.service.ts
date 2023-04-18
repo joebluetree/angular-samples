@@ -38,4 +38,14 @@ export class ModuleService {
 
   }
 
+  public delete(_id: number) {
+    const params = {
+      'id': _id
+    }
+    const options = {
+      params: params
+    }
+    return this.http.get<any>(this.gs.getUrl('api/module/DeleteAsync'), options);
+  }
+
 }

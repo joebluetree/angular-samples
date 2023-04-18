@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { module_load_records, module_load_success, module_update_search } from './module.actions';
+import { module_load_records, module_load_success, module_delete, module_update_search, module_delete_complete } from './module.actions';
 import { ModuleService } from '../../services/module.service';
 import { switchMap, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { iModulem, iModulem_Search } from '../../models/imodulem';
 import { ModuleState } from './module.reducer';
 import { modulePage, moduleSearch_Record } from './module.selectors';
 
@@ -12,7 +11,7 @@ import { modulePage, moduleSearch_Record } from './module.selectors';
 @Injectable()
 export class ModuleEffects {
 
-  mouelList$ = createEffect(() => {
+  moduleList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(module_load_records),
       withLatestFrom(
@@ -28,7 +27,18 @@ export class ModuleEffects {
         console.log('Module List', result);
         return this.store.dispatch(module_load_success({ records: result.records, page: result.page }));
       })
-    )
+    );
+  }, { dispatch: false });
+
+  moduleDelete$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(module_delete),
+      switchMap((action: any) => this.service.delete(action.id)),
+      tap((result: any) => {
+        if (result.status)
+          this.store.dispatch(module_delete_complete({ id: result.id }));
+      })
+    );
   }, { dispatch: false });
 
 

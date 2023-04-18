@@ -5,6 +5,8 @@ import { ModuleService } from '../../services/module.service';
 import { iModulem } from '../../models/imodulem';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
+import { Store } from '@ngrx/store';
+import { module_upsert_row } from '../../store/module/module.actions';
 
 @Component({
   selector: 'app-module-edit',
@@ -19,7 +21,9 @@ export class ModuleEditComponent {
     private service: ModuleService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private location: Location) {
+    private location: Location,
+    private store: Store
+  ) {
     this.mform = this.fb.group({
       module_id: [0],
       module_name: ['', [Validators.required, Validators.maxLength(60)]],
@@ -75,13 +79,14 @@ export class ModuleEditComponent {
       next: (v: iModulem) => {
         if (data.module_id == 0) {
           this.id = v.module_id;
+          data.module_id = this.id;
           this.mform.patchValue({ module_id: this.id });
-          //this.gs.editUrlParam('id', this.id.toString(), true);
           const param = {
             id: this.id.toString()
           };
           this.gs.updateURL(param);
         };
+        this.store.dispatch(module_upsert_row({ record: data }));
       },
       error: (e) => {
         console.log(e);

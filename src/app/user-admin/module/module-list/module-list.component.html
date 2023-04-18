@@ -20,21 +20,27 @@
   <div class="table-responsive">
     <table class="table table-sm table-hover table-bordered table-striped table-condensed">
       <thead class="table-success">
-        <tr>
-          <th>Edit</th>
-          <th>Name</th>
-          <th>Visible</th>
-          <th>Order</th>
+        <tr class="table-header">
+          <th>EDIT</th>
+          <th>NAME</th>
+          <th>VISIBLE</th>
+          <th>ORDER</th>
+          <th>REMOVE</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let rec  of records$ |async" (click)="selectRow(rec.module_id)"
           [ngClass]="{'table-info' : rec.module_id == (selectedRowId$ | async) }">
           <td (click)="selectRow(rec.module_id)" class="link" routerLink="/module/moduleEdit"
-            [queryParams]="{id :rec.module_id}">Edit</td>
+            [queryParams]="{id :rec.module_id}">
+            <i class="fa fa-pencil"></i>
+          </td>
           <td>{{rec.module_name}}</td>
           <td>{{rec.module_is_installed}}</td>
           <td>{{rec.module_order}}</td>
+          <td align="centre" (click)="deleteRow(rec.module_id)" class="link">
+            <i class="fa fa-trash"></i>
+          </td>
         </tr>
       </tbody>
     </table>

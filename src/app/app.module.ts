@@ -10,6 +10,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './store';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './customReuseStrategy';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,13 @@ import { reducers, metaReducers } from './store';
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomRouteReuseStrategy
+    }
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

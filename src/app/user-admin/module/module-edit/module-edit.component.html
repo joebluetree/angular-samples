@@ -62,5 +62,5 @@
 
 <div class="page-footer box">
   <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
-  <button class="btn btn-sm btn-success">New</button>
+  <button class="btn btn-sm btn-success" routerLink="/module/moduleEdit" [queryParams]="{id :0}">New</button>
 </div>

@@ -1,9 +1,8 @@
 import { createReducer, on, createSelector, select, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iModulem, iModulem_Search } from '../../models/imodulem';
-import { module_load_success, module_load_failure, module_update_selected_rowid, module_update_search } from './module.actions';
+import { module_load_success, module_load_failure, module_update_selected_rowid, module_update_search, module_upsert_row, module_delete, module_delete_complete } from './module.actions';
 import { iPage } from 'src/app/shared/models/ipage';
-
 
 export interface ModuleState extends EntityState<iModulem> {
   selectid: number;
@@ -36,6 +35,9 @@ export const moduleReducer = createReducer<ModuleState>(
   }),
   on(module_update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
+  }),
+  on(module_delete_complete, (state, action) => {
+    return adapter.removeOne(action.id, state);
   })
 )
 

@@ -9,6 +9,13 @@ body {
   font-size: 14px;
 }
 
+
+.table-header {
+  color: chocolate;
+  font-weight: bold;
+  font-size: 11px !important;
+}
+
 .error-text {
   font-size: smaller;
   color: chocolate;
@@ -18,4 +25,8 @@ body {
   cursor: pointer;
   color: chocolate;
   text-decoration: underline;
+}
+
+.text-center {
+  text-align: center;
 }
