@@ -27,7 +27,7 @@ export class ModuleEditComponent {
     this.mform = this.fb.group({
       module_id: [0],
       module_name: ['', [Validators.required, Validators.maxLength(60)]],
-      module_is_installed: [true],
+      module_is_installed: ['Y'],
       module_order: ['', [Validators.required, Validators.minLength(1)]],
     })
   }
@@ -64,7 +64,6 @@ export class ModuleEditComponent {
     return this.mform.controls[ctrlName];
   }
 
-
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
@@ -86,11 +85,13 @@ export class ModuleEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.store.dispatch(module_upsert_row({ record: data }));
+        this.store.dispatch(module_upsert_row({ record: v }));
+
+        this.gs.showScreen(["Save Complete"]);
+
       },
       error: (e) => {
-        console.log(e);
-        alert(e.error);
+        this.gs.showScreen([e.error]);
       },
       complete: () => { }
 

@@ -1,10 +1,15 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { userAdminFeature } from '../index';
+import { createSelector } from '@ngrx/store';
 import { ModuleState, moduleFeature, selectAll } from './module.reducer';
 
 
 export const moduleSelector = createSelector(
-  moduleFeature, selectAll
+  moduleFeature,
+  selectAll
+)
+
+export const moduleState = createSelector(
+  moduleFeature,
+  (state: ModuleState) => state
 )
 
 export const moduleSelectedRowId = createSelector(
@@ -17,8 +22,17 @@ export const moduleSearch_Record = createSelector(
   (a) => a.search_record
 )
 
-
 export const modulePage = createSelector(
   moduleFeature,
   (a) => a.page
+)
+
+export const modulePage_SortColumn = createSelector(
+  moduleFeature,
+  (a) => a.sort_column
+)
+
+export const modulePage_SortOrder = createSelector(
+  moduleFeature,
+  (a) => a.sort_order
 )

@@ -1,5 +1,6 @@
 <div class="page-header box">
   <h5>Module Master </h5>
+  <button class="btn btn-sm btn-success" routerLink="/module/moduleEdit" [queryParams]="{id :0, _id:id+1}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
@@ -14,7 +15,8 @@
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Module Name</label>
             <div class="col-sm-8">
-              <app-text-input maxlength="60" formControlName="module_name" [case]="''"></app-text-input>
+              <app-input-text maxlength="60" formControlName="module_name" [case]="''"
+                [id]="'module_name'"></app-input-text>
               <div class="error-text"
                 *ngIf="mform.controls['module_name'].invalid && mform.controls['module_name'].touched">
                 <span *ngIf="mform.controls['module_name'].errors?.['required']">
@@ -29,12 +31,11 @@
           </div>
 
           <div class="form-group row">
-            <label for="module_installed" class="form-label form-label-sm col-sm-4">module Visible</label>
+            <label class="form-label form-label-sm col-sm-4">Installed</label>
             <div class="col-sm-8">
-              <input type="checkbox" class="form-check-input" id="module_installed"
-                formControlName="module_is_installed">
+              <app-checkbox [id]="'module_is_installed'" formControlName="module_is_installed"></app-checkbox>
+              <label for="module_is_installed" class="ms-1 form-label form-label-sm">Visible</label>
             </div>
-
           </div>
 
           <div class="form-group row">
@@ -54,7 +55,6 @@
 
       </div>
 
-
     </form>
   </div>
 
@@ -62,5 +62,4 @@
 
 <div class="page-footer box">
   <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
-  <button class="btn btn-sm btn-success" routerLink="/module/moduleEdit" [queryParams]="{id :0}">New</button>
 </div>

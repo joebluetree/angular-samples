@@ -1,6 +1,6 @@
 <div class="page-header box">
   <h5>Module List</h5>
-  <button class="btn btn-success btn-sm" routerLink="/module/moduleEdit" [queryParams]="{id :0}">Add</button>
+  <button class="btn btn-success btn-sm" routerLink="/module/moduleEdit" [queryParams]="{id :0}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
@@ -22,26 +22,33 @@
       <thead class="table-success">
         <tr class="table-header">
           <th>EDIT</th>
-          <th>NAME</th>
-          <th>VISIBLE</th>
-          <th>ORDER</th>
+          <th (click)="sortHeader('module_id')">ID
+            <i [class]="getIcon('module_id')"></i>
+          </th>
+          <th (click)="sortHeader('module_name')">NAME <i [class]="getIcon('module_name')"></i></th>
+          <th (click)="sortHeader('module_is_installed')">VISIBLE <i [class]="getIcon('module_is_installed')"></i></th>
+          <th (click)="sortHeader('module_order')">ORDER <i [class]="getIcon('module_order')"></i></th>
           <th>REMOVE</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rec  of records$ |async" (click)="selectRow(rec.module_id)"
-          [ngClass]="{'table-info' : rec.module_id == (selectedRowId$ | async) }">
-          <td (click)="selectRow(rec.module_id)" class="link" routerLink="/module/moduleEdit"
-            [queryParams]="{id :rec.module_id}">
-            <i class="fa fa-pencil"></i>
-          </td>
-          <td>{{rec.module_name}}</td>
-          <td>{{rec.module_is_installed}}</td>
-          <td>{{rec.module_order}}</td>
-          <td align="centre" (click)="deleteRow(rec.module_id)" class="link">
-            <i class="fa fa-trash"></i>
-          </td>
-        </tr>
+        <ng-container *ngIf="(records$ | async) as records">
+
+          <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order " (click)="selectRow(rec.module_id)"
+            [ngClass]="{'table-info' : rec.module_id == (selectedRowId$ | async) }">
+            <td (click)="selectRow(rec.module_id)" class="link" routerLink="/module/moduleEdit"
+              [queryParams]="{id :rec.module_id}">
+              <i class="fa fa-pencil"></i>
+            </td>
+            <td>{{rec.module_id}}</td>
+            <td>{{rec.module_name}}</td>
+            <td>{{rec.module_is_installed}}</td>
+            <td>{{rec.module_order}}</td>
+            <td align="centre" (click)="deleteRow(rec)" class="link">
+              <i class="fa fa-trash"></i>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>

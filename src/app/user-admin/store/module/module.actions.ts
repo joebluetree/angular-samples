@@ -41,3 +41,8 @@ export const module_delete_complete = createAction(
   '[Module Master] Delete Complete',
   props<{ id: number }>()
 );
+
+export const module_sort = createAction(
+  '[Module Master] Sort Column',
+  props<{ colName: string }>()
+);

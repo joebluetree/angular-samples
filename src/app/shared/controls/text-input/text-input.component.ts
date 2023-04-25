@@ -1,8 +1,8 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-text-input',
+  selector: 'app-input-text',
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.css'],
   providers: [
@@ -14,33 +14,31 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class TextInputComponent implements ControlValueAccessor {
-
+  @Input('id') id: string = '_id_text';
   @Input() case: string = 'upper';
 
   isDisabled = false;
-  data!: string;
+  ctrl = new FormControl('');
 
-  onChange: any = (value: string) => {
-  };
 
-  onTouch: any = () => {
-
-  };
+  onChange: any = () => { };
+  onTouch: any = () => { };
 
   onBlur: any = () => {
-    this.data = this.data.toString().trim();
-
+    let _data = this.ctrl.value?.toString().trim() || '';
     if (this.case.toString().toLowerCase() == 'upper') {
-      this.data = this.data.toString().toUpperCase();
+      _data = _data.toUpperCase();
     }
     if (this.case.toString().toLowerCase() == 'lower') {
-      this.data = this.data.toString().toLowerCase();
+      _data = _data.toLowerCase();
     }
+    this.writeValue(_data);
+    this.onChange(_data);
     this.onTouch();
   }
 
   writeValue(obj: string): void {
-    this.data = obj;
+    this.ctrl.setValue(obj);
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;

@@ -4,11 +4,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageComponent } from './page/page.component';
 import { TextInputComponent } from './controls/text-input/text-input.component';
+import { SortPipe } from './pipe/sort.pipe';
+import { CheckboxComponent } from './controls/checkbox/checkbox.component';
+
 
 @NgModule({
   declarations: [
     PageComponent,
-    TextInputComponent
+    TextInputComponent,
+    SortPipe,
+    CheckboxComponent
   ],
   imports: [
     CommonModule,
@@ -21,9 +26,10 @@ import { TextInputComponent } from './controls/text-input/text-input.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
     PageComponent,
     TextInputComponent,
+    SortPipe,
+    CheckboxComponent,
   ]
 })
 export class SharedModule { }

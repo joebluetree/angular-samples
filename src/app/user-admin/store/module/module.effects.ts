@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { module_load_records, module_load_success, module_delete, module_update_search, module_delete_complete } from './module.actions';
 import { ModuleService } from '../../services/module.service';
-import { switchMap, tap, withLatestFrom } from 'rxjs';
+import { EMPTY, catchError, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ModuleState } from './module.reducer';
 import { modulePage, moduleSearch_Record } from './module.selectors';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 
 @Injectable()
@@ -37,6 +38,14 @@ export class ModuleEffects {
       tap((result: any) => {
         if (result.status)
           this.store.dispatch(module_delete_complete({ id: result.id }));
+        else {
+          throw new Error(result.message);
+        }
+      }),
+      catchError(error => {
+        const err = !!error.error ? error.error : error;
+        this.gs.showScreen([err]);
+        throw error;
       })
     );
   }, { dispatch: false });
@@ -45,7 +54,8 @@ export class ModuleEffects {
   constructor(
     private actions$: Actions,
     private service: ModuleService,
-    private store: Store<ModuleState>
+    private store: Store<ModuleState>,
+    private gs: GlobalService
   ) {
   }
 }

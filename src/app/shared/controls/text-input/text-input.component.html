@@ -1,2 +1,2 @@
-<input type="text" class="form-control form-control-sm" [(ngModel)]="data" (ngModelChange)="onChange($event)"
-  (blur)="onBlur()" [disabled]="isDisabled">
+<input type="text" class="form-control form-control-sm" (blur)="onBlur()" [disabled]="isDisabled" [formControl]="ctrl"
+  autocomplete="off" [id]="id">

@@ -30,11 +30,9 @@ export class LoginService {
   }
 
   public showScreen() {
-    console.log('show screen');
     this._loadScreen.next(true);
   }
   public hideScreen() {
-    console.log('hide screen');
     this._loadScreen.next(false);
   }
 

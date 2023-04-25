@@ -1,0 +1,16 @@
+<div class="toast-container p-3" style="position: absolute; top: 0px; right:5px;" *ngIf="messages.length > 0"
+  (click)="hide()">
+  <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        <ng-container *ngFor="let str of messages;let idx = index">
+          <p>
+            {{str}}<span *ngIf="idx==0" class="ms-1 badge bg-primary rounded-pill">{{_interval}}</span>
+          </p>
+        </ng-container>
+      </div>
+      <!-- <button type="button" class="btn-close me-4 mt-4 mx-auto" data-bs-dismiss="toast" aria-label="Close"
+        (click)="hide()"></button> -->
+    </div>
+  </div>
+</div>

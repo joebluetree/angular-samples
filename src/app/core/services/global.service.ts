@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,11 @@ import { Injectable } from '@angular/core';
 export class GlobalService {
 
   url = "https:/jsonplaceholder.typicode.com";
+
+
+  private _toast: Subject<string[]> = new Subject<string[]>();
+  public readonly toast$ = this._toast.asObservable();
+
 
   constructor(private location: Location) {
     this.url = "https:/jsonplaceholder.typicode.com";
@@ -53,5 +59,16 @@ export class GlobalService {
         return acc;
       }, Object.create(null));
   }
+
+
+  //toast subject
+
+  public showScreen(msg: string[]) {
+    this._toast.next(msg);
+  }
+  public hideScreen() {
+    this._toast.next([]);
+  }
+
 
 }

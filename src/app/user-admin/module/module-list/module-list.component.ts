@@ -1,12 +1,15 @@
-import { modulePage, moduleSearch_Record, moduleSelectedRowId } from './../../store/module/module.selectors';
+import { modulePage, modulePage_SortColumn, modulePage_SortOrder, moduleSearch_Record, moduleSelectedRowId, moduleState } from './../../store/module/module.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { module_load_records, module_delete, module_update_search, module_update_selected_rowid } from '../../store/module/module.actions';
-import { Observable, tap } from 'rxjs';
+import { module_load_records, module_delete, module_update_search, module_update_selected_rowid, module_sort } from '../../store/module/module.actions';
+import { Observable, tap, map } from 'rxjs';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
 import { moduleSelector } from '../../store/module/module.selectors';
 import { iPage } from 'src/app/shared/models/ipage';
+
+import { ModuleState } from '../../store/module/module.reducer';
+
 
 @Component({
   selector: 'app-module-list',
@@ -20,6 +23,9 @@ export class ModuleListComponent {
   selectedRowId$: Observable<number>;
   page$: Observable<iPage>;
 
+  sort_column = "";
+  sort_order = "";
+
   constructor(private store: Store,
     private location: Location) {
 
@@ -29,10 +35,15 @@ export class ModuleListComponent {
       tap(v => console.log(v))
     );
 
-    this.selectedRowId$ = this.store.select(moduleSelectedRowId);
-
+    // this.selectedRowId$ = this.store.select(moduleSelectedRowId);
+    this.selectedRowId$ = this.store.select(moduleState).pipe(
+      tap((e: ModuleState) => {
+        this.sort_column = e.sort_column;
+        this.sort_order = e.sort_order;
+      }),
+      map((e: ModuleState) => e.selectid)
+    );
     this.page$ = this.store.select(modulePage);
-
   }
 
   search(search_record: iModulem_Search) {
@@ -48,10 +59,25 @@ export class ModuleListComponent {
     this.store.dispatch(module_update_selected_rowid({ id: _id }));
   }
 
-  deleteRow(_id: number) {
-    if (!confirm('Delete y/n'))
+  deleteRow(_rec: iModulem) {
+    if (!confirm(`Delete ${_rec.module_name} y/n`))
       return;
-    this.store.dispatch(module_delete({ id: _id }));
+    this.store.dispatch(module_delete({ id: _rec.module_id }));
+  }
+
+  sortHeader(col_name: string) {
+    this.store.dispatch(module_sort({ colName: col_name }));
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sort_column) {
+      if (this.sort_order == 'asc')
+        return 'fa fa-long-arrow-up';
+      else
+        return 'fa fa-long-arrow-down';
+    }
+    else
+      return '';
   }
 
   return2Parent() {
