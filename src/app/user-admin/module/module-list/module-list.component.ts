@@ -1,4 +1,4 @@
-import { modulePage, modulePage_SortColumn, modulePage_SortOrder, moduleSearch_Record, moduleSelectedRowId, moduleState } from './../../store/module/module.selectors';
+import { modulePage, moduleSearch_Record, moduleState } from './../../store/module/module.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -7,9 +7,7 @@ import { Observable, tap, map } from 'rxjs';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
 import { moduleSelector } from '../../store/module/module.selectors';
 import { iPage } from 'src/app/shared/models/ipage';
-
 import { ModuleState } from '../../store/module/module.reducer';
-
 
 @Component({
   selector: 'app-module-list',
@@ -26,8 +24,10 @@ export class ModuleListComponent {
   sort_column = "";
   sort_order = "";
 
-  constructor(private store: Store,
-    private location: Location) {
+  constructor(
+    private store: Store,
+    private location: Location
+  ) {
 
     this.records$ = this.store.select(moduleSelector);
 
@@ -35,7 +35,6 @@ export class ModuleListComponent {
       tap(v => console.log(v))
     );
 
-    // this.selectedRowId$ = this.store.select(moduleSelectedRowId);
     this.selectedRowId$ = this.store.select(moduleState).pipe(
       tap((e: ModuleState) => {
         this.sort_column = e.sort_column;
@@ -69,13 +68,9 @@ export class ModuleListComponent {
     this.store.dispatch(module_sort({ colName: col_name }));
   }
 
-  public getIcon(col: string) {
-    if (col == this.sort_column) {
-      if (this.sort_order == 'asc')
-        return 'fa fa-long-arrow-up';
-      else
-        return 'fa fa-long-arrow-down';
-    }
+  public getIcon(col: string, sorted_col: string, sorted_order: string) {
+    if (col == sorted_col)
+      return sorted_order == 'asc' ? 'fa fa-long-arrow-up' : 'fa fa-long-arrow-down';
     else
       return '';
   }

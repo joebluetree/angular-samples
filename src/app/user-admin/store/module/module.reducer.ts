@@ -1,7 +1,7 @@
-import { createReducer, on, createSelector, select, createFeatureSelector } from '@ngrx/store';
+import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iModulem, iModulem_Search } from '../../models/imodulem';
-import { module_load_success, module_load_failure, module_update_selected_rowid, module_update_search, module_upsert_row, module_delete, module_delete_complete, module_sort } from './module.actions';
+import { module_load_success, module_load_failure, module_update_selected_rowid, module_update_search, module_upsert_row, module_delete_complete, module_sort } from './module.actions';
 import { iPage } from 'src/app/shared/models/ipage';
 
 export interface ModuleState extends EntityState<iModulem> {

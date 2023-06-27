@@ -1,7 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { CoreFeatureSelector } from '../index';
 
-
 export const AuthStateSelector = createSelector(
   CoreFeatureSelector,
   (coreSelectore) => coreSelectore.auth

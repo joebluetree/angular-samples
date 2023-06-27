@@ -22,12 +22,13 @@
       <thead class="table-success">
         <tr class="table-header">
           <th>EDIT</th>
-          <th (click)="sortHeader('module_id')">ID
-            <i [class]="getIcon('module_id')"></i>
+          <th (click)="sortHeader('module_id')">ID<i [class]="getIcon('module_id',sort_column, sort_order)"></i></th>
+          <th (click)="sortHeader('module_name')">NAME <i [class]="getIcon('module_name',sort_column, sort_order)"></i>
           </th>
-          <th (click)="sortHeader('module_name')">NAME <i [class]="getIcon('module_name')"></i></th>
-          <th (click)="sortHeader('module_is_installed')">VISIBLE <i [class]="getIcon('module_is_installed')"></i></th>
-          <th (click)="sortHeader('module_order')">ORDER <i [class]="getIcon('module_order')"></i></th>
+          <th (click)="sortHeader('module_is_installed')">VISIBLE <i
+              [class]="getIcon('module_is_installed',sort_column, sort_order)"></i></th>
+          <th (click)="sortHeader('module_order')">ORDER <i
+              [class]="getIcon('module_order',sort_column, sort_order)"></i></th>
           <th>REMOVE</th>
         </tr>
       </thead>

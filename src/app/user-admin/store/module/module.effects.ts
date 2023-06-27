@@ -11,7 +11,6 @@ import { GlobalService } from 'src/app/core/services/global.service';
 
 @Injectable()
 export class ModuleEffects {
-
   moduleList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(module_load_records),
