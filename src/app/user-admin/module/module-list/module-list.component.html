@@ -1,10 +1,10 @@
-<div class="page-header box">
+<div class="page-header">
   <h5>Module List</h5>
   <button class="btn btn-success btn-sm" routerLink="/module/moduleEdit" [queryParams]="{id :0}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
-<div class="page-search box">
+<div class="page-search">
   <ng-container *ngIf="(search_record$ | async) as record">
     <app-module-search [input]="record" (output)="search($event)"></app-module-search>
   </ng-container>
@@ -16,7 +16,7 @@
 </div>
 
 
-<div class="page-body box">
+<div class="page-body">
   <div class="table-responsive">
     <table class="table table-sm table-hover table-bordered table-striped table-condensed">
       <thead class="table-success">
@@ -55,6 +55,6 @@
   </div>
 </div>
 
-<div class="page-pagination" *ngIf="(page$ | async) as page">
+<div class="page-pagination line-bottom" *ngIf="(page$ | async) as page">
   <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
 </div>

@@ -13,6 +13,7 @@ export interface ModuleState extends EntityState<iModulem> {
   error: string;
 };
 
+
 const adapter: EntityAdapter<iModulem> = createEntityAdapter<iModulem>({
   selectId: (m) => m.module_id
 });
@@ -25,6 +26,9 @@ export const initialState: ModuleState = adapter.getInitialState({
   sort_order: 'asc',
   error: ''
 });
+
+
+
 
 export const moduleReducer = createReducer<ModuleState>(
   initialState,

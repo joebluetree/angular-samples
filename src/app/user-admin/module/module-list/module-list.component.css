@@ -1,37 +1,3 @@
 * {
   overflow: hidden;
 }
-
-.box {
-  border: 1px solid lightgray;
-}
-
-.page-header {
-  display: flex;
-  justify-content: baseline;
-  align-items: center;
-  gap: 6px;
-  color: chocolate;
-  margin: 65px 1px 0px 1px;
-  padding: 2px;
-}
-
-.page-search {
-  margin: 2px 1px 0px 1px;
-  padding: 4px 4px 4px 4px;
-}
-
-.page-body {
-  margin: 2px 1px 0px 1px;
-  padding: 2px;
-}
-
-.page-pagination {
-  margin: 2px 1px 0px 1px;
-  cursor: pointer;
-  border: 1px solid lightgray;
-}
-
-i {
-  color: darkorange;
-}
