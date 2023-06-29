@@ -11,7 +11,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 
 @Injectable()
 export class ParamEffects {
-  moduleList$ = createEffect(() => {
+  paramList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(param_load_records),
       withLatestFrom(
@@ -29,7 +29,7 @@ export class ParamEffects {
     );
   }, { dispatch: false });
 
-  moduleDelete$ = createEffect(() => {
+  paramDelete$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(param_delete),
       switchMap((action: any) => this.service.delete(action.id)),

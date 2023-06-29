@@ -12,6 +12,7 @@
 
 </div>
 
+
 <div class="page-pagination" *ngIf="(page$ | async) as page">
   <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
 </div>
