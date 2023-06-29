@@ -1,0 +1,60 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button class="btn btn-success btn-sm" routerLink="/masters/paramEdit"
+    [queryParams]="{id :0,menuid:menuid,type:type, title:title}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<div class="page-search">
+  <ng-container *ngIf="(search_record$ | async) as record">
+    <app-param-search [input]="record" (output)="search($event)"></app-param-search>
+  </ng-container>
+
+</div>
+
+<div class="page-pagination" *ngIf="(page$ | async) as page">
+  <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
+</div>
+
+
+<div class="page-body">
+  <div class="table-responsive">
+    <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+      <thead class="table-success">
+        <tr class="table-header">
+          <th>EDIT</th>
+          <th (click)="sortHeader('param_id')">ID<i [class]="getIcon('param_id',sort_column, sort_order)"></i></th>
+          <th (click)="sortHeader('param_code')">NAME <i [class]="getIcon('param_code',sort_column, sort_order)"></i>
+          <th (click)="sortHeader('param_name')">NAME <i [class]="getIcon('param_name',sort_column, sort_order)"></i>
+          </th>
+          <th (click)="sortHeader('param_order')">ORDER <i [class]="getIcon('param_order',sort_column, sort_order)"></i>
+          </th>
+          <th>REMOVE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="(records$ | async) as records">
+
+          <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order " (click)="selectRow(rec.param_id)"
+            [ngClass]="{'table-info' : rec.param_id == (selectedRowId$ | async) }">
+            <td (click)="selectRow(rec.param_id)" class="link" routerLink="/masters/paramEdit"
+              [queryParams]="{id :rec.param_id}">
+              <i class="fa fa-pencil"></i>
+            </td>
+            <td>{{rec.param_id}}</td>
+            <td>{{rec.param_code}}</td>
+            <td>{{rec.param_name}}</td>
+            <td>{{rec.param_order}}</td>
+            <td align="centre" (click)="deleteRow(rec)" class="link">
+              <i class="fa fa-trash"></i>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="page-pagination line-bottom" *ngIf="(page$ | async) as page">
+  <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
+</div>

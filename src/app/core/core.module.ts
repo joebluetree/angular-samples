@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'contactus', component: ContactusComponent },
   { path: 'login', component: LoginComponent },
   { path: 'module', loadChildren: () => import('../user-admin/user-admin.module').then(m => m.UserAdminModule) },
+  { path: 'masters', loadChildren: () => import('../masters/masters.module').then(m => m.MastersModule) },
 ]
 
 @NgModule({

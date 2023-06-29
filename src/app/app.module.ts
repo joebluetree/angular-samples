@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './store';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './customReuseStrategy';
+import { CustomSerializer } from './custom-route-serializer';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CustomRouteReuseStrategy } from './customReuseStrategy';
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
     StoreDevtoolsModule.instrument(),
   ],
   providers: [

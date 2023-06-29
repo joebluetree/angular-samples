@@ -23,7 +23,6 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    //StoreModule.forFeature(UserAdminFeatureName, reducers),
     StoreModule.forFeature(ModuleFeatureName, moduleReducer),
     EffectsModule.forFeature([ModuleEffects])
   ]
