@@ -79,6 +79,7 @@ export class ParamEditComponent {
       return;
     }
     const data = <iParam>this.mform.value;
+    data.param_type = this.type;
 
     if (data.param_id == null)
       data.param_id = 0;

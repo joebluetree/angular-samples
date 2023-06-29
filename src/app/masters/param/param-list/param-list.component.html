@@ -25,7 +25,8 @@
         <tr class="table-header">
           <th>EDIT</th>
           <th (click)="sortHeader('param_id')">ID<i [class]="getIcon('param_id',sort_column, sort_order)"></i></th>
-          <th (click)="sortHeader('param_code')">NAME <i [class]="getIcon('param_code',sort_column, sort_order)"></i>
+          <th (click)="sortHeader('param_type')">TYPE <i [class]="getIcon('param_type',sort_column, sort_order)"></i>
+          <th (click)="sortHeader('param_code')">CODE <i [class]="getIcon('param_code',sort_column, sort_order)"></i>
           <th (click)="sortHeader('param_name')">NAME <i [class]="getIcon('param_name',sort_column, sort_order)"></i>
           </th>
           <th (click)="sortHeader('param_order')">ORDER <i [class]="getIcon('param_order',sort_column, sort_order)"></i>
@@ -39,10 +40,11 @@
           <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order " (click)="selectRow(rec.param_id)"
             [ngClass]="{'table-info' : rec.param_id == (selectedRowId$ | async) }">
             <td (click)="selectRow(rec.param_id)" class="link" routerLink="/masters/paramEdit"
-              [queryParams]="{id :rec.param_id}">
+              [queryParams]="{id :rec.param_id,menuid:menuid,type:type, title:title}">
               <i class="fa fa-pencil"></i>
             </td>
             <td>{{rec.param_id}}</td>
+            <td>{{rec.param_type}}</td>
             <td>{{rec.param_code}}</td>
             <td>{{rec.param_name}}</td>
             <td>{{rec.param_order}}</td>
