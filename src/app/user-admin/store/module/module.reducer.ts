@@ -29,7 +29,6 @@ export const initialState: ModuleState = adapter.getInitialState({
 
 
 
-
 export const moduleReducer = createReducer<ModuleState>(
   initialState,
   on(module_load_success, (state, action) => {

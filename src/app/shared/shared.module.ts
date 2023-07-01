@@ -7,6 +7,7 @@ import { TextInputComponent } from './controls/text-input/text-input.component';
 import { SortPipe } from './pipe/sort.pipe';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 
+import { LetModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CheckboxComponent } from './controls/checkbox/checkbox.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LetModule,
   ],
   exports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { CheckboxComponent } from './controls/checkbox/checkbox.component';
     TextInputComponent,
     SortPipe,
     CheckboxComponent,
+    LetModule,
   ]
 })
 export class SharedModule { }

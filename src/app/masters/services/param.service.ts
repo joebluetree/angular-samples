@@ -12,8 +12,8 @@ export class ParamService {
     private gs: GlobalService) {
   }
 
-  public getList(action: string, search_record: iParam_Search, page: iPage) {
-    const data = { 'action': action, ...search_record, ...page }
+  public getList(action: any, search_record: iParam_Search, page: iPage) {
+    const data = { ...action, ...search_record, ...page }
     return this.http.post<any>(this.gs.getUrl('/api/param/GetListAsync'), data);
   }
 

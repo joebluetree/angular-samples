@@ -4,12 +4,12 @@ import { iPage } from 'src/app/shared/models/ipage';
 
 export const param_load_records = createAction(
   '[Param Master] Load Records',
-  props<{ action: string }>()
+  props<{ action: string, param_type: string }>()
 );
 
 export const param_load_success = createAction(
   '[Param Master] Load Success',
-  props<{ records: iParam[], page: iPage }>()
+  props<{ records: iParam[], page: iPage, param_type: string }>()
 );
 
 export const param_load_failure = createAction(

@@ -1,14 +1,14 @@
-import { paramPage, paramSearch_Record, paramState } from './../../store/param/param.selectors';
+import { paramPage, paramRecords, paramSearch_Record, paramStateSelector } from './../../store/param/param.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { param_load_records, param_delete, param_update_search, param_update_selected_rowid, param_sort } from '../../store/param/param.actions';
 import { Observable, tap, map } from 'rxjs';
 import { iParam, iParam_Search } from '../../models/iparam';
-import { paramSelector } from '../../store/param/param.selectors';
 import { iPage } from 'src/app/shared/models/ipage';
 import { ParamState } from '../../store/param/param.reducer';
 import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-param-list',
@@ -41,16 +41,19 @@ export class ParamListComponent {
       this.type = rec["type"];
     })
 
-    this.records$ = this.store.select(paramSelector);
+    console.log('paramlist component')
+
+    this.records$ = this.store.select(paramRecords);
 
     this.search_record$ = this.store.select(paramSearch_Record).pipe(
       tap(v => console.log(v))
     );
 
-    this.selectedRowId$ = this.store.select(paramState).pipe(
+    this.selectedRowId$ = this.store.select(paramStateSelector).pipe(
       tap((e: ParamState) => {
         this.sort_column = e.sort_column;
         this.sort_order = e.sort_order;
+
       }),
       map((e: ParamState) => e.selectid)
     );
@@ -65,7 +68,7 @@ export class ParamListComponent {
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(param_load_records({ action: _action.action }))
+    this.store.dispatch(param_load_records({ action: _action.action, param_type: this.type }))
   }
 
   selectRow(_id: number) {

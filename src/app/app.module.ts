@@ -14,6 +14,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './customReuseStrategy';
 import { CustomSerializer } from './custom-route-serializer';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -23,7 +24,6 @@ import { CustomSerializer } from './custom-route-serializer';
     SharedModule,
     CoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
     StoreDevtoolsModule.instrument(),
