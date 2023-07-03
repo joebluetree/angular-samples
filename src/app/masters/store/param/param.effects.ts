@@ -26,14 +26,15 @@ export class ParamEffects {
   paramDelete$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(param_delete),
-      switchMap((action: any) => this.service.delete(action.id)),
-      tap((result: any) => {
-        if (result.status)
-          this.store.dispatch(param_delete_complete({ id: result.id }));
-        else {
-          throw new Error(result.message);
-        }
-      }),
+      switchMap((action: any) => this.service.delete(action.id).pipe(
+        map(result => {
+          if (result.status)
+            this.store.dispatch(param_delete_complete({ id: result.id, param_type: action.param_type }));
+          else {
+            throw new Error(result.message);
+          }
+        })
+      )),
       catchError(error => {
         const err = !!error.error ? error.error : error;
         this.gs.showScreen([err]);

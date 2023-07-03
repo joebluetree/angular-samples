@@ -19,30 +19,30 @@ export const param_load_failure = createAction(
 
 export const param_update_selected_rowid = createAction(
   '[Param Master] Update Selected Row Id',
-  props<{ id: number }>()
+  props<{ id: number, param_type: string }>()
 )
 
 export const param_update_search = createAction(
   '[Param Master] Update Search',
-  props<{ search_record: iParam_Search }>()
+  props<{ search_record: iParam_Search, param_type: string }>()
 );
 
 export const param_upsert_row = createAction(
   '[Param Master] Add / Update Row',
-  props<{ record: iParam }>()
+  props<{ record: iParam, param_type: string }>()
 );
 
 export const param_delete = createAction(
   '[Param Master] Delete',
-  props<{ id: number }>()
+  props<{ id: number, param_type: string }>()
 );
 
 export const param_delete_complete = createAction(
   '[Param Master] Delete Complete',
-  props<{ id: number }>()
+  props<{ id: number, param_type: string }>()
 );
 
 export const param_sort = createAction(
   '[Param Master] Sort Column',
-  props<{ colName: string }>()
+  props<{ colName: string, param_type: string }>()
 );

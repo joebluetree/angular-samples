@@ -49,25 +49,35 @@ export const paramReducer = createReducer<ParamGroupState>(
   // on(param_load_failure, (state, action) => {
   //   return adapter.removeAll({ ...state, error: action.erorr })
   // }),
-  // on(param_update_selected_rowid, (state, action) => {
-  //   return { ...state, selectid: action.id };
-  // }),
-  // on(param_update_search, (state, action) => {
-  //   return { ...state, search_record: action.search_record }
-  // }),
-  // on(param_upsert_row, (state, action) => {
-  //   return adapter.upsertOne(action.record, state)
-  // }),
-  // on(param_delete_complete, (state, action) => {
-  //   return adapter.removeOne(action.id, state);
-  // }),
-  // on(param_sort, (state, action) => {
-  //   let colName = action.colName;
-  //   let colOrder = 'asc';
-  //   if (colName == state.sort_column)
-  //     colOrder = state.sort_order == 'asc' ? 'desc' : 'asc';
-  //   return { ...state, sort_column: action.colName, sort_order: colOrder }
-  // })
+  on(param_update_selected_rowid, (state, action) => {
+    return { ...state, [action.param_type]: { ...state[action.param_type], selectid: action.id } };
+  }),
+  on(param_update_search, (state, action) => {
+    return { ...state, [action.param_type]: { ...state[action.param_type], search_record: action.search_record } };
+  }),
+  on(param_upsert_row, (state, action) => {
+
+    return {
+      ...state,
+      [action.param_type]: adapter.upsertOne(action.record, state[action.param_type])
+    }
+  }),
+  on(param_delete_complete, (state, action) => {
+    return {
+      ...state,
+      [action.param_type]: adapter.removeOne(action.id, state[action.param_type])
+    }
+  }),
+  on(param_sort, (state, action) => {
+    let colName = action.colName;
+    let colOrder = 'asc';
+    if (colName == state[action.param_type].sort_column)
+      colOrder = state[action.param_type].sort_order == 'asc' ? 'desc' : 'asc';
+    return {
+      ...state,
+      [action.param_type]: { ...state[action.param_type], sort_column: action.colName, sort_order: colOrder }
+    }
+  })
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();

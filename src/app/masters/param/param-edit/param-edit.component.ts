@@ -95,7 +95,7 @@ export class ParamEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.store.dispatch(param_upsert_row({ record: v }));
+        this.store.dispatch(param_upsert_row({ record: v, param_type: this.type }));
 
         this.gs.showScreen(["Save Complete"]);
 

@@ -59,7 +59,7 @@ export class ParamListComponent {
   }
 
   search(search_record: iParam_Search) {
-    this.store.dispatch(param_update_search({ search_record: search_record }))
+    this.store.dispatch(param_update_search({ search_record: search_record, param_type: this.type }))
     this.pageEvents({ 'action': 'search' });
   }
 
@@ -68,17 +68,17 @@ export class ParamListComponent {
   }
 
   selectRow(_id: number) {
-    this.store.dispatch(param_update_selected_rowid({ id: _id }));
+    this.store.dispatch(param_update_selected_rowid({ id: _id, param_type: this.type }));
   }
 
   deleteRow(_rec: iParam) {
     if (!confirm(`Delete ${_rec.param_name} y/n`))
       return;
-    this.store.dispatch(param_delete({ id: _rec.param_id }));
+    this.store.dispatch(param_delete({ id: _rec.param_id, param_type: this.type }));
   }
 
   sortHeader(col_name: string) {
-    this.store.dispatch(param_sort({ colName: col_name }));
+    this.store.dispatch(param_sort({ colName: col_name, param_type: this.type }));
   }
 
   public getIcon(col: string, sorted_col: string, sorted_order: string) {
