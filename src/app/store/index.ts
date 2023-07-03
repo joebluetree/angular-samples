@@ -23,52 +23,18 @@ export function resetState(reducer: ActionReducer<AppState>): ActionReducer<AppS
   };
 }
 
-
 export const getRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
 
 export const SelectRouterQueryParam = createSelector(
   getRouterState,
   (router) => {
     return (router && router.state && router.state.queryParams) || {}
-    // console.log('router ', router)
-    // if (router) {
-    //   return router.state.queryParams;
-    // }
-    // else
-    //   return null;
   }
 );
 
-
-// export const SelectID = createSelector(
-//   getRouterState,
-//   (router) => {
-//     if (router.state) {
-//       return router.state.queryParams.id;
-//     }
-//     else
-//       return null;
-//   }
-// );
-
-// export const SelectMenuID = createSelector(
-//   getRouterState,
-//   (router) => {
-//     if (router.state) {
-//       return router.state.queryParams.menu_id;
-//     }
-//     else
-//       return null;
-//   }
-// );
-
-// export const SelectMenuParam = createSelector(
-//   getRouterState,
-//   (router) => {
-//     if (router.state) {
-//       return router.state.queryParams.menu_param;
-//     }
-//     else
-//       return null;
-//   }
-// );
+export const SelectRouterParam = createSelector(
+  getRouterState,
+  (router) => {
+    return (router && router.state && router.state.params) || {}
+  }
+);
