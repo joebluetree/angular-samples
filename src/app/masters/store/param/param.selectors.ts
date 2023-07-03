@@ -1,44 +1,46 @@
 import { createSelector } from '@ngrx/store';
 import { ParamGroupState, paramFeature, selectAll } from './param.reducer';
-import { SelectRouterParam } from 'src/app/store';
+import { SelectRouterQueryParam } from 'src/app/store';
 
-export const paramStateSelector = createSelector(
+export const selectParamState = createSelector(
   paramFeature,
-  SelectRouterParam,
+  SelectRouterQueryParam,
   (state: ParamGroupState, url: any) => {
-    if (url)
-      return state[url.type];
-    else
+    if (Object.keys(url).length === 0) {
       return state['DEFAULT'];
+    }
+    else {
+      return state[url.type];
+    }
   }
 )
 
-export const paramRecords = createSelector(
-  paramStateSelector,
+export const selectParamRecords = createSelector(
+  selectParamState,
   selectAll
 )
 
-export const paramSelectedRowId = createSelector(
-  paramStateSelector,
+export const selectParamRowId = createSelector(
+  selectParamState,
   (a) => a.selectid
 )
 
-export const paramSearch_Record = createSelector(
-  paramStateSelector,
+export const selectParamSearch_Record = createSelector(
+  selectParamState,
   (a) => a.search_record
 )
 
-export const paramPage = createSelector(
-  paramStateSelector,
+export const selectParamPage = createSelector(
+  selectParamState,
   (a) => a.page
 )
 
-export const paramPage_SortColumn = createSelector(
-  paramStateSelector,
+export const selectParamPage_SortColumn = createSelector(
+  selectParamState,
   (a) => a.sort_column
 )
 
-export const paramPage_SortOrder = createSelector(
-  paramStateSelector,
+export const selectParamPage_SortOrder = createSelector(
+  selectParamState,
   (a) => a.sort_order
 )

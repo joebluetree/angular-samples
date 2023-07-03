@@ -5,7 +5,7 @@ import { ParamService } from '../../services/param.service';
 import { EMPTY, catchError, map, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ParamState } from './param.reducer';
-import { paramPage, paramSearch_Record } from './param.selectors';
+import { selectParamPage, selectParamSearch_Record } from './param.selectors';
 import { GlobalService } from 'src/app/core/services/global.service';
 
 @Injectable()
@@ -14,15 +14,12 @@ export class ParamEffects {
     return this.actions$.pipe(
       ofType(param_load_records),
       withLatestFrom(
-        this.store.select(paramSearch_Record),
-        this.store.select(paramPage)
+        this.store.select(selectParamSearch_Record),
+        this.store.select(selectParamPage)
       ),
-      switchMap(([action, search_record, page]) => {
-        return this.service.getList(action, search_record, page).pipe(
-          map(result => this.store.dispatch(param_load_success({ records: result.records, page: result.page, param_type: action.param_type }))),
-          catchError((err) => of(err.error))
-        );
-      }),
+      switchMap(([action, search_record, page]) => this.service.getList(action, search_record, page).pipe(
+        map(result => this.store.dispatch(param_load_success({ records: result.records, page: result.page, param_type: action.param_type }))),
+      )),
     );
   }, { dispatch: false });
 

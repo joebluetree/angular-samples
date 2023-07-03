@@ -15,6 +15,7 @@ export class AuthEffects {
       ofType(auth_login),
       switchMap(user => this.loginService.login(user).pipe(
         tap((user: any) => {
+          console.log('tap', 'login ');
           if (user == undefined) {
             this.store.dispatch(auth_login_failure({ error: 'Login Error' }));
           }

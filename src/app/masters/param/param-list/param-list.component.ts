@@ -1,4 +1,4 @@
-import { paramPage, paramRecords, paramSearch_Record, paramStateSelector } from './../../store/param/param.selectors';
+import { selectParamPage, selectParamRecords, selectParamSearch_Record, selectParamState } from './../../store/param/param.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -41,24 +41,20 @@ export class ParamListComponent {
       this.type = rec["type"];
     })
 
-    console.log('paramlist component')
 
-    this.records$ = this.store.select(paramRecords);
+    this.records$ = this.store.select(selectParamRecords);
 
-    this.search_record$ = this.store.select(paramSearch_Record).pipe(
-      tap(v => console.log(v))
-    );
+    this.search_record$ = this.store.select(selectParamSearch_Record);
 
-    this.selectedRowId$ = this.store.select(paramStateSelector).pipe(
+    this.selectedRowId$ = this.store.select(selectParamState).pipe(
       tap((e: ParamState) => {
         this.sort_column = e.sort_column;
         this.sort_order = e.sort_order;
-
       }),
       map((e: ParamState) => e.selectid)
     );
 
-    this.page$ = this.store.select(paramPage);
+    this.page$ = this.store.select(selectParamPage);
 
   }
 

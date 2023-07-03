@@ -1,6 +1,6 @@
 import { isDevMode } from '@angular/core';
 import { RouterReducerState, routerReducer } from '@ngrx/router-store';
-import { ActionReducerMap, MetaReducer, createFeatureSelector, createSelector } from '@ngrx/store';
+import { Action, ActionReducer, ActionReducerMap, MetaReducer, createFeatureSelector, createSelector } from '@ngrx/store';
 import { RouterStateUrl } from '../custom-route-serializer';
 
 export interface AppState {
@@ -11,18 +11,32 @@ export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer
 };
 
-export const metaReducers: MetaReducer<AppState>[] = isDevMode() ? [] : [];
+export const metaReducers: MetaReducer<AppState>[] = [resetState];
+
+export const auth_logout = '[Auth] Logout';
+
+export function resetState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
+  return (state, action) => {
+    if (action.type === auth_logout) {
+      state = {} as AppState;
+    }
+    return reducer(state, action);
+  };
+}
+
 
 export const getRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
 
-export const SelectRouterParam = createSelector(
+export const SelectRouterQueryParam = createSelector(
   getRouterState,
   (router) => {
-    if (router) {
-      return router.state.queryParams;
-    }
-    else
-      return null;
+    return (router && router.state && router.state.queryParams) || {}
+    // console.log('router ', router)
+    // if (router) {
+    //   return router.state.queryParams;
+    // }
+    // else
+    //   return null;
   }
 );
 
