@@ -6,7 +6,7 @@ import { param_load_records, param_delete, param_update_search, param_update_sel
 import { Observable, tap, map } from 'rxjs';
 import { iParam, iParam_Search } from '../../models/iparam';
 import { iPage } from 'src/app/shared/models/ipage';
-import { ParamState } from '../../store/param/param.reducer';
+import { ParamGroupState, ParamState } from '../../store/param/param.reducer';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -31,7 +31,7 @@ export class ParamListComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store,
+    private store: Store<ParamGroupState>,
     private location: Location
   ) {
 

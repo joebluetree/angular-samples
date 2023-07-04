@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
 import { module_upsert_row } from '../../store/module/module.actions';
+import { ModuleState } from '../../store/module/module.reducer';
 
 @Component({
   selector: 'app-module-edit',
@@ -22,13 +23,13 @@ export class ModuleEditComponent {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private location: Location,
-    private store: Store
+    private store: Store<ModuleState>
   ) {
     this.mform = this.fb.group({
       module_id: [0],
-      module_name: ['', [Validators.required, Validators.maxLength(60)]],
-      module_is_installed: ['Y'],
-      module_order: ['', [Validators.required, Validators.minLength(1)]],
+      module_name: [{ value: '' }, [Validators.required, Validators.maxLength(60)]],
+      module_is_installed: [{ value: 'Y' }],
+      module_order: [{ value: '' }, [Validators.required, Validators.minLength(1)]],
     })
   }
 

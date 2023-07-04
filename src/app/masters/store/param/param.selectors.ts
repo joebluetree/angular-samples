@@ -6,12 +6,21 @@ export const selectParamState = createSelector(
   paramFeature,
   SelectRouterQueryParam,
   (state: ParamGroupState, url: any) => {
-    if (Object.keys(url).length === 0) {
-      return state['DEFAULT'];
-    }
-    else {
+
+    if (url.type)
       return state[url.type];
-    }
+    else
+      return state['DEFAULT'];
+
+    // if (Object.keys(url).length === 0) {
+    //   return state['DEFAULT'];
+    // }
+    // else {
+    //   if (url.type)
+    //     return state[url.type];
+    //   else
+    //     return state['DEFAULT'];
+    // }
   }
 )
 

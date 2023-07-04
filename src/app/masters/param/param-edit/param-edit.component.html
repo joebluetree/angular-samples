@@ -16,7 +16,7 @@
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Code</label>
             <div class="col-sm-8">
-              <app-input-text maxlength="60" formControlName="param_code" [case]="''"
+              <app-input-text maxlength="60" formControlName="param_code" [case]="'upper'"
                 [id]="'param_code'"></app-input-text>
               <div class="error-text"
                 *ngIf="mform.controls['param_code'].invalid && mform.controls['param_code'].touched">
@@ -34,7 +34,7 @@
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Name</label>
             <div class="col-sm-8">
-              <app-input-text maxlength="60" formControlName="param_name" [case]="''"
+              <app-input-text maxlength="60" formControlName="param_name" [case]="'upper'"
                 [id]="'param_name'"></app-input-text>
               <div class="error-text"
                 *ngIf="mform.controls['param_name'].invalid && mform.controls['param_name'].touched">

@@ -25,7 +25,7 @@ export class ModuleListComponent {
   sort_order = "";
 
   constructor(
-    private store: Store,
+    private store: Store<ModuleState>,
     private location: Location
   ) {
 

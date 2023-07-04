@@ -20,9 +20,22 @@ export class TextInputComponent implements ControlValueAccessor {
   isDisabled = false;
   ctrl = new FormControl('');
 
-
   onChange: any = () => { };
   onTouch: any = () => { };
+
+  writeValue(obj: string): void {
+    this.ctrl.setValue(obj);
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  // setDisabledState(isDisabled: boolean): void {
+  //   this.isDisabled = isDisabled;
+  // }
 
   onBlur: any = () => {
     let _data = this.ctrl.value?.toString().trim() || '';
@@ -37,19 +50,5 @@ export class TextInputComponent implements ControlValueAccessor {
     this.onTouch();
   }
 
-  writeValue(obj: string): void {
-    this.ctrl.setValue(obj);
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouch = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
-  }
 
 }
