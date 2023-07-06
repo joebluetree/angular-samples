@@ -1,7 +1,5 @@
 import { createSelector } from '@ngrx/store';
 import { ModuleState, moduleFeature, selectAll } from './module.reducer';
-import { SelectRouterQueryParam } from 'src/app/store';
-
 
 export const moduleSelector = createSelector(
   moduleFeature,
