@@ -10,6 +10,7 @@ export interface ModuleState extends EntityState<iModulem> {
   page: iPage;
   sort_column: string;
   sort_order: string;
+  sort_icon: string;
   error: string;
 };
 
@@ -24,6 +25,7 @@ export const initialState: ModuleState = adapter.getInitialState({
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
   sort_column: 'module_order',
   sort_order: 'asc',
+  sort_icon: '',
   error: ''
 });
 
@@ -48,11 +50,7 @@ export const moduleReducer = createReducer<ModuleState>(
     return adapter.removeOne(action.id, state);
   }),
   on(module_sort, (state, action) => {
-    let colName = action.colName;
-    let colOrder = 'asc';
-    if (colName == state.sort_column)
-      colOrder = state.sort_order == 'asc' ? 'desc' : 'asc';
-    return { ...state, sort_column: action.colName, sort_order: colOrder }
+    return { ...state, sort_column: action.sort_column, sort_order: action.sort_order, sort_icon: action.sort_icon }
   })
 )
 

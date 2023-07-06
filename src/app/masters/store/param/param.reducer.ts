@@ -11,6 +11,7 @@ export interface ParamState extends EntityState<iParam> {
   page: iPage;
   sort_column: string;
   sort_order: string;
+  sort_icon: string;
   error: string;
 };
 
@@ -25,6 +26,7 @@ export const initialParamState: ParamState = adapter.getInitialState({
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
   sort_column: 'param_order',
   sort_order: 'asc',
+  sort_icon: '',
   error: ''
 });
 
@@ -68,13 +70,9 @@ export const paramReducer = createReducer<ParamGroupState>(
     }
   }),
   on(param_sort, (state, action) => {
-    let colName = action.colName;
-    let colOrder = 'asc';
-    if (colName == state[action.param_type].sort_column)
-      colOrder = state[action.param_type].sort_order == 'asc' ? 'desc' : 'asc';
     return {
       ...state,
-      [action.param_type]: { ...state[action.param_type], sort_column: action.colName, sort_order: colOrder }
+      [action.param_type]: { ...state[action.param_type], sort_column: action.sort_column, sort_order: action.sort_order, sort_icon: action.sort_icon }
     }
   })
 )

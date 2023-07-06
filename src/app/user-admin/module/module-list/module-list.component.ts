@@ -23,22 +23,27 @@ export class ModuleListComponent {
 
   sort_column = "";
   sort_order = "";
+  sort_icon = '';
 
   constructor(
     private store: Store<ModuleState>,
     private location: Location
-  ) {
+  ) { }
 
+  ngOnInit(): void {
     this.records$ = this.store.select(moduleSelector);
     this.search_record$ = this.store.select(moduleSearch_Record);
     this.selectedRowId$ = this.store.select(moduleState).pipe(
       tap((e: ModuleState) => {
         this.sort_column = e.sort_column;
         this.sort_order = e.sort_order;
+        this.sort_icon = e.sort_icon;
       }),
       map((e: ModuleState) => e.selectid)
     );
     this.page$ = this.store.select(modulePage);
+
+
   }
 
   search(search_record: iModulem_Search) {
@@ -61,12 +66,17 @@ export class ModuleListComponent {
   }
 
   sortHeader(col_name: string) {
-    this.store.dispatch(module_sort({ colName: col_name }));
+    if (col_name == this.sort_column)
+      this.sort_order = this.sort_order == 'asc' ? 'desc' : 'asc';
+    else
+      this.sort_order = 'asc';
+    this.sort_icon = this.sort_order == 'asc' ? 'fa fa-long-arrow-up' : 'fa fa-long-arrow-down';
+    this.store.dispatch(module_sort({ sort_column: col_name, sort_order: this.sort_order, sort_icon: this.sort_icon }));
   }
 
-  public getIcon(col: string, sorted_col: string, sorted_order: string) {
-    if (col == sorted_col)
-      return sorted_order == 'asc' ? 'fa fa-long-arrow-up' : 'fa fa-long-arrow-down';
+  public getIcon(col: string) {
+    if (col == this.sort_column)
+      return this.sort_icon;
     else
       return '';
   }
