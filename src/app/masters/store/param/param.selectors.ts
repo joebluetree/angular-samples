@@ -7,10 +7,7 @@ export const selectParamGroupState = createSelector(
   SelectRouterQueryParam,
   (state: ParamGroupState, url: any) => {
     console.log('param selector ', url);
-    if (url.type)
-      return state[url.type];
-    else
-      return state['DEFAULT'];
+    return state[url.type ? url.type : 'DEFAULT'];
   }
 )
 

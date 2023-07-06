@@ -30,11 +30,7 @@ export class ModuleListComponent {
   ) {
 
     this.records$ = this.store.select(moduleSelector);
-
-    this.search_record$ = this.store.select(moduleSearch_Record).pipe(
-      tap(v => console.log(v))
-    );
-
+    this.search_record$ = this.store.select(moduleSearch_Record);
     this.selectedRowId$ = this.store.select(moduleState).pipe(
       tap((e: ModuleState) => {
         this.sort_column = e.sort_column;

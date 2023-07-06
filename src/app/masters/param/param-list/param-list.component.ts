@@ -42,7 +42,6 @@ export class ParamListComponent {
   }
 
   ngOnInit(): void {
-
     this.records$ = this.store.select(selectParamRecords);
     this.search_record$ = this.store.select(selectParamSearch_Record);
     this.selectedRowId$ = this.store.select(selectParamGroupState).pipe(
