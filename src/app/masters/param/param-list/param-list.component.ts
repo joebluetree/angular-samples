@@ -1,4 +1,4 @@
-import { selectParamPage, selectParamRecords, selectParamSearch_Record, selectParamState } from './../../store/param/param.selectors';
+import { selectParamGroupState, selectParamPage, selectParamRecords, selectParamSearch_Record } from './../../store/param/param.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -34,28 +34,25 @@ export class ParamListComponent {
     private store: Store<ParamGroupState>,
     private location: Location
   ) {
-
     this.route.queryParams.forEach(rec => {
       this.menuid = rec["menuid"];
       this.title = rec["title"];
       this.type = rec["type"];
     })
+  }
 
+  ngOnInit(): void {
 
     this.records$ = this.store.select(selectParamRecords);
-
     this.search_record$ = this.store.select(selectParamSearch_Record);
-
-    this.selectedRowId$ = this.store.select(selectParamState).pipe(
+    this.selectedRowId$ = this.store.select(selectParamGroupState).pipe(
       tap((e: ParamState) => {
         this.sort_column = e.sort_column;
         this.sort_order = e.sort_order;
       }),
       map((e: ParamState) => e.selectid)
     );
-
     this.page$ = this.store.select(selectParamPage);
-
   }
 
   search(search_record: iParam_Search) {

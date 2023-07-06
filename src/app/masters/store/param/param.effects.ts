@@ -4,7 +4,7 @@ import { param_load_records, param_load_success, param_delete, param_update_sear
 import { ParamService } from '../../services/param.service';
 import { EMPTY, catchError, map, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ParamState } from './param.reducer';
+import { ParamGroupState, ParamState } from './param.reducer';
 import { selectParamPage, selectParamSearch_Record } from './param.selectors';
 import { GlobalService } from 'src/app/core/services/global.service';
 
@@ -47,7 +47,7 @@ export class ParamEffects {
   constructor(
     private actions$: Actions,
     private service: ParamService,
-    private store: Store<ParamState>,
+    private store: Store<ParamGroupState>,
     private gs: GlobalService
   ) {
   }

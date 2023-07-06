@@ -28,6 +28,11 @@ export class ParamEditComponent {
     private location: Location,
     private store: Store
   ) {
+    this.buildForm();
+  }
+
+
+  buildForm() {
     this.mform = this.fb.group({
       param_id: [0],
       param_code: ['', [Validators.required, Validators.maxLength(60)]],
@@ -44,8 +49,6 @@ export class ParamEditComponent {
       this.title = rec["title"];
       this.type = rec["type"];
     })
-
-    console.log(this.title);
     this.getRecord();
   }
 

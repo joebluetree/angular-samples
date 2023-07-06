@@ -8,7 +8,6 @@
   <ng-container *ngIf="(search_record$ | async) as record">
     <app-module-search [input]="record" (output)="search($event)"></app-module-search>
   </ng-container>
-
 </div>
 
 <div class="page-pagination" *ngIf="(page$ | async) as page">
