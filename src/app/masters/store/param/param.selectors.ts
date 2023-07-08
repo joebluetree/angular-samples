@@ -1,13 +1,18 @@
 import { createSelector } from '@ngrx/store';
 import { ParamGroupState, paramFeature, selectAll } from './param.reducer';
-import { SelectRouterQueryParam } from 'src/app/store';
+import { selectRouterQueryParam } from 'src/app/store';
+
+export const selectParamType = createSelector(
+  selectRouterQueryParam,
+  (url: any) => url.type
+)
 
 export const selectParamGroupState = createSelector(
   paramFeature,
-  SelectRouterQueryParam,
-  (state: ParamGroupState, url: any) => {
-    console.log('param selector ', url);
-    return state[url.type ? url.type : 'DEFAULT'];
+  selectParamType,
+  (state: ParamGroupState, type: string) => {
+    console.log('param selector', type);
+    return state[type || 'DEFAULT'];
   }
 )
 

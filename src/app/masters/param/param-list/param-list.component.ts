@@ -9,7 +9,6 @@ import { iPage } from 'src/app/shared/models/ipage';
 import { ParamGroupState, ParamState } from '../../store/param/param.reducer';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-param-list',
   templateUrl: './param-list.component.html',
@@ -46,7 +45,6 @@ export class ParamListComponent {
       this.type = rec["type"];
     })
 
-
     this.records$ = this.store.select(selectParamRecords);
     this.search_record$ = this.store.select(selectParamSearch_Record);
     this.selectedRowId$ = this.store.select(selectParamGroupState).pipe(
@@ -79,18 +77,6 @@ export class ParamListComponent {
     this.store.dispatch(param_delete({ id: _rec.param_id, param_type: this.type }));
   }
 
-  /*
-  sortHeader(col_name: string) {
-    this.store.dispatch(param_sort({ colName: col_name, param_type: this.type }));
-  }
-
-  public getIcon(col: string, sorted_col: string, sorted_order: string) {
-    if (col == sorted_col)
-      return sorted_order == 'asc' ? 'fa fa-long-arrow-up' : 'fa fa-long-arrow-down';
-    else
-      return null;
-  }
-*/
 
   sortHeader(col_name: string) {
     if (col_name == this.sort_column)
@@ -107,10 +93,6 @@ export class ParamListComponent {
     else
       return '';
   }
-
-
-
-
 
   return2Parent() {
     this.location.back();

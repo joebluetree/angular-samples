@@ -17,7 +17,8 @@ export const auth_logout = '[Auth] Logout';
 export function resetState(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
   return (state, action) => {
     if (action.type === auth_logout) {
-      state = {} as AppState;
+      //state = {} as AppState;
+      return reducer(undefined, action);
     }
     return reducer(state, action);
   };
@@ -25,14 +26,14 @@ export function resetState(reducer: ActionReducer<AppState>): ActionReducer<AppS
 
 export const getRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
 
-export const SelectRouterQueryParam = createSelector(
+export const selectRouterQueryParam = createSelector(
   getRouterState,
   (router) => {
     return (router && router.state && router.state.queryParams) || {}
   }
 );
 
-export const SelectRouterParam = createSelector(
+export const selectRouterParam = createSelector(
   getRouterState,
   (router) => {
     return (router && router.state && router.state.params) || {}

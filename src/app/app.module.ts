@@ -23,7 +23,12 @@ import { CustomSerializer } from './custom-route-serializer';
     BrowserModule,
     SharedModule,
     CoreModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+      }
+    }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
     StoreDevtoolsModule.instrument(),

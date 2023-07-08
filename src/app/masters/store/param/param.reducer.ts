@@ -78,7 +78,5 @@ export const paramReducer = createReducer<ParamGroupState>(
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
-
-export const paramFeatureName = 'paramState';
+export const paramFeatureName = 'paramGroupState';
 export const paramFeature = createFeatureSelector<ParamGroupState>(paramFeatureName);
-
