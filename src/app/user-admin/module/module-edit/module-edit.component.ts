@@ -27,9 +27,9 @@ export class ModuleEditComponent {
   ) {
     this.mform = this.fb.group({
       module_id: [0],
-      module_name: [{ value: '' }, [Validators.required, Validators.maxLength(60)]],
-      module_is_installed: [{ value: 'Y' }],
-      module_order: [{ value: '' }, [Validators.required, Validators.minLength(1)]],
+      module_name: ['', [Validators.required, Validators.maxLength(60)]],
+      module_is_installed: ['Y'],
+      module_order: ['', [Validators.required, Validators.minLength(1)]],
     })
   }
 
