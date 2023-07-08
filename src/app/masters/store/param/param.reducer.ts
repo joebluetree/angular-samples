@@ -24,8 +24,8 @@ export const initialParamState: ParamState = adapter.getInitialState({
   param_type: '',
   search_record: <iParam_Search>{ param_code: '', param_name: '', },
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
-  sort_column: 'param_order',
-  sort_order: 'asc',
+  sort_column: '',
+  sort_order: '',
   sort_icon: '',
   error: ''
 });
