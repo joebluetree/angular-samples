@@ -20,11 +20,9 @@ export class ModuleEffects {
       ),
       switchMap(([action, search_record, page]) => {
         const data: any = this.service.getList(action.action, search_record, page);
-        console.log(data);
         return data;
       }),
       tap((result: any) => {
-        console.log('Module List', result);
         return this.store.dispatch(module_load_success({ records: result.records, page: result.page }));
       })
     );

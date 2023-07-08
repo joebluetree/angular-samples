@@ -26,7 +26,6 @@ export class LoginComponent {
   }
 
   login() {
-    console.log('login ');
     this.store.dispatch(auth_login(this.loginForm.value))
   }
 

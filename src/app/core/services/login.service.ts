@@ -19,7 +19,6 @@ export class LoginService {
   }
 
   login(login: any) {
-    console.log('login calling backend');
     const params = new HttpParams()
       .set("code", login.code)
       .set("password", login.password)

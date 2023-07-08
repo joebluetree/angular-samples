@@ -17,14 +17,12 @@ const initialState: AuthState = {
 export const authReducer = createReducer<AuthState>(
   initialState,
   on(auth_login_success, (state, payload) => {
-    console.log('login success ', payload.user);
     return {
       user: payload.user,
       error: ''
     }
   }),
   on(auth_login_failure, (state, payload) => {
-    console.log('login Failure ', payload);
     return {
       user: undefined,
       error: payload.error

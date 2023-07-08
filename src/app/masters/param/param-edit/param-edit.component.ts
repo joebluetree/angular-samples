@@ -65,7 +65,6 @@ export class ParamEditComponent {
         })
       },
       error: (e) => {
-        console.log(e);
         alert(e.message);
       },
       complete: () => { }
