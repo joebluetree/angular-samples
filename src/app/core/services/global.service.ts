@@ -60,7 +60,6 @@ export class GlobalService {
       }, Object.create(null));
   }
 
-
   //toast subject
 
   public showScreen(msg: string[]) {

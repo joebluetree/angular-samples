@@ -74,6 +74,8 @@ export class ModuleEditComponent {
     if (data.module_id == null)
       data.module_id = 0;
 
+
+
     this.service.save(this.id, data).subscribe({
       next: (v: iModulem) => {
         if (data.module_id == 0) {

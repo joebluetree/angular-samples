@@ -24,7 +24,9 @@ export class AuthEffects {
               user_code: user.user_code,
               user_name: user.user_name,
               user_email: user.user_email,
-              user_password: ''
+              user_password: '',
+              user_company_id: 1,
+              user_branch_id: 1
             }
             localStorage.setItem("token", JSON.stringify(user));
             this.store.dispatch(auth_login_success({ user: _user }));
