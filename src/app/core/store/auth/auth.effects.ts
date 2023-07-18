@@ -6,6 +6,7 @@ import { LoginService } from '../../services/login.service';
 import { auth_login, auth_login_success, auth_login_failure } from './auth.actions';
 import { iUser } from '../../models/user';
 import { Router } from '@angular/router';
+import { GlobalService } from '../../services/global.service';
 
 @Injectable()
 export class AuthEffects {
@@ -29,6 +30,7 @@ export class AuthEffects {
               user_branch_id: 1
             }
             localStorage.setItem("token", JSON.stringify(user));
+            this.gs.user = _user;
             this.store.dispatch(auth_login_success({ user: _user }));
             this.router.navigate(['/home']);
           }
@@ -43,6 +45,7 @@ export class AuthEffects {
 
   constructor(
     private actions$: Actions,
+    private gs: GlobalService,
     private loginService: LoginService,
     private router: Router,
     private store: Store

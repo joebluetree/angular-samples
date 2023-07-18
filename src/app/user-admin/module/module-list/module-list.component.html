@@ -25,6 +25,10 @@
           <th (click)="sortHeader('module_is_installed')">VISIBLE <i [ngClass]="getIcon('module_is_installed')"></i>
           </th>
           <th (click)="sortHeader('module_order')">ORDER <i [ngClass]="getIcon('module_order')"></i></th>
+          <th (click)="sortHeader('rec_created_by')">CREATED-BY<i [ngClass]="getIcon('rec_created_by')"></i></th>
+          <th (click)="sortHeader('rec_created_date')">CREATED-ON<i [ngClass]="getIcon('rec_created_date')"></i></th>
+          <th (click)="sortHeader('rec_edited_by')">EDITED-BY<i [ngClass]="getIcon('rec_edited_by')"></i></th>
+          <th (click)="sortHeader('rec_edited_date')">EDITED-ON<i [ngClass]="getIcon('rec_edited_date')"></i></th>
           <th>REMOVE</th>
         </tr>
       </thead>
@@ -41,6 +45,10 @@
             <td>{{rec.module_name}}</td>
             <td>{{rec.module_is_installed}}</td>
             <td>{{rec.module_order}}</td>
+            <td>{{rec.rec_created_by}}</td>
+            <td>{{rec.rec_created_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
+            <td>{{rec.rec_edited_by}}</td>
+            <td>{{rec.rec_edited_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
             <td align="centre" (click)="deleteRow(rec)" class="link">
               <i class="fa fa-trash"></i>
             </td>

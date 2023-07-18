@@ -75,6 +75,9 @@ export class ModuleEditComponent {
       data.module_id = 0;
 
 
+    data.rec_company_id = this.gs.user.user_company_id;
+    data.rec_created_by = this.gs.user.user_code;
+
 
     this.service.save(this.id, data).subscribe({
       next: (v: iModulem) => {

@@ -20,8 +20,8 @@ export class LoginComponent {
   constructor(private store: Store<AuthState>, private router: Router) {
     this.loginError$ = this.store.select(selectLoginError)
     this.loginForm = new FormGroup({
-      code: new FormControl('joy'),
-      password: new FormControl('joy123')
+      code: new FormControl('admin'),
+      password: new FormControl('admin')
     })
   }
 

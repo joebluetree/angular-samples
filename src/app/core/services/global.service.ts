@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { iUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class GlobalService {
   private _toast: Subject<string[]> = new Subject<string[]>();
   public readonly toast$ = this._toast.asObservable();
 
+
+  public user: iUser;
 
   constructor(private location: Location) {
     this.url = "https:/jsonplaceholder.typicode.com";
