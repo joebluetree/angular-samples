@@ -11,7 +11,9 @@ export interface iParam {
 
 export interface iParam_Search {
   param_code: string;
+
   param_name: string;
+
 }
 
 
