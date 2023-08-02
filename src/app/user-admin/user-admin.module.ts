@@ -35,8 +35,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreModule.forFeature(ModuleFeatureName, moduleReducer),
     StoreModule.forFeature(MenuFeatureName, menuReducer),
-    EffectsModule.forFeature([ModuleEffects]),
-    EffectsModule.forFeature([MenuEffects])
+    EffectsModule.forFeature([ModuleEffects, MenuEffects]),
   ]
 })
 export class UserAdminModule { }

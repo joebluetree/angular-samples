@@ -99,7 +99,7 @@ export class MenuEditComponent {
 
       },
       error: (e) => {
-        this.gs.showScreen([e.error]);
+        this.gs.showScreen([e.error || e.message]);
       },
       complete: () => { }
 
