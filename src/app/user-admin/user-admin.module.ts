@@ -8,23 +8,35 @@ import { ModuleEffects } from './store/module/module.effects';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleSearchComponent } from './module/module-search/module-search.component';
 import { ModuleFeatureName, moduleReducer } from './store/module/module.reducer';
+import { MenuSearchComponent } from './menum/menu-search/menu-search.component';
+import { MenuEditComponent } from './menum/menu-edit/menu-edit.component';
+import { MenuListComponent } from './menum/menu-list/menu-list.component';
+import { MenuFeatureName, menuReducer } from './store/menu/menu.reducer';
+import { MenuEffects } from './store/menu/menu.effects';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
-  { path: 'moduleEdit', component: ModuleEditComponent }
+  { path: 'moduleEdit', component: ModuleEditComponent },
+  { path: 'menuList', component: MenuListComponent },
+  { path: 'menuEdit', component: MenuEditComponent }
 ]
 
 @NgModule({
   declarations: [
     ModuleListComponent,
     ModuleEditComponent,
-    ModuleSearchComponent
+    ModuleSearchComponent,
+    MenuSearchComponent,
+    MenuEditComponent,
+    MenuListComponent
   ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(ModuleFeatureName, moduleReducer),
-    EffectsModule.forFeature([ModuleEffects])
+    StoreModule.forFeature(MenuFeatureName, menuReducer),
+    EffectsModule.forFeature([ModuleEffects]),
+    EffectsModule.forFeature([MenuEffects])
   ]
 })
 export class UserAdminModule { }

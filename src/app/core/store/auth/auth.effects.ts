@@ -29,7 +29,7 @@ export class AuthEffects {
               user_company_id: 1,
               user_branch_id: 1
             }
-            localStorage.setItem("token", JSON.stringify(user));
+            localStorage.setItem("token", JSON.stringify(_user));
             this.gs.user = _user;
             this.store.dispatch(auth_login_success({ user: _user }));
             this.router.navigate(['/home']);

@@ -1,12 +1,12 @@
 <div class="page-header">
-  <h5>Module List</h5>
-  <button class="btn btn-success btn-sm" routerLink="/admin/moduleEdit" [queryParams]="{id :0}">New</button>
+  <h5>Menu List</h5>
+  <button class="btn btn-success btn-sm" routerLink="/admin/menuEdit" [queryParams]="{id :0}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
 <div class="page-search">
   <ng-container *ngIf="(search_record$ | async) as record">
-    <app-module-search [input]="record" (output)="search($event)"></app-module-search>
+    <app-menu-search [input]="record" (output)="search($event)"></app-menu-search>
   </ng-container>
 </div>
 
@@ -20,11 +20,11 @@
       <thead class="table-success">
         <tr class="table-header">
           <th>EDIT</th>
-          <th (click)="sortHeader('module_id')">ID<i [ngClass]="getIcon('module_id')"></i></th>
-          <th (click)="sortHeader('module_name')">NAME <i [ngClass]="getIcon('module_name')"></i></th>
-          <th (click)="sortHeader('module_is_installed')">VISIBLE <i [ngClass]="getIcon('module_is_installed')"></i>
+          <th (click)="sortHeader('menu_id')">ID<i [ngClass]="getIcon('menu_id')"></i></th>
+          <th (click)="sortHeader('menu_name')">NAME <i [ngClass]="getIcon('menu_name')"></i></th>
+          <th (click)="sortHeader('menu_visible')">VISIBLE <i [ngClass]="getIcon('menu_visible')"></i>
           </th>
-          <th (click)="sortHeader('module_order')">ORDER <i [ngClass]="getIcon('module_order')"></i></th>
+          <th (click)="sortHeader('menu_order')">ORDER <i [ngClass]="getIcon('menu_order')"></i></th>
           <th (click)="sortHeader('rec_created_by')">CREATED-BY<i [ngClass]="getIcon('rec_created_by')"></i></th>
           <th (click)="sortHeader('rec_created_date')">CREATED-ON<i [ngClass]="getIcon('rec_created_date')"></i></th>
           <th (click)="sortHeader('rec_edited_by')">EDITED-BY<i [ngClass]="getIcon('rec_edited_by')"></i></th>
@@ -35,16 +35,16 @@
       <tbody>
         <ng-container *ngIf="(records$ | async) as records">
 
-          <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order " (click)="selectRow(rec.module_id)"
-            [ngClass]="{'table-info' : rec.module_id == (selectedRowId$ | async) }">
-            <td (click)="selectRow(rec.module_id)" class="link" routerLink="/admin/moduleEdit"
-              [queryParams]="{id :rec.module_id}">
+          <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order " (click)="selectRow(rec.menu_id)"
+            [ngClass]="{'table-info' : rec.menu_id == (selectedRowId$ | async) }">
+            <td (click)="selectRow(rec.menu_id)" class="link" routerLink="/admin/menuEdit"
+              [queryParams]="{id :rec.menu_id}">
               <i class="fa fa-pencil"></i>
             </td>
-            <td>{{rec.module_id}}</td>
-            <td>{{rec.module_name}}</td>
-            <td>{{rec.module_is_installed}}</td>
-            <td>{{rec.module_order}}</td>
+            <td>{{rec.menu_id}}</td>
+            <td>{{rec.menu_name}}</td>
+            <td>{{rec.menu_visible}}</td>
+            <td>{{rec.menu_order}}</td>
             <td>{{rec.rec_created_by}}</td>
             <td>{{rec.rec_created_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
             <td>{{rec.rec_edited_by}}</td>
