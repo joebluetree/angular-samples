@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
         user_code: user.user_code,
         user_name: user.user_name,
         user_email: user.user_email,
+        user_token: user.user_token,
         user_company_id: user.user_company_id,
         user_branch_id: user.user_branch_id,
         user_password: ''

@@ -26,6 +26,7 @@ export class AuthEffects {
               user_name: user.user_name,
               user_email: user.user_email,
               user_password: '',
+              user_token: user.user_token,
               user_company_id: 1,
               user_branch_id: 1
             }
