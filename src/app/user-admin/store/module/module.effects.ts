@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { module_load_records, module_load_success, module_delete, module_update_search, module_delete_complete } from './module.actions';
+import { module_load_records, module_load_success, module_delete, module_delete_complete } from './module.actions';
 import { ModuleService } from '../../services/module.service';
 import { EMPTY, catchError, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
