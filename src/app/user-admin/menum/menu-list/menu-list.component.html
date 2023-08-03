@@ -22,8 +22,9 @@
           <th>EDIT</th>
           <th (click)="sortHeader('menu_id')">ID<i [ngClass]="getIcon('menu_id')"></i></th>
           <th (click)="sortHeader('menu_name')">NAME <i [ngClass]="getIcon('menu_name')"></i></th>
-          <th (click)="sortHeader('menu_visible')">VISIBLE <i [ngClass]="getIcon('menu_visible')"></i>
-          </th>
+          <th (click)="sortHeader('menu_route')">ROUTE<i [ngClass]="getIcon('menu_route')"></i></th>
+          <th (click)="sortHeader('menu_visible')">VISIBLE <i [ngClass]="getIcon('menu_visible')"></i></th>
+          <th (click)="sortHeader('module_name')">Module<i [ngClass]="getIcon('module_name')"></i></th>
           <th (click)="sortHeader('menu_order')">ORDER <i [ngClass]="getIcon('menu_order')"></i></th>
           <th (click)="sortHeader('rec_created_by')">CREATED-BY<i [ngClass]="getIcon('rec_created_by')"></i></th>
           <th (click)="sortHeader('rec_created_date')">CREATED-ON<i [ngClass]="getIcon('rec_created_date')"></i></th>
@@ -43,7 +44,9 @@
             </td>
             <td>{{rec.menu_id}}</td>
             <td>{{rec.menu_name}}</td>
+            <td>{{rec.menu_route}}</td>
             <td>{{rec.menu_visible}}</td>
+            <td>{{rec.menu_module_name}}</td>
             <td>{{rec.menu_order}}</td>
             <td>{{rec.rec_created_by}}</td>
             <td>{{rec.rec_created_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>

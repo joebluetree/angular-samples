@@ -52,6 +52,8 @@ export class MenuEditComponent {
         this.mform.setValue({
           menu_id: rec.menu_id,
           menu_name: rec.menu_name,
+          menu_route: rec.menu_route,
+          menu_module_id: rec.menu_module_id,
           menu_visible: rec.menu_visible,
           menu_order: rec.menu_order
         })
