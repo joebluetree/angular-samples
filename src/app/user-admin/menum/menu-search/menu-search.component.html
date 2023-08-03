@@ -2,6 +2,7 @@
 
   <div class="row">
     <div class="col-sm-6">
+
       <div class="form-group row">
         <label class="col-sm-4 form-label form-label-sm" for="">Name</label>
         <div class="col-sm-8">
@@ -9,6 +10,18 @@
             autocomplete="__away">
         </div>
       </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Name</label>
+        <div class="col-sm-8">
+
+          <auto-complete-modulem maxlength="60" [(ngModel)]="module_id" [case]="''"
+            [id]="'module_id'"></auto-complete-modulem>
+
+
+        </div>
+      </div>
+
       <div class="form-group row">
         <label class="col-sm-4 form-label form-label-sm" for="">Visible</label>
         <div class="col-sm-8">

@@ -8,6 +8,8 @@ import { iMenum_Search } from '../../models/imenum';
 })
 export class MenuSearchComponent {
 
+  module_id = "";
+
   record!: iMenum_Search;
 
   @Input() set input(v: iMenum_Search) {
