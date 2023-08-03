@@ -23,7 +23,6 @@ export class MenuEffects {
         return data;
       }),
       tap((result: any) => {
-        console.log('search')
         return this.store.dispatch(allActions.menu_load_success({ records: result.records, page: result.page }));
       })
     );
