@@ -8,13 +8,15 @@ import { SortPipe } from './pipe/sort.pipe';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 
 import { LetModule } from '@ngrx/component';
+import { AutoCompleteComponent } from './controls/autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
     PageComponent,
     TextInputComponent,
     SortPipe,
-    CheckboxComponent
+    CheckboxComponent,
+    AutoCompleteComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { LetModule } from '@ngrx/component';
     TextInputComponent,
     SortPipe,
     CheckboxComponent,
+    AutoCompleteComponent,
     LetModule,
   ]
 })
