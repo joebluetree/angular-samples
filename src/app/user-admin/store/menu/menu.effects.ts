@@ -8,7 +8,6 @@ import { menuPage, menuSearch_Record } from './menu.selectors';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { MenueService } from '../../services/menu.service';
 
-
 @Injectable()
 export class MenuEffects {
   moduleList$ = createEffect(() => {
