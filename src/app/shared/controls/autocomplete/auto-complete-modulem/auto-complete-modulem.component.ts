@@ -1,5 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { iModulem } from '../../../../user-admin/models/imodulem';
 
 @Component({
   selector: 'auto-complete-modulem',
@@ -22,6 +23,11 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
 
   onChange: any = () => { };
   onTouch: any = () => { };
+
+  records: Array<iModulem> = [];
+
+  constructor() {
+  }
 
   writeValue(obj: string): void {
     this.ctrl.setValue(obj);

@@ -1,2 +1,17 @@
 <input type="text" class="form-control form-control-sm" (blur)="onBlur()" [formControl]="ctrl" autocomplete="off"
   [id]="id">
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rec of records">
+      <td>{{rec.module_id}}</td>
+      <td>{{rec.module_name}}</td>
+    </tr>
+  </tbody>
+</table>
