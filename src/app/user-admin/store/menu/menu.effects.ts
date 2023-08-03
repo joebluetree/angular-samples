@@ -46,7 +46,6 @@ export class MenuEffects {
     );
   }, { dispatch: false });
 
-
   constructor(
     private actions$: Actions,
     private service: MenueService,
@@ -55,4 +54,3 @@ export class MenuEffects {
   ) {
   }
 }
-
