@@ -1,3 +1,4 @@
+import { AutoCompleteModulemComponent } from './controls/autocomplete/auto-complete-modulem/auto-complete-modulem.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,7 +9,6 @@ import { SortPipe } from './pipe/sort.pipe';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 
 import { LetModule } from '@ngrx/component';
-import { AutoCompleteComponent } from './controls/autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { AutoCompleteComponent } from './controls/autocomplete/autocomplete.comp
     TextInputComponent,
     SortPipe,
     CheckboxComponent,
-    AutoCompleteComponent
+    AutoCompleteModulemComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +34,7 @@ import { AutoCompleteComponent } from './controls/autocomplete/autocomplete.comp
     TextInputComponent,
     SortPipe,
     CheckboxComponent,
-    AutoCompleteComponent,
+    AutoCompleteModulemComponent,
     LetModule,
   ]
 })
