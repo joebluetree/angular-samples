@@ -1,42 +1,39 @@
-<form #frm="ngForm">
+<div class="row">
+  <div class="col-sm-6">
 
-  <div class="row">
-    <div class="col-sm-6">
-
-      <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">Name</label>
-        <div class="col-sm-8">
-          <input class="form-control form-control-sm" type="text" name="module_name" [(ngModel)]="record.menu_name"
-            autocomplete="__away">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">Module</label>
-        <div class="col-sm-8">
-          <auto-complete-modulem maxlength="60" [(ngModel)]="module_id" [case]="''"
-            [id]="'module_id'"></auto-complete-modulem>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">Visible</label>
-        <div class="col-sm-8">
-          <select class="form-select form-select-sm" name="module_is_installed" [(ngModel)]="record.menu_visible">
-            <option value="NA">ALL</option>
-            <option value="Y">YES</option>
-            <option value="N">NO</option>
-          </select>
-        </div>
+    <div class="form-group row">
+      <label class="col-sm-4 form-label form-label-sm" for="">Name</label>
+      <div class="col-sm-8">
+        <input class="form-control form-control-sm" type="text" name="module_name" [(ngModel)]="record.menu_name"
+          autocomplete="__away">
       </div>
     </div>
 
-    <div class="col-sm-6">
-      <div class="form-group row">
-        <div class="col-sm-12">
-          <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
-        </div>
+    <div class="form-group row">
+      <label class="col-sm-4 form-label form-label-sm" for="">Module</label>
+      <div class="col-sm-8">
+        <auto-complete-modulem maxlength="60" [(ngModel)]="module_id" [case]="''"
+          [id]="'module_id'"></auto-complete-modulem>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 form-label form-label-sm" for="">Visible</label>
+      <div class="col-sm-8">
+        <select class="form-select form-select-sm" name="module_is_installed" [(ngModel)]="record.menu_visible">
+          <option value="NA">ALL</option>
+          <option value="Y">YES</option>
+          <option value="N">NO</option>
+        </select>
       </div>
     </div>
   </div>
-</form>
+
+  <div class="col-sm-6">
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
+      </div>
+    </div>
+  </div>
+</div>

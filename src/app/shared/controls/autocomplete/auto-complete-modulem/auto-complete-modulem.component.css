@@ -4,31 +4,30 @@
   padding-bottom: 10px;
   color: #405065;
 }
-
 .search-hero {
   max-width: 500px;
   padding-bottom: 50px;
   margin: auto;
 }
-
-
 .form-control {
   box-shadow: 0 10px 40px 0 #B0C1D9;
 }
 */
-
 .form-control::placeholder {
   font-family: FontAwesome;
 }
 
-
-.my-class {
-  cursor: pointer;
+.lov-class {
   position: absolute;
   z-index: 9999;
-  width: 100vh;
+  cursor: pointer;
+  width: 50vh;
   box-shadow: 10px 10px 10px 0px lightgray;
-  margin-top: 1px;
   background-color: ghostwhite;
+}
 
+
+.btnRadio {
+
+  outline: none;
 }

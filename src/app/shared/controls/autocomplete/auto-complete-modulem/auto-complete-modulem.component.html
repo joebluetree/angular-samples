@@ -1,19 +1,26 @@
 <div>
-  <input type="text" class="form-control form-control-sm" (blur)="onBlur()" [formControl]="ctrl" autocomplete="off"
-    placeholder="&#61442; Search" [id]="id">
 
-  <div class="my-class" [ngStyle]="{'display' : showDiv ? 'block' : 'none'}">
+  <input type="text" class="form-control form-control-sm " [formControl]="ctrl" autocomplete="off"
+    placeholder="&#61442; Search" [id]="id" (focus)="InputBox_OnFocus()" (keydown)="InputBox_OnKeyDown($event)"
+    (blur)="InputBox_OnBlur($event)" #inputBox>
+
+  <div class="lov-class" [ngStyle]="{'display' : showDiv ? 'block' : 'none'}">
     <table class="table table-sm table-hover table-bordered table-striped table-condensed">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>NAME</th>
+          <th width="10%">SELECT</th>
+          <th width="20%">ID</th>
+          <th width="70%">NAME</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rec of records">
-          <td>{{rec.module_id}}</td>
-          <td>{{rec.module_name}}</td>
+        <tr *ngFor="let rec of records;let i= index" [style.background-color]="i==rowid ? '#ffcccc' : ''">
+          <td>
+            <input class="btnRadio" type="radio" #radio [checked]="i==rowid" (focus)="rowid=i"
+              (keydown)="radioKeyDown($event,rec)">
+          </td>
+          <td (click)="onSelection(rec)">{{rec.module_id}}</td>
+          <td (click)="onSelection(rec)">{{rec.module_name}}</td>
         </tr>
       </tbody>
     </table>
