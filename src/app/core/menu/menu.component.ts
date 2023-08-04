@@ -30,6 +30,7 @@ export class MenuComponent {
   }
 
   ngOnInit(): void {
+
   }
 
   ngOnDestroy(): void {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { iUser } from './core/models/user';
 import { Store } from '@ngrx/store';
@@ -18,6 +17,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private gs: GlobalService,
     private store: Store) {
+
   }
 
   ngOnInit(): void {
