@@ -21,8 +21,10 @@
         <tr class="table-header">
           <th>EDIT</th>
           <th (click)="sortHeader('menu_id')">ID<i [ngClass]="getIcon('menu_id')"></i></th>
+          <th (click)="sortHeader('menu_code')">CODE <i [ngClass]="getIcon('menu_code')"></i></th>
           <th (click)="sortHeader('menu_name')">NAME <i [ngClass]="getIcon('menu_name')"></i></th>
           <th (click)="sortHeader('menu_route')">ROUTE<i [ngClass]="getIcon('menu_route')"></i></th>
+          <th (click)="sortHeader('menu_param')">PARAM<i [ngClass]="getIcon('menu_param')"></i></th>
           <th (click)="sortHeader('menu_visible')">VISIBLE <i [ngClass]="getIcon('menu_visible')"></i></th>
           <th (click)="sortHeader('module_name')">Module<i [ngClass]="getIcon('module_name')"></i></th>
           <th (click)="sortHeader('menu_order')">ORDER <i [ngClass]="getIcon('menu_order')"></i></th>
@@ -43,8 +45,10 @@
               <i class="fa fa-pencil"></i>
             </td>
             <td>{{rec.menu_id}}</td>
+            <td>{{rec.menu_code}}</td>
             <td>{{rec.menu_name}}</td>
             <td>{{rec.menu_route}}</td>
+            <td>{{rec.menu_param}}</td>
             <td>{{rec.menu_visible}}</td>
             <td>{{rec.menu_module_name}}</td>
             <td>{{rec.menu_order}}</td>

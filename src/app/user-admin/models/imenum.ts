@@ -3,8 +3,10 @@ export interface iMenum {
   menu_id: number;
   menu_module_id: number;
   menu_module_name: string;
+  menu_code: string;
   menu_name: string;
   menu_route: string;
+  menu_param: string;
   menu_visible: string;
   menu_order: number;
   rec_company_id: number;

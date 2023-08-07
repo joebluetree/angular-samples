@@ -18,6 +18,7 @@ import { MenueService } from '../../services/menu.service';
 export class MenuEditComponent {
   id = 0;
   mform: FormGroup;
+  showModel = false;
   constructor(
     private gs: GlobalService,
     private service: MenueService,
@@ -28,8 +29,10 @@ export class MenuEditComponent {
   ) {
     this.mform = this.fb.group({
       menu_id: [0],
+      menu_code: ['', [Validators.required, Validators.maxLength(20)]],
       menu_name: ['', [Validators.required, Validators.maxLength(60)]],
       menu_route: ['', [Validators.required, Validators.maxLength(60)]],
+      menu_param: ['', [Validators.required, Validators.maxLength(100)]],
       menu_visible: ['Y'],
       menu_module_id: [0, [Validators.required]],
       menu_module_name: ['', [Validators.required, Validators.maxLength(60)]],
@@ -52,9 +55,12 @@ export class MenuEditComponent {
       next: (rec) => {
         this.mform.setValue({
           menu_id: rec.menu_id,
+          menu_code: rec.menu_code,
           menu_name: rec.menu_name,
           menu_route: rec.menu_route,
+          menu_param: rec.menu_param,
           menu_module_id: rec.menu_module_id,
+          menu_module_name: rec.menu_module_name,
           menu_visible: rec.menu_visible,
           menu_order: rec.menu_order
         })
@@ -79,8 +85,6 @@ export class MenuEditComponent {
 
     if (data.menu_id == null)
       data.menu_id = 0;
-
-    data.menu_module_id = 1;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
