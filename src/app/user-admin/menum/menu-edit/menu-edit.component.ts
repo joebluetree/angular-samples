@@ -32,7 +32,7 @@ export class MenuEditComponent {
       menu_code: ['', [Validators.required, Validators.maxLength(20)]],
       menu_name: ['', [Validators.required, Validators.maxLength(60)]],
       menu_route: ['', [Validators.required, Validators.maxLength(60)]],
-      menu_param: ['', [Validators.required, Validators.maxLength(100)]],
+      menu_param: ['', [Validators.maxLength(100)]],
       menu_visible: ['Y'],
       menu_module_id: [0, [Validators.required]],
       menu_module_name: ['', [Validators.required, Validators.maxLength(60)]],

@@ -12,11 +12,10 @@
 
         <div class="col-sm-6">
 
-
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Menu Code</label>
             <div class="col-sm-8">
-              <app-input-text maxlength="20" formControlName="menu_code" [case]="''"
+              <app-input-text maxlength="20" formControlName="menu_code" [case]="'UPPER'"
                 [id]="'menu_code'"></app-input-text>
               <div class="error-text"
                 *ngIf="mform.controls['menu_code'].invalid && mform.controls['menu_code'].touched">
@@ -72,15 +71,7 @@
             <div class="col-sm-8">
               <app-input-text maxlength="100" formControlName="menu_param" [case]="''"
                 [id]="'menu_param'"></app-input-text>
-              <div class="error-text"
-                *ngIf="mform.controls['menu_param'].invalid && mform.controls['menu_param'].touched">
-                <span *ngIf="mform.controls['menu_param'].errors?.['required']">
-                  Route Required
-                </span>
-                <span *ngIf="mform.controls['menu_param'].errors?.['maxlength']">
-                  Cannot Be more than 100 characters
-                </span>
-              </div>
+
             </div>
           </div>
 
