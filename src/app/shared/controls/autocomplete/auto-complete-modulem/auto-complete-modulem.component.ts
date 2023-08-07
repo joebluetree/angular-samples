@@ -132,6 +132,10 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
     }
   }
 
+  onClickSearch() {
+    this.searchRecord();
+  }
+
   radioKeyDown(event: KeyboardEvent, rec: iModulem) {
     if (event.key === 'Tab') {
       event.preventDefault();

@@ -1,8 +1,19 @@
 <div>
 
-  <input type="text" class="form-control form-control-sm " [formControl]="ctrl" autocomplete="off"
-    placeholder="&#61442; Search" [id]="id" (focus)="InputBox_OnFocus()" (keydown)="InputBox_OnKeyDown($event)"
-    (blur)="InputBox_OnBlur($event)" #inputBox>
+  <div class="input-group">
+
+    <input type="text" class="form-control form-control-sm " [formControl]="ctrl" autocomplete="off"
+      placeholder="&#61442; Search" [id]="id" (focus)="InputBox_OnFocus()" (keydown)="InputBox_OnKeyDown($event)"
+      (blur)="InputBox_OnBlur($event)" #inputBox>
+
+    <div class="input-group-append">
+      <button id="btn" class="btn btn-sm btn-outline-secondary" type="button" (click)="onClickSearch()"> <i
+          class="fa fa-search"></i></button>
+    </div>
+
+  </div>
+
+
 
   <div class="lov-class" [ngStyle]="{'display' : showDiv ? 'block' : 'none'}">
     <table class="table table-sm table-hover table-bordered table-striped table-condensed">
