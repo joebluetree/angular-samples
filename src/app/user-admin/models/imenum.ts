@@ -16,6 +16,8 @@ export interface iMenum {
 
 export interface iMenum_Search {
   menu_name: string;
+  module_id: number;
+  module_name: string;
   menu_visible: string;
 }
 

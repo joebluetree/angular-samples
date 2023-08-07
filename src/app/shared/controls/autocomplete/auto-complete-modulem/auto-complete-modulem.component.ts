@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, QueryList, ViewChild, ViewChildren, forwardRef } from '@angular/core';
+import { Component, ElementRef, Input, Output, QueryList, ViewChild, ViewChildren, forwardRef, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { iModulem } from '../../../../user-admin/models/imodulem';
 import { CommonService } from 'src/app/shared/services/common.service';
@@ -20,8 +20,9 @@ import { switchMap } from 'rxjs/operators';
   ]
 })
 export class AutoCompleteModulemComponent implements ControlValueAccessor {
-  @Input('id') id: string = '_id_text';
-  @Input() case: string = '';
+  @Input('id') id: string = 'module_id';
+
+  @Output() CallBack = new EventEmitter<{ id: string, rec: iModulem }>();
 
   @ViewChild('inputBox') inputBox: ElementRef;
   @ViewChildren('radio') inputs: QueryList<ElementRef>;
@@ -80,7 +81,6 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
   }
 
   selectTableRow(index: number = 0) {
-    console.log(this.inputs);
     setTimeout(() => {
       if (this.inputs.toArray()[index])
         this.inputs.toArray()[index].nativeElement.focus();
@@ -116,7 +116,7 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
   }
 
   public InputBox_OnKeyDown(event: KeyboardEvent) {
-    console.log('onkey down changed', event);
+
     if (event.key == "Tab" || event.key == "Escape")
       return;
     if (event.key == "ArrowDown" || event.key == "Enter") {
@@ -153,6 +153,7 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
     this.isChanged = false;
     this.showDiv = false;
     this.selectInputBox();
+    this.CallBack.emit({ id: this.id, rec: rec });
   }
 
   cancelSelection() {
@@ -160,7 +161,5 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
     this.showDiv = false;
     this.selectInputBox();
   }
-
-
 
 }

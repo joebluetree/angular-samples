@@ -12,7 +12,7 @@
     <div class="form-group row">
       <label class="col-sm-4 form-label form-label-sm" for="">Module</label>
       <div class="col-sm-8">
-        <auto-complete-modulem maxlength="60" [(ngModel)]="module_id" [case]="''"
+        <auto-complete-modulem maxlength="60" [(ngModel)]="record.module_name" (CallBack)="callBack($event)"
           [id]="'module_id'"></auto-complete-modulem>
       </div>
     </div>

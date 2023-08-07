@@ -23,7 +23,15 @@ export class MenuSearchComponent {
 
   search(_action: string) {
     if (this.output) {
+      console.log(this.record);
       this.output.emit(this.record);
+    }
+  }
+
+  callBack(action: { id: string, rec: any }) {
+    if (action.id == 'module_id') {
+      this.record.module_id = action.rec.module_id;
+      this.record.module_name = action.rec.module_name;
     }
   }
 

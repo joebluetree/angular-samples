@@ -31,7 +31,8 @@ export class MenuEditComponent {
       menu_name: ['', [Validators.required, Validators.maxLength(60)]],
       menu_route: ['', [Validators.required, Validators.maxLength(60)]],
       menu_visible: ['Y'],
-      menu_module_id: [0],
+      menu_module_id: [0, [Validators.required]],
+      menu_module_name: ['', [Validators.required, Validators.maxLength(60)]],
       menu_order: ['', [Validators.required, Validators.minLength(1)]],
     })
   }
@@ -106,6 +107,15 @@ export class MenuEditComponent {
       complete: () => { }
 
     })
+  }
+
+  callBack(action: { id: string, rec: any }) {
+    if (action.id == 'menu_module_id') {
+      this.mform.patchValue({
+        menu_module_id: action.rec.module_id,
+        menu_module_name: action.rec.module_name,
+      })
+    }
   }
 
   return2Parent() {

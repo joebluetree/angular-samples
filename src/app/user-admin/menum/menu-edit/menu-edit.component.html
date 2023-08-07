@@ -48,6 +48,24 @@
 
 
           <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Module</label>
+            <div class="col-sm-8">
+
+              <auto-complete-modulem formControlName="menu_module_name" (CallBack)="callBack($event)"
+                [id]="'menu_module_id'"></auto-complete-modulem>
+
+              <div class="error-text"
+                *ngIf="mform.controls['menu_module_name'].invalid && mform.controls['menu_module_name'].touched">
+                <span *ngIf="mform.controls['menu_module_id'].errors?.['required']">
+                  Module Name Should Be Selected
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="form-group row">
             <label class="form-label form-label-sm col-sm-4">Visiable</label>
             <div class="col-sm-8">
               <app-checkbox [id]="'menu_visible'" formControlName="menu_visible"></app-checkbox>
@@ -79,4 +97,11 @@
 
 <div class="page-footer line-bottom">
   <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div>
+
+<div>
+  <pre>
+    {{mform.value | json}}
+  </pre>
+
 </div>
