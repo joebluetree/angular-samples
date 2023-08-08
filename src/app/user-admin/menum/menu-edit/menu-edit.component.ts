@@ -9,6 +9,7 @@ import * as allActions from '../../store/menu/menu.actions';
 import { iMenum } from '../../models/imenum';
 import { MenuState } from '../../store/menu/menu.reducer';
 import { MenueService } from '../../services/menu.service';
+import { iModulem } from '../../models/imodulem';
 
 @Component({
   selector: 'app-menu-edit',
@@ -18,7 +19,7 @@ import { MenueService } from '../../services/menu.service';
 export class MenuEditComponent {
   id = 0;
   mform: FormGroup;
-  showModel = false;
+  showModel = true;
   constructor(
     private gs: GlobalService,
     private service: MenueService,
@@ -113,14 +114,22 @@ export class MenuEditComponent {
     })
   }
 
-  callBack(action: { id: string, rec: any }) {
+  callBack(action: { id: string, rec: iModulem }) {
+
     if (action.id == 'menu_module_id') {
+
       this.mform.patchValue({
-        menu_module_id: action.rec.module_id,
-        menu_module_name: action.rec.module_name,
+        menu_module_id: action.rec ? action.rec.module_id : 0,
+        menu_module_name: action.rec ? action.rec.module_name : '',
       })
+
     }
   }
+
+  getCompanyId() {
+    return this.gs.user.user_company_id;
+  }
+
 
   return2Parent() {
     this.location.back();

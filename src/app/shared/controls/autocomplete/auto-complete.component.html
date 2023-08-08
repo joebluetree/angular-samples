@@ -2,7 +2,6 @@
 
   <div class="input-group">
 
-
     <input type="text" class="form-control form-control-sm " [formControl]="ctrl" autocomplete="off"
       placeholder="&#61442; Search" [id]="id" (focus)="InputBox_OnFocus()" (keydown)="InputBox_OnKeyDown($event)"
       (blur)="InputBox_OnBlur($event)" #inputBox>
@@ -13,7 +12,6 @@
     </div>
 
   </div>
-
 
 
   <div class="lov-class" [ngStyle]="{'display' : showDiv ? 'block' : 'none'}">
@@ -31,8 +29,8 @@
             <input class="btnRadio" type="radio" #radio [checked]="i==rowid" (focus)="rowid=i"
               (keydown)="radioKeyDown($event,rec)">
           </td>
-          <td (click)="onSelection(rec)">{{rec.module_id}}</td>
-          <td (click)="onSelection(rec)">{{rec.module_name}}</td>
+          <td (click)="onSelection(rec)">{{rec['module_id']}}</td>
+          <td (click)="onSelection(rec)">{{rec['module_name']}}</td>
         </tr>
       </tbody>
     </table>

@@ -1,32 +1,36 @@
 import { Component, ElementRef, Input, Output, QueryList, ViewChild, ViewChildren, forwardRef, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { iModulem } from '../../../../user-admin/models/imodulem';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { iMenum } from '../../../../user-admin/models/imenum';
 
 @Component({
-  selector: 'auto-complete-modulem',
-  templateUrl: './auto-complete-modulem.component.html',
-  styleUrls: ['./auto-complete-modulem.component.css'],
+  selector: 'auto-complete',
+  templateUrl: './auto-complete.component.html',
+  styleUrls: ['./auto-complete.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AutoCompleteModulemComponent),
+      useExisting: forwardRef(() => AutoCompleteComponent),
       multi: true
     }
   ]
 })
-export class AutoCompleteModulemComponent implements ControlValueAccessor {
-  @Input('id') id: string = 'module_id';
+export class AutoCompleteComponent implements ControlValueAccessor {
+  @Input('id') id: string = '_ID_';
+  @Input('company_id') company_id: number = 0;
+  @Input('branch_id') branch_id: number = 0;
+  @Input('table') table: string = '';
+  @Input('display_column') display_column: string = '';
 
-  @Output() CallBack = new EventEmitter<{ id: string, rec: iModulem }>();
+  @Output() CallBack = new EventEmitter<{ id: string, rec: any }>();
 
   @ViewChild('inputBox') inputBox: ElementRef;
   @ViewChildren('radio') inputs: QueryList<ElementRef>;
+
+
 
   showDiv = false;
   isDisabled = false;
@@ -35,12 +39,14 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
   onChange: any = () => { };
   onTouch: any = () => { };
 
-  records: Array<iModulem> = [];
+  records: Array<any> = [];
   term$ = new Subject<string>();
 
   isChanged = false;
 
   rowid = 0;
+
+
 
   constructor(private service: CommonService, private gs: GlobalService) {
   }
@@ -54,15 +60,15 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
       .pipe(
         switchMap(value => {
           let search_record = {
-            'table': 'modulem',
+            'table': this.table,
             'company_id': this.gs.user.user_company_id,
-            'module_name': value
+            'search_string': value
           }
           return this.service.getList(search_record);
         }),
       ).subscribe({
         next: (v) => {
-          this.records = <iModulem[]>v.records;
+          this.records = v.records;
           if (this.records.length > 0) {
             this.showDiv = true;
             this.selectTableRow(0);
@@ -141,7 +147,7 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
     this.searchRecord();
   }
 
-  radioKeyDown(event: KeyboardEvent, rec: iModulem) {
+  radioKeyDown(event: KeyboardEvent, rec: any) {
     if (event.key === 'Tab') {
       event.preventDefault();
     }
@@ -157,8 +163,8 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
     }
   }
 
-  onSelection(rec: iModulem) {
-    this.ctrl.setValue(rec.module_name);
+  onSelection(rec: any) {
+    this.ctrl.setValue(rec[this.display_column]);
     this.isChanged = false;
     this.showDiv = false;
     this.selectInputBox();
@@ -168,7 +174,8 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
   ResetValue() {
     let data = this.getValue();
     if (data == '') {
-      const value = <iModulem>{ module_id: 0, module_name: '' };
+      //const value = <iModulem>{ module_id: 0, module_name: '' };
+      const value = null;
       this.CallBack.emit({ id: this.id, rec: value });
     }
   }

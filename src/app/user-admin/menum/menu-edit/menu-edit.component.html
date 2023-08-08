@@ -82,8 +82,8 @@
             <label class="col-sm-4 form-label form-lable-sm" for="">Module</label>
             <div class="col-sm-8">
 
-              <auto-complete-modulem formControlName="menu_module_name" (CallBack)="callBack($event)"
-                [id]="'menu_module_id'"></auto-complete-modulem>
+              <auto-complete formControlName="menu_module_name" (CallBack)="callBack($event)" [table]="'modulem'"
+                [company_id]="getCompanyId()" [display_column]="'module_name'" [id]="'menu_module_id'"></auto-complete>
 
               <div class="error-text"
                 *ngIf="mform.controls['menu_module_name'].invalid && mform.controls['menu_module_name'].touched">
