@@ -86,6 +86,9 @@ export class ParamEditComponent {
     if (data.param_id == null)
       data.param_id = 0;
 
+    data.rec_company_id = this.gs.user.user_company_id;
+    data.rec_created_by = this.gs.user.user_code;
+
     this.service.save(this.id, data).subscribe({
       next: (v: iParam) => {
         if (data.param_id == 0) {

@@ -21,7 +21,7 @@
         <tr class="table-header">
           <th>EDIT</th>
           <th (click)="sortHeader('menu_id')">ID<i [ngClass]="getIcon('menu_id')"></i></th>
-          <th (click)="sortHeader('menu_code')">CODE <i [ngClass]="getIcon('menu_code')"></i></th>
+          <th (click)="sortHeader('menu_code')">MENU-ID <i [ngClass]="getIcon('menu_code')"></i></th>
           <th (click)="sortHeader('menu_name')">NAME <i [ngClass]="getIcon('menu_name')"></i></th>
           <th (click)="sortHeader('menu_route')">ROUTE<i [ngClass]="getIcon('menu_route')"></i></th>
           <th (click)="sortHeader('menu_param')">PARAM<i [ngClass]="getIcon('menu_param')"></i></th>
@@ -29,9 +29,9 @@
           <th (click)="sortHeader('module_name')">Module<i [ngClass]="getIcon('module_name')"></i></th>
           <th (click)="sortHeader('menu_order')">ORDER <i [ngClass]="getIcon('menu_order')"></i></th>
           <th (click)="sortHeader('rec_created_by')">CREATED-BY<i [ngClass]="getIcon('rec_created_by')"></i></th>
-          <th (click)="sortHeader('rec_created_date')">CREATED-ON<i [ngClass]="getIcon('rec_created_date')"></i></th>
+          <th (click)="sortHeader('rec_created_date')">CREATED-DT<i [ngClass]="getIcon('rec_created_date')"></i></th>
           <th (click)="sortHeader('rec_edited_by')">EDITED-BY<i [ngClass]="getIcon('rec_edited_by')"></i></th>
-          <th (click)="sortHeader('rec_edited_date')">EDITED-ON<i [ngClass]="getIcon('rec_edited_date')"></i></th>
+          <th (click)="sortHeader('rec_edited_date')">EDITED-DT<i [ngClass]="getIcon('rec_edited_date')"></i></th>
           <th>REMOVE</th>
         </tr>
       </thead>
