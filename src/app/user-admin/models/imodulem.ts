@@ -15,6 +15,7 @@ export interface iModulem {
 export interface iModulem_Search {
   module_name: string;
   module_is_installed: string;
+  rec_company_id: number;
 }
 
 

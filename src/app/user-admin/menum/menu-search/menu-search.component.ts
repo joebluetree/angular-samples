@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { iMenum_Search } from '../../models/imenum';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
   selector: 'app-menu-search',
@@ -18,12 +19,13 @@ export class MenuSearchComponent {
 
   @Output() output = new EventEmitter<iMenum_Search>();
 
-  constructor() {
+  constructor(private gs: GlobalService) {
   }
 
   search(_action: string) {
     if (this.output) {
       console.log(this.record);
+      this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit(this.record);
     }
   }

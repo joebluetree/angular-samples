@@ -21,6 +21,7 @@ export interface iMenum_Search {
   module_id: number;
   module_name: string;
   menu_visible: string;
+  rec_company_id: number;
 }
 
 

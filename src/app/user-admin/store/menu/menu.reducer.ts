@@ -20,7 +20,7 @@ const adapter: EntityAdapter<iMenum> = createEntityAdapter<iMenum>({
 
 export const initialState: MenuState = adapter.getInitialState({
   selectid: 0,
-  search_record: <iMenum_Search>{ menu_name: '', module_id: 0, module_name: '', menu_visible: 'NA' },
+  search_record: <iMenum_Search>{ menu_name: '', module_id: 0, module_name: '', menu_visible: 'NA', rec_company_id: 0 },
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
   sort_column: '',
   sort_order: '',

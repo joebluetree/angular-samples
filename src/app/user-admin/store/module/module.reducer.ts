@@ -21,7 +21,7 @@ const adapter: EntityAdapter<iModulem> = createEntityAdapter<iModulem>({
 
 export const initialState: ModuleState = adapter.getInitialState({
   selectid: 0,
-  search_record: <iModulem_Search>{ module_name: '', module_is_installed: 'NA' },
+  search_record: <iModulem_Search>{ module_name: '', module_is_installed: 'NA', rec_company_id: 0 },
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
   sort_column: '',
   sort_order: '',

@@ -22,7 +22,7 @@ const adapter: EntityAdapter<iParam> = createEntityAdapter<iParam>({
 export const initialParamState: ParamState = adapter.getInitialState({
   selectid: 0,
   param_type: '',
-  search_record: <iParam_Search>{ param_code: '', param_name: '', },
+  search_record: <iParam_Search>{ param_code: '', param_name: '', rec_company_id: 0 },
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
   sort_column: '',
   sort_order: '',

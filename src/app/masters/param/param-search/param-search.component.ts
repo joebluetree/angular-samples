@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { iParam_Search } from '../../models/iparam';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
   selector: 'app-param-search',
@@ -16,11 +17,12 @@ export class ParamSearchComponent {
 
   @Output() output = new EventEmitter<iParam_Search>();
 
-  constructor() {
+  constructor(private gs: GlobalService) {
   }
 
   search(_action: string) {
     if (this.output) {
+      this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit(this.record);
     }
   }
