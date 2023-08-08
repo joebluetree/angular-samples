@@ -19,8 +19,11 @@
       <thead>
         <tr>
           <th width="10%">SELECT</th>
-          <th width="20%">ID</th>
-          <th width="70%">NAME</th>
+          <ng-container *ngFor="let col of columns">
+            <th>{{col.id}}</th>
+          </ng-container>
+          <!-- <th width="20%">ID</th>
+          <th width="70%">NAME</th> -->
         </tr>
       </thead>
       <tbody>
@@ -29,8 +32,12 @@
             <input class="btnRadio" type="radio" #radio [checked]="i==rowid" (focus)="rowid=i"
               (keydown)="radioKeyDown($event,rec)">
           </td>
-          <td (click)="onSelection(rec)">{{rec['module_id']}}</td>
-          <td (click)="onSelection(rec)">{{rec['module_name']}}</td>
+          <!-- <td (click)="onSelection(rec)">{{rec['module_id']}}</td>
+          <td (click)="onSelection(rec)">{{rec['module_name']}}</td> -->
+          <ng-container *ngFor="let col of columns">
+            <td (click)="onSelection(rec)">{{rec[col.value]}}</td>
+          </ng-container>
+
         </tr>
       </tbody>
     </table>

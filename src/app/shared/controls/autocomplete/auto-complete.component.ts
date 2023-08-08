@@ -5,6 +5,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { icolumns } from '../../models/icolumns';
 
 @Component({
   selector: 'auto-complete',
@@ -31,7 +32,6 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   @ViewChildren('radio') inputs: QueryList<ElementRef>;
 
 
-
   showDiv = false;
   isDisabled = false;
   ctrl = new FormControl('');
@@ -46,12 +46,14 @@ export class AutoCompleteComponent implements ControlValueAccessor {
 
   rowid = 0;
 
-
+  columns: icolumns[];
 
   constructor(private service: CommonService, private gs: GlobalService) {
+
   }
 
   ngOnInit(): void {
+    this.columns = this.service.getColumns(this.table);
     this.setup();
   }
 
@@ -61,7 +63,7 @@ export class AutoCompleteComponent implements ControlValueAccessor {
         switchMap(value => {
           let search_record = {
             'table': this.table,
-            'company_id': this.gs.user.user_company_id,
+            'company_id': this.company_id,
             'search_string': value
           }
           return this.service.getList(search_record);
@@ -183,8 +185,6 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   getValue() {
     return this.ctrl.value?.toString().trim() || '';
   }
-
-
 
   cancelSelection() {
     this.isChanged = false;
