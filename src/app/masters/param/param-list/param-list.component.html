@@ -26,6 +26,12 @@
           </th>
           <th (click)="sortHeader('param_order')">ORDER <i [class]="getIcon('param_order')"></i>
           </th>
+
+          <th (click)="sortHeader('rec_created_by')">CREATED-BY<i [ngClass]="getIcon('rec_created_by')"></i></th>
+          <th (click)="sortHeader('rec_created_date')">CREATED-DT<i [ngClass]="getIcon('rec_created_date')"></i></th>
+          <th (click)="sortHeader('rec_edited_by')">EDITED-BY<i [ngClass]="getIcon('rec_edited_by')"></i></th>
+          <th (click)="sortHeader('rec_edited_date')">EDITED-DT<i [ngClass]="getIcon('rec_edited_date')"></i></th>
+
           <th>REMOVE</th>
         </tr>
       </thead>
@@ -43,6 +49,12 @@
             <td>{{rec.param_code}}</td>
             <td>{{rec.param_name}}</td>
             <td>{{rec.param_order}}</td>
+
+            <td>{{rec.rec_created_by}}</td>
+            <td>{{rec.rec_created_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
+            <td>{{rec.rec_edited_by}}</td>
+            <td>{{rec.rec_edited_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
+
             <td align="centre" (click)="deleteRow(rec)" class="link">
               <i class="fa fa-trash"></i>
             </td>
