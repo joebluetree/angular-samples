@@ -6,6 +6,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { iMenum } from '../../../../user-admin/models/imenum';
 
 @Component({
   selector: 'auto-complete-modulem',
@@ -76,7 +77,7 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
   }
 
   private searchRecord() {
-    let data = this.ctrl.value?.toString().trim() || '';
+    let data = this.getValue();
     this.term$.next(data);
   }
 
@@ -127,9 +128,13 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
   }
 
   public InputBox_OnBlur: any = () => {
-    if (this.isChanged) {
-      this.searchRecord();
+    let data = this.getValue();
+    if (data == '') {
+      this.ResetValue();
+      return;
     }
+    if (this.isChanged)
+      this.searchRecord();
   }
 
   onClickSearch() {
@@ -159,6 +164,20 @@ export class AutoCompleteModulemComponent implements ControlValueAccessor {
     this.selectInputBox();
     this.CallBack.emit({ id: this.id, rec: rec });
   }
+
+  ResetValue() {
+    let data = this.getValue();
+    if (data == '') {
+      const value = <iModulem>{ module_id: 0, module_name: '' };
+      this.CallBack.emit({ id: this.id, rec: value });
+    }
+  }
+
+  getValue() {
+    return this.ctrl.value?.toString().trim() || '';
+  }
+
+
 
   cancelSelection() {
     this.isChanged = false;
