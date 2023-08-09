@@ -2,10 +2,9 @@ import { Component, ElementRef, Input, Output, QueryList, ViewChild, ViewChildre
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { GlobalService } from 'src/app/core/services/global.service';
-
-import { Subject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { icolumns } from '../../models/icolumns';
+
+
 
 @Component({
   selector: 'auto-complete',
@@ -31,7 +30,6 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   @ViewChild('inputBox') inputBox: ElementRef;
   @ViewChildren('radio') inputs: QueryList<ElementRef>;
 
-
   showDiv = false;
   isDisabled = false;
   ctrl = new FormControl('');
@@ -40,7 +38,7 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   onTouch: any = () => { };
 
   records: Array<any> = [];
-  term$ = new Subject<string>();
+
 
   isChanged = false;
 
@@ -57,36 +55,26 @@ export class AutoCompleteComponent implements ControlValueAccessor {
     this.setup();
   }
 
-  private setup() {
-    this.term$
-      .pipe(
-        switchMap(value => {
-          let search_record = {
-            'table': this.table,
-            'company_id': this.company_id,
-            'search_string': value
-          }
-          return this.service.getList(search_record);
-        }),
-      ).subscribe({
-        next: (v) => {
-          this.records = v.records;
-          if (this.records.length > 0) {
-            this.showDiv = true;
-            this.selectTableRow(0);
-          }
-          this.isChanged = false;
-        },
-        error: (e) => {
-          this.gs.showScreen([e.error || e.message]);
-        },
-        complete: () => { }
-      })
-  }
-
   private searchRecord() {
     let data = this.getValue();
-    this.term$.next(data);
+    let search_record = {
+      'table': this.table,
+      'company_id': this.company_id,
+      'search_string': data
+    };
+    this.service.getList(search_record).subscribe({
+      next: (v) => {
+        this.records = v.records;
+        if (this.records.length > 0) {
+          this.showDiv = true;
+          this.selectTableRow(0);
+        }
+        this.isChanged = false;
+      },
+      error: (e) => {
+        this.gs.showScreen([e.error || e.message]);
+      }
+    })
   }
 
   selectTableRow(index: number = 0) {
@@ -104,7 +92,6 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   }
 
   ngOnDestroy(): void {
-    this.term$.unsubscribe();
   }
 
   writeValue(obj: string): void {
@@ -176,9 +163,7 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   ResetValue() {
     let data = this.getValue();
     if (data == '') {
-      //const value = <iModulem>{ module_id: 0, module_name: '' };
-      const value = null;
-      this.CallBack.emit({ id: this.id, rec: value });
+      this.CallBack.emit({ id: this.id, rec: null });
     }
   }
 
@@ -192,4 +177,34 @@ export class AutoCompleteComponent implements ControlValueAccessor {
     this.selectInputBox();
   }
 
+  private setup() {
+    /*
+  this.term$.pipe(
+    switchMap(value => {
+      let search_record = {
+        'table': this.table,
+        'company_id': this.company_id,
+        'search_string': value
+      }
+      return this.service.getList(search_record);
+    }),
+    catchError(error => {
+      throw error;
+    })
+  ).subscribe({
+    next: (v) => {
+      this.records = v.records;
+      if (this.records.length > 0) {
+        this.showDiv = true;
+        this.selectTableRow(0);
+      }
+      this.isChanged = false;
+    },
+    error: (e) => {
+      //this.gs.showScreen([e.error || e.message]);
+      this.gs.showScreen(['error']);
+    }
+  })
+  */
+  }
 }

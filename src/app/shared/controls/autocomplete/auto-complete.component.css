@@ -14,7 +14,6 @@ tbody {
   position: absolute;
   z-index: 9999;
   cursor: pointer;
-  width: 50vh;
   box-shadow: 10px 10px 10px 0px lightgray;
   background-color: ghostwhite;
 }
