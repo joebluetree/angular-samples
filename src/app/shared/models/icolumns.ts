@@ -4,9 +4,6 @@ export interface icolumns {
 }
 
 
-
-
-
 export interface table_constants {
   getColumns(): icolumns[]
 }

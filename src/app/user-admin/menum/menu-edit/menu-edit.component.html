@@ -15,83 +15,36 @@
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Menu Code</label>
             <div class="col-sm-8">
-              <app-input-text maxlength="20" formControlName="menu_code" [case]="'UPPER'"
-                [id]="'menu_code'"></app-input-text>
-              <div class="error-text"
-                *ngIf="mform.controls['menu_code'].invalid && mform.controls['menu_code'].touched">
-                <span *ngIf="mform.controls['menu_code'].errors?.['required']">
-                  Menu ID Required
-                </span>
-                <span *ngIf="mform.controls['menu_code'].errors?.['maxlength']">
-                  Cannot Be more than 20 characters
-                </span>
-              </div>
+              <app-input formControlName="menu_code" [case]="'UPPER'" required maxlength="20"></app-input>
             </div>
           </div>
-
-
 
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Menu Name</label>
             <div class="col-sm-8">
-              <app-input-text maxlength="60" formControlName="menu_name" [case]="''"
-                [id]="'menu_name'"></app-input-text>
-              <div class="error-text"
-                *ngIf="mform.controls['menu_name'].invalid && mform.controls['menu_name'].touched">
-                <span *ngIf="mform.controls['menu_name'].errors?.['required']">
-                  Menu Name Required
-                </span>
-                <span *ngIf="mform.controls['menu_name'].errors?.['maxlength']">
-                  Cannot Be more than 60 characters
-                </span>
-              </div>
+              <app-input formControlName="menu_name" [case]="''" required maxlength="60"></app-input>
             </div>
           </div>
-
 
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Menu Route</label>
             <div class="col-sm-8">
-              <app-input-text maxlength="60" formControlName="menu_route" [case]="''"
-                [id]="'menu_route'"></app-input-text>
-              <div class="error-text"
-                *ngIf="mform.controls['menu_route'].invalid && mform.controls['menu_route'].touched">
-                <span *ngIf="mform.controls['menu_route'].errors?.['required']">
-                  Route Required
-                </span>
-                <span *ngIf="mform.controls['menu_route'].errors?.['maxlength']">
-                  Cannot Be more than 60 characters
-                </span>
-              </div>
+              <app-input maxlength="60" formControlName="menu_route" [case]="''" required maxlength="60"></app-input>
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Menu Param</label>
             <div class="col-sm-8">
-              <app-input-text maxlength="100" formControlName="menu_param" [case]="''"
-                [id]="'menu_param'"></app-input-text>
-
+              <app-input maxlength="100" formControlName="menu_param" [case]="''" maxlength="100"></app-input>
             </div>
           </div>
-
-
-
 
           <div class="form-group row">
             <label class="col-sm-4 form-label form-lable-sm" for="">Module</label>
             <div class="col-sm-8">
-
               <auto-complete formControlName="menu_module_name" (CallBack)="callBack($event)" [table]="'modulem'"
-                [company_id]="getCompanyId()" [display_column]="'module_name'" [id]="'menu_module_id'"></auto-complete>
-
-              <div class="error-text"
-                *ngIf="mform.controls['menu_module_name'].invalid && mform.controls['menu_module_name'].touched">
-                <span *ngIf="mform.controls['menu_module_id'].errors?.['required']">
-                  Module Name Should Be Selected
-                </span>
-              </div>
-
+                [company_id]="getCompanyId()" [display_column]="'module_name'" required></auto-complete>
             </div>
           </div>
 
@@ -99,7 +52,7 @@
           <div class="form-group row">
             <label class="form-label form-label-sm col-sm-4">Visible</label>
             <div class="col-sm-8">
-              <app-checkbox [id]="'menu_visible'" formControlName="menu_visible"></app-checkbox>
+              <app-checkbox formControlName="menu_visible"></app-checkbox>
               <label for="menu_visible" class="ms-1 form-label form-label-sm">Visible</label>
             </div>
           </div>
@@ -107,13 +60,8 @@
           <div class="form-group row">
             <label class="col-sm-4 form-label form-label-sm" for="">Order</label>
             <div class="col-sm-8">
-              <input type="number" class="form-control form-control-sm" maxlength="5" formControlName="menu_order">
-              <div class="error-text"
-                *ngIf="mform.controls['menu_order'].invalid && mform.controls['menu_order'].touched">
-                <span *ngIf="mform.controls['menu_order'].errors?.['required']">
-                  Menu Order Required
-                </span>
-              </div>
+              <app-input type="number" maxlength="5" required formControlName="menu_order">
+              </app-input>
             </div>
           </div>
 

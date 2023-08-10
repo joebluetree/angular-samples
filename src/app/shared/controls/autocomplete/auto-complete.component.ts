@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, Output, QueryList, ViewChild, ViewChildren, forwardRef, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { icolumns } from '../../models/icolumns';
@@ -20,6 +20,9 @@ import { icolumns } from '../../models/icolumns';
 })
 export class AutoCompleteComponent implements ControlValueAccessor {
   @Input('id') id: string = '_ID_';
+  @Input('required') required: any;
+  @Input('formControlName') ctrl_name: any;
+  @Input('validation') _validations: boolean = true;
   @Input('company_id') company_id: number = 0;
   @Input('branch_id') branch_id: number = 0;
   @Input('table') table: string = '';
@@ -53,6 +56,23 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   ngOnInit(): void {
     this.columns = this.service.getColumns(this.table);
     this.setup();
+  }
+
+  ngAfterViewInit(): void {
+    this.id = this.ctrl_name;
+    if (this._validations)
+      this.addValidators();
+  }
+
+
+  addValidators() {
+    let bOk = false;
+    if (this.required == '') {
+      this.ctrl.addValidators([Validators.required]);
+      bOk = true;
+    }
+    if (bOk)
+      this.ctrl.updateValueAndValidity();
   }
 
   private searchRecord() {

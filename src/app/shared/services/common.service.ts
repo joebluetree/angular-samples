@@ -19,19 +19,13 @@ export class CommonService {
     private http: HttpClient,
     private gs: GlobalService) {
   }
-
-  public getList(search_record: any) {
-    return this.http.post<any>(this.gs.getUrl('/api/search/GetListAsync'), search_record);
-  }
-
-  private getFunction(action: string) {
-    return classMapping[`${action}`];
-  }
-
   public getColumns(table: string) {
-    let funName = new (this.getFunction(table));
+    let funName = new (classMapping[`${table}`]);
     const data = funName.getColumns();
     return data;
+  }
+  public getList(search_record: any) {
+    return this.http.post<any>(this.gs.getUrl('/api/search/GetListAsync'), search_record);
   }
 
 }

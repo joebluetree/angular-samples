@@ -1,2 +1,15 @@
-<input type="text" class="form-control form-control-sm" (blur)="onBlur()" [formControl]="ctrl" autocomplete="off"
-  [id]="id">
+<input [type]="ctrl_type" class="form-control form-control-sm" (blur)="onBlur()" [formControl]="ctrl"
+  autocomplete="new-password" [id]="id" [class]="{'error' : ctrl.invalid && ctrl.touched && ctrl.errors?.['required']}">
+
+<div class="error-text" *ngIf="ctrl.invalid && ctrl.touched">
+  <!-- <span *ngIf="ctrl.errors?.['required']">
+    --Required--
+  </span> -->
+  <span *ngIf="ctrl.errors?.['minlength']">
+    --Min Length {{minLength}}--
+  </span>
+  <span *ngIf="ctrl.errors?.['maxlength']">
+    --Max Length {{maxLength}}--
+  </span>
+</div>
+<!-- <button (click)="test()">Valid</button> -->

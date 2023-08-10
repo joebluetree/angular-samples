@@ -37,7 +37,7 @@ export class MenuEditComponent {
       menu_visible: ['Y'],
       menu_module_id: [0, [Validators.required]],
       menu_module_name: ['', [Validators.required, Validators.maxLength(60)]],
-      menu_order: ['', [Validators.required, Validators.minLength(1)]],
+      menu_order: ['', [Validators.required]],
     })
   }
 

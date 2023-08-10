@@ -15,7 +15,10 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 })
 export class CheckboxComponent implements ControlValueAccessor {
   chkbox = new FormControl();
-  @Input('id') id: string = '_id'
+
+  @Input('formControlName') ctrl_name: any;
+
+  id: string = '_id'
 
   isDisabled = false;
 
@@ -24,6 +27,12 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   constructor() {
   }
+
+  ngAfterViewInit(): void {
+    this.id = this.ctrl_name;
+  }
+
+
 
   writeValue(obj: any): void {
     const _type = typeof (obj);

@@ -22,3 +22,7 @@ tbody {
 .btnRadio {
   outline: none;
 }
+
+.error {
+  border-bottom: 1px red solid;
+}

@@ -29,7 +29,7 @@ export class ModuleEditComponent {
       module_id: [0],
       module_name: ['', [Validators.required, Validators.maxLength(60)]],
       module_is_installed: ['Y'],
-      module_order: ['', [Validators.required, Validators.minLength(1)]],
+      module_order: ['', [Validators.required]],
     })
   }
 
