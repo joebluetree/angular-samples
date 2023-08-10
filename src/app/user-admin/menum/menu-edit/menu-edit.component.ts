@@ -19,7 +19,7 @@ import { iModulem } from '../../models/imodulem';
 export class MenuEditComponent {
   id = 0;
   mform: FormGroup;
-  showModel = true;
+  showModel = false;
   constructor(
     private gs: GlobalService,
     private service: MenueService,
