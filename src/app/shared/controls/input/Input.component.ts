@@ -3,17 +3,17 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from
 
 @Component({
   selector: 'app-input',
-  templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.css'],
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TextInputComponent),
+      useExisting: forwardRef(() => InputComponent),
       multi: true
     }
   ]
 })
-export class TextInputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor {
 
   @Input() case: string = '';
   @Input('formControlName') ctrl_name: any;

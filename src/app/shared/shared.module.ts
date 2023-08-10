@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageComponent } from './page/page.component';
-import { TextInputComponent } from './controls/text-input/text-input.component';
+
 import { SortPipe } from './pipe/sort.pipe';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 
 import { LetModule } from '@ngrx/component';
+import { InputComponent } from './controls/input/Input.component';
+
 
 @NgModule({
   declarations: [
     PageComponent,
-    TextInputComponent,
+    InputComponent,
     SortPipe,
     CheckboxComponent,
     AutoCompleteComponent
@@ -31,7 +33,7 @@ import { LetModule } from '@ngrx/component';
     ReactiveFormsModule,
     HttpClientModule,
     PageComponent,
-    TextInputComponent,
+    InputComponent,
     SortPipe,
     CheckboxComponent,
     AutoCompleteComponent,
