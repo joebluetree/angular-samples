@@ -1,6 +1,7 @@
 <div class="page-header">
   <h5>Menu List</h5>
-  <button class="btn btn-success btn-sm" routerLink="/admin/menuEdit" [queryParams]="{id :0}">New</button>
+  <button class="btn btn-success btn-sm" routerLink="/admin/menuEdit"
+    [queryParams]="{id:0,menuid:menuid,type:type, title:title}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
@@ -15,55 +16,11 @@
 </div>
 
 <div class="page-body">
-  <div class="table-responsive">
-    <table class="table table-sm table-hover table-bordered table-striped table-condensed">
-      <thead class="table-success">
-        <tr class="table-header">
-          <th>EDIT</th>
-          <th (click)="sortHeader('menu_id')">ID<i [ngClass]="getIcon('menu_id')"></i></th>
-          <th (click)="sortHeader('menu_code')">MENU-ID <i [ngClass]="getIcon('menu_code')"></i></th>
-          <th (click)="sortHeader('menu_name')">NAME <i [ngClass]="getIcon('menu_name')"></i></th>
-          <th (click)="sortHeader('menu_route')">ROUTE<i [ngClass]="getIcon('menu_route')"></i></th>
-          <th (click)="sortHeader('menu_param')">PARAM<i [ngClass]="getIcon('menu_param')"></i></th>
-          <th (click)="sortHeader('menu_visible')">VISIBLE <i [ngClass]="getIcon('menu_visible')"></i></th>
-          <th (click)="sortHeader('module_name')">Module<i [ngClass]="getIcon('module_name')"></i></th>
-          <th (click)="sortHeader('menu_order')">ORDER <i [ngClass]="getIcon('menu_order')"></i></th>
-          <th (click)="sortHeader('rec_created_by')">CREATED-BY<i [ngClass]="getIcon('rec_created_by')"></i></th>
-          <th (click)="sortHeader('rec_created_date')">CREATED-DT<i [ngClass]="getIcon('rec_created_date')"></i></th>
-          <th (click)="sortHeader('rec_edited_by')">EDITED-BY<i [ngClass]="getIcon('rec_edited_by')"></i></th>
-          <th (click)="sortHeader('rec_edited_date')">EDITED-DT<i [ngClass]="getIcon('rec_edited_date')"></i></th>
-          <th>REMOVE</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngIf="(records$ | async) as records">
+  <app-table [table]="table_data" [data]="records$ | ngrxPush" (callback_table)="callback_table($event)"
+    [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'module_id'"
+    [selected_id]="selected_id$ | ngrxPush">
+  </app-table>
 
-          <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order " (click)="selectRow(rec.menu_id)"
-            [ngClass]="{'table-info' : rec.menu_id == (selectedRowId$ | async) }">
-            <td (click)="selectRow(rec.menu_id)" class="link" routerLink="/admin/menuEdit"
-              [queryParams]="{id :rec.menu_id}">
-              <i class="fa fa-pencil"></i>
-            </td>
-            <td>{{rec.menu_id}}</td>
-            <td>{{rec.menu_code}}</td>
-            <td>{{rec.menu_name}}</td>
-            <td>{{rec.menu_route}}</td>
-            <td>{{rec.menu_param}}</td>
-            <td>{{rec.menu_visible}}</td>
-            <td>{{rec.menu_module_name}}</td>
-            <td>{{rec.menu_order}}</td>
-            <td>{{rec.rec_created_by}}</td>
-            <td>{{rec.rec_created_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
-            <td>{{rec.rec_edited_by}}</td>
-            <td>{{rec.rec_edited_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
-            <td align="centre" (click)="deleteRow(rec)" class="link">
-              <i class="fa fa-trash"></i>
-            </td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
-  </div>
 </div>
 
 <div class="page-pagination line-bottom" *ngIf="(page$ | async) as page">

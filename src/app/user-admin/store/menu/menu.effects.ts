@@ -4,9 +4,9 @@ import * as allActions from './menu.actions';
 import { EMPTY, catchError, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MenuState } from './menu.reducer';
-import { menuPage, menuSearch_Record } from './menu.selectors';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { MenueService } from '../../services/menu.service';
+import { selectMenuPage, selectMenuSearch_Record } from './menu.selectors';
 
 @Injectable()
 export class MenuEffects {
@@ -14,8 +14,8 @@ export class MenuEffects {
     return this.actions$.pipe(
       ofType(allActions.menu_load_records),
       withLatestFrom(
-        this.store.select(menuSearch_Record),
-        this.store.select(menuPage)
+        this.store.select(selectMenuSearch_Record),
+        this.store.select(selectMenuPage)
       ),
       switchMap(([action, search_record, page]) => {
         const data: any = this.service.getList(action.action, search_record, page);

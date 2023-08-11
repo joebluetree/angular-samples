@@ -2,11 +2,12 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as allActions from '../../store/menu/menu.actions';
-import { Observable, tap, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { iPage } from 'src/app/shared/models/ipage';
 import { iMenum, iMenum_Search } from '../../models/imenum';
-import { menuPage, menuSearch_Record, menuSelector, menuState } from '../../store/menu/menu.selectors';
+import { selectMenu, selectMenuPage, selectMenuPage_RowId, selectMenuPage_SortColumn, selectMenuPage_SortOrder, selectMenuSearch_Record } from '../../store/menu/menu.selectors';
 import { MenuState } from '../../store/menu/menu.reducer';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,30 +19,55 @@ export class MenuListComponent {
 
   search_record$: Observable<iMenum_Search>;
   records$: Observable<iMenum[]>;
-  selectedRowId$: Observable<number>;
+  selected_id$: Observable<number>;
+  sort_column$: Observable<string>;
+  sort_order$: Observable<string>;
   page$: Observable<iPage>;
 
-  sort_column = "";
-  sort_order = "";
-  sort_icon = '';
+  table_data: any[] = [];
+
+  menuid = '';
+  title = '';
+  type = '';
 
   constructor(
     private store: Store<MenuState>,
+    private route: ActivatedRoute,
     private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.records$ = this.store.select(menuSelector);
-    this.search_record$ = this.store.select(menuSearch_Record);
-    this.selectedRowId$ = this.store.select(menuState).pipe(
-      tap((e: MenuState) => {
-        this.sort_column = e.sort_column;
-        this.sort_order = e.sort_order;
-        this.sort_icon = e.sort_icon;
-      }),
-      map((e: MenuState) => e.selectid)
-    );
-    this.page$ = this.store.select(menuPage);
+
+    this.route.queryParams.forEach(rec => {
+      this.menuid = rec["menuid"];
+      this.title = rec["title"];
+      this.type = rec["type"];
+    })
+
+    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title }
+    this.table_data = [
+      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/admin/menuEdit', param: param },
+      { col_name: "menu_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "menu_code", col_caption: "CODE", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "menu_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "menu_route", col_caption: "ROUTE", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "menu_param", col_caption: "PARAM", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "menu_visible", col_caption: "VISIBLE", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "module_name", col_caption: "MODULE", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "menu_order", col_caption: "ORDER", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
+      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {} },
+    ];
+
+    this.records$ = this.store.select(selectMenu);
+    this.search_record$ = this.store.select(selectMenuSearch_Record);
+    this.selected_id$ = this.store.select(selectMenuPage_RowId);
+    this.sort_column$ = this.store.select(selectMenuPage_SortColumn);
+    this.sort_order$ = this.store.select(selectMenuPage_SortOrder);
+    this.page$ = this.store.select(selectMenuPage);
   }
 
   search(search_record: iMenum_Search) {
@@ -53,31 +79,20 @@ export class MenuListComponent {
     this.store.dispatch(allActions.menu_load_records({ action: _action.action }))
   }
 
-  selectRow(_id: number) {
-    this.store.dispatch(allActions.menu_update_selected_rowid({ id: _id }));
+  callback_table(data: any) {
+    if (data.action == 'SORT') {
+      this.store.dispatch(allActions.menu_sort({ sort_column: data.sort_column, sort_order: data.sort_order }));
+    }
+    if (data.action == 'ROW-SELECTED') {
+      this.store.dispatch(allActions.menu_update_selected_rowid({ id: data.row_id }));
+    }
+    if (data.action == 'DELETE') {
+      if (!confirm(`Delete ${data.rec.menu_name} y/n`))
+        return;
+      this.store.dispatch(allActions.menu_delete({ id: data.rec.menu_id }));
+    }
   }
 
-  deleteRow(_rec: iMenum) {
-    if (!confirm(`Delete ${_rec.menu_name} y/n`))
-      return;
-    this.store.dispatch(allActions.menu_delete({ id: _rec.menu_id }));
-  }
-
-  sortHeader(col_name: string) {
-    if (col_name == this.sort_column)
-      this.sort_order = this.sort_order == 'asc' ? 'desc' : 'asc';
-    else
-      this.sort_order = 'asc';
-    this.sort_icon = this.sort_order == 'asc' ? 'fa fa-long-arrow-up' : 'fa fa-long-arrow-down';
-    this.store.dispatch(allActions.menu_sort({ sort_column: col_name, sort_order: this.sort_order, sort_icon: this.sort_icon }));
-  }
-
-  public getIcon(col: string) {
-    if (col == this.sort_column)
-      return this.sort_icon;
-    else
-      return '';
-  }
 
   return2Parent() {
     this.location.back();

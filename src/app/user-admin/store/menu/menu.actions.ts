@@ -44,5 +44,5 @@ export const menu_delete_complete = createAction(
 
 export const menu_sort = createAction(
   '[Menu Master] Sort Column',
-  props<{ sort_column: string, sort_order: string, sort_icon: string }>()
+  props<{ sort_column: string, sort_order: string }>()
 );
