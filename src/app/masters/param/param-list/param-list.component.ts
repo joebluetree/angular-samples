@@ -33,15 +33,20 @@ export class ParamListComponent {
     private route: ActivatedRoute,
     private location: Location
   ) {
-  }
-
-  ngOnInit(): void {
 
     this.route.queryParams.forEach(rec => {
       this.menuid = rec["menuid"];
       this.title = rec["title"];
       this.type = rec["type"];
     })
+
+
+    this.records$ = this.store.select(selectParamRecords);
+    this.search_record$ = this.store.select(selectParamSearch_Record);
+    this.selected_id$ = this.store.select(selectParamPage_RowId);
+    this.sort_column$ = this.store.select(selectParamPage_SortColumn);
+    this.sort_order$ = this.store.select(selectParamPage_SortOrder);
+    this.page$ = this.store.select(selectParamPage);
 
     const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title }
     this.table_data = [
@@ -56,13 +61,9 @@ export class ParamListComponent {
       { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {} },
     ];
+  }
 
-    this.records$ = this.store.select(selectParamRecords);
-    this.search_record$ = this.store.select(selectParamSearch_Record);
-    this.selected_id$ = this.store.select(selectParamPage_RowId);
-    this.sort_column$ = this.store.select(selectParamPage_SortColumn);
-    this.sort_order$ = this.store.select(selectParamPage_SortOrder);
-    this.page$ = this.store.select(selectParamPage);
+  ngOnInit(): void {
   }
 
   search(search_record: iParam_Search) {
@@ -93,7 +94,6 @@ export class ParamListComponent {
   }
 
   ngOnDestroy(): void {
-
   }
 
 }

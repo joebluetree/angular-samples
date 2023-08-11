@@ -5,7 +5,7 @@
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
-<div class="page-search" *ngrxLet="search_record$ as record">
+<div class="page-search" *ngIf="(search_record$ | async) as record">
   <app-param-search [input]="record" (output)="search($event)"></app-param-search>
 </div>
 
@@ -14,10 +14,13 @@
 </div>
 
 <div class="page-body">
-  <app-table [table]="table_data" [data]="records$ | ngrxPush" (callback_table)="callback_table($event)"
-    [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'param_id'"
-    [selected_id]="selected_id$ | ngrxPush">
-  </app-table>
+  <ng-container *ngIf="(records$ | async) as records">
+    <app-table [table]="table_data" [data]="records" (callback_table)="callback_table($event)"
+      [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'param_id'"
+      [selected_id]="selected_id$ | ngrxPush">
+    </app-table>
+  </ng-container>
+
 </div>
 
 <div class="page-pagination line-bottom" *ngIf="(page$ | async) as page">

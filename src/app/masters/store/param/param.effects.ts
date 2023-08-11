@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { param_load_records, param_load_success, param_delete, param_update_search, param_delete_complete } from './param.actions';
+import { param_load_records, param_load_success, param_delete, param_delete_complete } from './param.actions';
 import { ParamService } from '../../services/param.service';
-import { EMPTY, catchError, map, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
+import { EMPTY, catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ParamGroupState, ParamState } from './param.reducer';
+import { ParamGroupState } from './param.reducer';
 import { selectParamPage, selectParamSearch_Record } from './param.selectors';
 import { GlobalService } from 'src/app/core/services/global.service';
 
@@ -20,6 +20,11 @@ export class ParamEffects {
       switchMap(([action, search_record, page]) => this.service.getList(action, search_record, page).pipe(
         map(result => this.store.dispatch(param_load_success({ records: result.records, page: result.page, param_type: action.param_type }))),
       )),
+      catchError(error => {
+        const err = !!error.error ? error.error : error;
+        this.gs.showScreen([err]);
+        throw EMPTY;
+      })
     );
   }, { dispatch: false });
 

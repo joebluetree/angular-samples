@@ -19,7 +19,7 @@ import { icolumns } from '../../models/icolumns';
   ]
 })
 export class AutoCompleteComponent implements ControlValueAccessor {
-  @Input('id') id: string = '_ID_';
+
   @Input('required') required: any;
   @Input('formControlName') ctrl_name: any;
   @Input('validation') _validations: boolean = true;
@@ -32,6 +32,8 @@ export class AutoCompleteComponent implements ControlValueAccessor {
 
   @ViewChild('inputBox') inputBox: ElementRef;
   @ViewChildren('radio') inputs: QueryList<ElementRef>;
+
+  id: string = '_id_text';
 
   showDiv = false;
   isDisabled = false;
@@ -59,7 +61,8 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   }
 
   ngAfterViewInit(): void {
-    this.id = this.ctrl_name;
+    if (this.ctrl_name)
+      this.id = this.ctrl_name;
     if (this._validations)
       this.addValidators();
   }

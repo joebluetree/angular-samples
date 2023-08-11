@@ -1,5 +1,5 @@
 import { RouterReducerState, routerReducer } from '@ngrx/router-store';
-import { Action, ActionReducer, ActionReducerMap, MetaReducer, createFeatureSelector, createSelector } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer, createFeatureSelector, createSelector } from '@ngrx/store';
 import { RouterStateUrl } from '../custom-route-serializer';
 
 export interface AppState {
