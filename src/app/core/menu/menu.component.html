@@ -22,9 +22,11 @@
           Masters
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" routerLink="admin/moduleList">Module Master</a></li>
+          <li><a class="dropdown-item" routerLink="admin/moduleList"
+              [queryParams]="{menuid:'MODULE',type:'MODULE', title:'Module Master'}">Module Master</a></li>
 
-          <li><a class="dropdown-item" routerLink="admin/menuList">Menu Master</a></li>
+          <li><a class="dropdown-item" routerLink="admin/menuList"
+              [queryParams]="{menuid:'MENU',type:'MENU', title:'Menu Master'}">Menu Master</a></li>
 
           <li><a class="dropdown-item" routerLink="masters/paramList"
               [queryParams]="{menuid:'COUNTRY',type:'COUNTRY', title:'Country Master'}">Country

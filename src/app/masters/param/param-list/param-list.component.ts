@@ -29,8 +29,8 @@ export class ParamListComponent {
   table_data: any[] = [];
 
   constructor(
-    private route: ActivatedRoute,
     private store: Store<ParamGroupState>,
+    private route: ActivatedRoute,
     private location: Location
   ) {
   }

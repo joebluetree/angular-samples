@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
 import { iPage } from 'src/app/shared/models/ipage';
 import { ModuleState } from '../../store/module/module.reducer';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-module-list',
@@ -30,10 +31,17 @@ export class ModuleListComponent {
 
   constructor(
     private store: Store<ModuleState>,
-    private location: Location
+    private route: ActivatedRoute,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
+
+    this.route.queryParams.forEach(rec => {
+      this.menuid = rec["menuid"];
+      this.title = rec["title"];
+      this.type = rec["type"];
+    })
 
     const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title }
     this.table_data = [
