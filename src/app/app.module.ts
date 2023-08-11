@@ -29,7 +29,6 @@ import { CustomSerializer } from './custom-route-serializer';
     }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot({
-      navigationActionTiming: NavigationActionTiming.PostActivation,
       serializer: CustomSerializer
     }),
     StoreDevtoolsModule.instrument(),
