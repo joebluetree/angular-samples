@@ -16,7 +16,8 @@
 <div class="page-body">
   <ng-container *ngIf="(records$ | async) as records">
     <app-table [table]="table_data" [data]="records" (callback_table)="callback_table($event)"
-      [sort_column]="sort_column" [sort_order]="sort_order" [row_id_name]="'param_id'" [selected_id]="selected_id">
+      [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'param_id'"
+      [selected_id]="selected_id$ | ngrxPush">
     </app-table>
   </ng-container>
 </div>

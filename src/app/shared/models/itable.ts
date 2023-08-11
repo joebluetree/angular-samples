@@ -4,5 +4,5 @@ export interface iTable {
   col_format: string;
   col_sortable: boolean;
   link: string;
-  param: string;
+  param: {};
 }

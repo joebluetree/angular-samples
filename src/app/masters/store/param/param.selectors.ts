@@ -20,10 +20,6 @@ export const selectParamRecords = createSelector(
   selectAll
 )
 
-export const selectParamRowId = createSelector(
-  selectParamGroupState,
-  (a) => a.selectid
-)
 
 export const selectParamSearch_Record = createSelector(
   selectParamGroupState,
@@ -33,6 +29,11 @@ export const selectParamSearch_Record = createSelector(
 export const selectParamPage = createSelector(
   selectParamGroupState,
   (a) => a.page
+)
+
+export const selectParamPage_RowId = createSelector(
+  selectParamGroupState,
+  (a) => a.selectid
 )
 
 export const selectParamPage_SortColumn = createSelector(

@@ -8,6 +8,7 @@ import { PageComponent } from './page/page.component';
 import { SortPipe } from './pipe/sort.pipe';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 
+import { PushModule } from '@ngrx/component';
 import { LetModule } from '@ngrx/component';
 import { InputComponent } from './controls/input/Input.component';
 import { TableComponent } from './controls/table/table.component';
@@ -29,6 +30,7 @@ import { RouterLink, RouterModule } from '@angular/router';
     ReactiveFormsModule,
     HttpClientModule,
     LetModule,
+    PushModule,
     RouterModule,
   ],
   exports: [
@@ -43,6 +45,7 @@ import { RouterLink, RouterModule } from '@angular/router';
     CheckboxComponent,
     AutoCompleteComponent,
     LetModule,
+    PushModule,
   ]
 })
 export class SharedModule { }

@@ -44,5 +44,5 @@ export const param_delete_complete = createAction(
 
 export const param_sort = createAction(
   '[Param Master] Sort Column',
-  props<{ sort_column: string, sort_order: string, sort_icon: string, param_type: string }>()
+  props<{ sort_column: string, sort_order: string, param_type: string }>()
 );
