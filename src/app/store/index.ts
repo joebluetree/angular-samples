@@ -29,7 +29,8 @@ export const getRouterState = createFeatureSelector<RouterReducerState<RouterSta
 export const selectRouterQueryParam = createSelector(
   getRouterState,
   (router) => {
-    return (router && router.state && router.state.queryParams) || {}
+    //return (router && router.state && router.state.queryParams) || {}
+    return (router && router.state) || {}
   }
 );
 

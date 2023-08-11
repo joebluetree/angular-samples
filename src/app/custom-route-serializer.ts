@@ -9,7 +9,9 @@ export interface RouterStateUrl {
 
 export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
+
     let route = routerState.root;
+
     while (route.firstChild) {
       route = route.firstChild;
     }

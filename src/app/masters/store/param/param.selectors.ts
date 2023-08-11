@@ -5,8 +5,10 @@ import { selectRouterQueryParam } from 'src/app/store';
 export const selectParamType = createSelector(
   selectRouterQueryParam,
   (url: any) => {
-    console.log('param page url type ', url.type);
-    return url.type;
+    if (url.url.includes('paramList'))
+      return url.queryParams.type;
+    else
+      return undefined;
   }
 )
 
@@ -14,8 +16,6 @@ export const selectParamGroupState = createSelector(
   paramFeature,
   selectParamType,
   (state: ParamGroupState, type: string) => {
-    if (type == 'MODULE' || type == 'MENU')
-      type = 'DEFAULT'
     return state[type || 'DEFAULT'];
   }
 )
