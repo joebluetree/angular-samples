@@ -17,7 +17,7 @@
 
 <div class="page-body">
   <app-table [table]="table_data" [data]="records$ | ngrxPush" (callback_table)="callback_table($event)"
-    [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'module_id'"
+    [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'menu_id'"
     [selected_id]="selected_id$ | ngrxPush">
   </app-table>
 
