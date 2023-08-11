@@ -7,7 +7,7 @@ const url_path = 'paramList';
 export const selectParamType = createSelector(
   selectRouterQueryParam,
   (routerState: any) => {
-    if (routerState.url.includes(url_path))
+    if (routerState.url?.includes(url_path))
       return routerState.queryParams.type;
     else
       return undefined;
