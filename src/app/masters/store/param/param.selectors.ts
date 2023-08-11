@@ -16,6 +16,8 @@ export const selectParamGroupState = createSelector(
   paramFeature,
   selectParamType,
   (state: ParamGroupState, type: string) => {
+    const _data = type || 'DEFAULT';
+    console.log('param group ', type, _data);
     return state[type || 'DEFAULT'];
   }
 )
