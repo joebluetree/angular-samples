@@ -20,7 +20,6 @@
     [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'menu_id'"
     [selected_id]="selected_id$ | ngrxPush">
   </app-table>
-
 </div>
 
 <div class="page-pagination line-bottom" *ngIf="(page$ | async) as page">
