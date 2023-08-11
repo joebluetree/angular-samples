@@ -18,6 +18,10 @@ import { iModulem } from '../../models/imodulem';
 })
 export class MenuEditComponent {
   id = 0;
+  menuid = '';
+  title = '';
+  type = '';
+
   mform: FormGroup;
   showModel = false;
   constructor(
@@ -45,6 +49,9 @@ export class MenuEditComponent {
     this.id = 0;
     this.route.queryParams.forEach(rec => {
       this.id = +rec["id"];
+      this.menuid = rec["menuid"];
+      this.title = rec["title"];
+      this.type = rec["type"];
     })
     this.getRecord();
   }
