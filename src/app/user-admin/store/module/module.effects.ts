@@ -5,8 +5,8 @@ import { ModuleService } from '../../services/module.service';
 import { EMPTY, catchError, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ModuleState } from './module.reducer';
-import { modulePage, moduleSearch_Record } from './module.selectors';
 import { GlobalService } from 'src/app/core/services/global.service';
+import { selectModulePage, selectModuleSearch_Record } from './module.selectors';
 
 
 @Injectable()
@@ -15,8 +15,8 @@ export class ModuleEffects {
     return this.actions$.pipe(
       ofType(module_load_records),
       withLatestFrom(
-        this.store.select(moduleSearch_Record),
-        this.store.select(modulePage)
+        this.store.select(selectModuleSearch_Record),
+        this.store.select(selectModulePage)
       ),
       switchMap(([action, search_record, page]) => {
         const data: any = this.service.getList(action.action, search_record, page);

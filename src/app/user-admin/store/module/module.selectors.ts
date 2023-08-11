@@ -1,37 +1,38 @@
 import { createSelector } from '@ngrx/store';
 import { ModuleState, moduleFeature, selectAll } from './module.reducer';
 
-export const moduleSelector = createSelector(
+export const selectModule = createSelector(
   moduleFeature,
   selectAll
 )
 
-export const moduleState = createSelector(
+export const selectModuleState = createSelector(
   moduleFeature,
   (state: ModuleState) => state
 )
 
-export const moduleSelectedRowId = createSelector(
-  moduleFeature,
-  (a) => a.selectid
-)
 
-export const moduleSearch_Record = createSelector(
+export const selectModuleSearch_Record = createSelector(
   moduleFeature,
   (a) => a.search_record
 )
 
-export const modulePage = createSelector(
+export const selectModulePage = createSelector(
   moduleFeature,
   (a) => a.page
 )
 
-export const modulePage_SortColumn = createSelector(
+export const selectModulePage_RowId = createSelector(
+  moduleFeature,
+  (a) => a.selectid
+)
+
+export const selectModulePage_SortColumn = createSelector(
   moduleFeature,
   (a) => a.sort_column
 )
 
-export const modulePage_SortOrder = createSelector(
+export const selectModulePage_SortOrder = createSelector(
   moduleFeature,
   (a) => a.sort_order
 )

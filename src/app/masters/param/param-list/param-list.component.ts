@@ -26,7 +26,6 @@ export class ParamListComponent {
   selected_id$: Observable<number>;
   sort_column$: Observable<string>;
   sort_order$: Observable<string>;
-
   table_data: any[] = [];
 
   constructor(
@@ -45,7 +44,6 @@ export class ParamListComponent {
     })
 
     const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title }
-
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/masters/paramEdit', param: param },
       { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },

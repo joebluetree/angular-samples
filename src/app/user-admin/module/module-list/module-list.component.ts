@@ -1,11 +1,10 @@
-import { modulePage, moduleSearch_Record, moduleState } from './../../store/module/module.selectors';
+import { selectModule, selectModulePage, selectModulePage_RowId, selectModulePage_SortColumn, selectModulePage_SortOrder, selectModuleSearch_Record } from './../../store/module/module.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { module_load_records, module_delete, module_update_search, module_update_selected_rowid, module_sort } from '../../store/module/module.actions';
-import { Observable, tap, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
-import { moduleSelector } from '../../store/module/module.selectors';
 import { iPage } from 'src/app/shared/models/ipage';
 import { ModuleState } from '../../store/module/module.reducer';
 
@@ -15,15 +14,19 @@ import { ModuleState } from '../../store/module/module.reducer';
   styleUrls: ['./module-list.component.css']
 })
 export class ModuleListComponent {
+  menuid = '';
+  title = '';
+  type = '';
 
   search_record$: Observable<iModulem_Search>;
   records$: Observable<iModulem[]>;
-  selectedRowId$: Observable<number>;
+  selected_id$: Observable<number>;
+  sort_column$: Observable<string>;
+  sort_order$: Observable<string>;
   page$: Observable<iPage>;
 
-  sort_column = "";
-  sort_order = "";
-  sort_icon = '';
+
+  table_data: any[] = [];
 
   constructor(
     private store: Store<ModuleState>,
@@ -31,18 +34,28 @@ export class ModuleListComponent {
   ) { }
 
   ngOnInit(): void {
-    this.records$ = this.store.select(moduleSelector);
-    this.search_record$ = this.store.select(moduleSearch_Record);
-    this.selectedRowId$ = this.store.select(moduleState).pipe(
-      tap((e: ModuleState) => {
-        this.sort_column = e.sort_column;
-        this.sort_order = e.sort_order;
-        this.sort_icon = e.sort_icon;
-      }),
-      map((e: ModuleState) => e.selectid)
-    );
-    this.page$ = this.store.select(modulePage);
 
+    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title }
+    this.table_data = [
+      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/admin/moduleEdit', param: param },
+      { col_name: "module_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "module_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "module_is_installed", col_caption: "VISIBLE", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "module_order", col_caption: "ORDER", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
+      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {} },
+    ];
+
+
+    this.records$ = this.store.select(selectModule);
+    this.search_record$ = this.store.select(selectModuleSearch_Record);
+    this.selected_id$ = this.store.select(selectModulePage_RowId);
+    this.sort_column$ = this.store.select(selectModulePage_SortColumn);
+    this.sort_order$ = this.store.select(selectModulePage_SortOrder);
+    this.page$ = this.store.select(selectModulePage);
 
   }
 
@@ -55,30 +68,18 @@ export class ModuleListComponent {
     this.store.dispatch(module_load_records({ action: _action.action }))
   }
 
-  selectRow(_id: number) {
-    this.store.dispatch(module_update_selected_rowid({ id: _id }));
-  }
-
-  deleteRow(_rec: iModulem) {
-    if (!confirm(`Delete ${_rec.module_name} y/n`))
-      return;
-    this.store.dispatch(module_delete({ id: _rec.module_id }));
-  }
-
-  sortHeader(col_name: string) {
-    if (col_name == this.sort_column)
-      this.sort_order = this.sort_order == 'asc' ? 'desc' : 'asc';
-    else
-      this.sort_order = 'asc';
-    this.sort_icon = this.sort_order == 'asc' ? 'fa fa-long-arrow-up' : 'fa fa-long-arrow-down';
-    this.store.dispatch(module_sort({ sort_column: col_name, sort_order: this.sort_order, sort_icon: this.sort_icon }));
-  }
-
-  public getIcon(col: string) {
-    if (col == this.sort_column)
-      return this.sort_icon;
-    else
-      return '';
+  callback_table(data: any) {
+    if (data.action == 'SORT') {
+      this.store.dispatch(module_sort({ sort_column: data.sort_column, sort_order: data.sort_order }));
+    }
+    if (data.action == 'ROW-SELECTED') {
+      this.store.dispatch(module_update_selected_rowid({ id: data.row_id }));
+    }
+    if (data.action == 'DELETE') {
+      if (!confirm(`Delete ${data.rec.module_name} y/n`))
+        return;
+      this.store.dispatch(module_delete({ id: data.rec.module_id }));
+    }
   }
 
   return2Parent() {

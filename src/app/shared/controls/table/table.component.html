@@ -16,7 +16,7 @@
 
           <ng-container *ngIf="cols.col_format == 'edit'">
             <td>
-              <a [routerLink]="cols.link" [queryParams]="getParam(rec, cols)">
+              <a [routerLink]="cols.link" [queryParams]="getParam(rec, cols)" (click)="selectRow(rec)">
                 <i class="fa fa-pencil"></i>
               </a>
             </td>

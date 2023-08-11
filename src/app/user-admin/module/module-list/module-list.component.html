@@ -15,48 +15,10 @@
 </div>
 
 <div class="page-body">
-  <div class="table-responsive">
-    <table class="table table-sm table-hover table-bordered table-striped table-condensed">
-      <thead class="table-success">
-        <tr class="table-header">
-          <th>EDIT</th>
-          <th (click)="sortHeader('module_id')">ID<i [ngClass]="getIcon('module_id')"></i></th>
-          <th (click)="sortHeader('module_name')">NAME <i [ngClass]="getIcon('module_name')"></i></th>
-          <th (click)="sortHeader('module_is_installed')">VISIBLE <i [ngClass]="getIcon('module_is_installed')"></i>
-          </th>
-          <th (click)="sortHeader('module_order')">ORDER <i [ngClass]="getIcon('module_order')"></i></th>
-          <th (click)="sortHeader('rec_created_by')">CREATED-BY<i [ngClass]="getIcon('rec_created_by')"></i></th>
-          <th (click)="sortHeader('rec_created_date')">CREATED-DT<i [ngClass]="getIcon('rec_created_date')"></i></th>
-          <th (click)="sortHeader('rec_edited_by')">EDITED-BY<i [ngClass]="getIcon('rec_edited_by')"></i></th>
-          <th (click)="sortHeader('rec_edited_date')">EDITED-DT<i [ngClass]="getIcon('rec_edited_date')"></i></th>
-          <th>REMOVE</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngIf="(records$ | async) as records">
-
-          <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order " (click)="selectRow(rec.module_id)"
-            [ngClass]="{'table-info' : rec.module_id == (selectedRowId$ | async) }">
-            <td (click)="selectRow(rec.module_id)" class="link" routerLink="/admin/moduleEdit"
-              [queryParams]="{id :rec.module_id}">
-              <i class="fa fa-pencil"></i>
-            </td>
-            <td>{{rec.module_id}}</td>
-            <td>{{rec.module_name}}</td>
-            <td>{{rec.module_is_installed}}</td>
-            <td>{{rec.module_order}}</td>
-            <td>{{rec.rec_created_by}}</td>
-            <td>{{rec.rec_created_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
-            <td>{{rec.rec_edited_by}}</td>
-            <td>{{rec.rec_edited_date | date: 'dd-MMM-yyyy hh:mm a'}}</td>
-            <td align="centre" (click)="deleteRow(rec)" class="link">
-              <i class="fa fa-trash"></i>
-            </td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
-  </div>
+  <app-table [table]="table_data" [data]="records$ | ngrxPush" (callback_table)="callback_table($event)"
+    [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'module_id'"
+    [selected_id]="selected_id$ | ngrxPush">
+  </app-table>
 </div>
 
 <div class="page-pagination line-bottom" *ngIf="(page$ | async) as page">

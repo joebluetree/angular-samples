@@ -8,7 +8,7 @@ import { iTable } from '../../models/itable';
 })
 export class TableComponent {
   @Input('table') table_data: iTable[] = [];
-  @Input('data') records: any[] = [];
+  @Input('data') records: any;
   @Input('selected_id') selected_id: any;
   @Input('sort_column') sort_column: any;
   @Input('sort_order') sort_order: any;

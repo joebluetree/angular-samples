@@ -8,11 +8,11 @@ import { PageComponent } from './page/page.component';
 import { SortPipe } from './pipe/sort.pipe';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 
-import { PushModule } from '@ngrx/component';
-import { LetModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
+
 import { InputComponent } from './controls/input/Input.component';
 import { TableComponent } from './controls/table/table.component';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
