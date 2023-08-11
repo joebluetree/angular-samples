@@ -53,18 +53,19 @@ export class ParamListComponent {
       this.type = rec["type"];
     })
 
-    const qp = { id: '', menuid: this.menuid, type: this.type, title: this.title }
+    const param = { id: '', menuid: this.menuid, type: this.type, title: this.title }
 
     this.table_data = [
-      { col_name: "EDIT", col_caption: "EDIT", col_format: "EDIT", col_sortable: false, link: '/masters/paramEdit', qp: qp },
-      { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', qp: {} },
-      { col_name: "param_type", col_caption: "TYPE", col_format: "", col_sortable: true, link: '', qp: {} },
-      { col_name: "param_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', qp: {} },
-      { col_name: "param_order", col_caption: "ORDER", col_format: "", col_sortable: true, link: '', qp: {} },
-      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', qp: {} },
-      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', qp: {} },
-      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', qp: {} },
-      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', qp: {} },
+      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/masters/paramEdit', param: param },
+      { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "param_type", col_caption: "TYPE", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "param_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "param_order", col_caption: "ORDER", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
+      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {} },
     ];
 
     this.records$ = this.store.select(selectParamRecords);
@@ -102,12 +103,6 @@ export class ParamListComponent {
 
 
 
-  deleteRow(_rec: iParam) {
-    if (!confirm(`Delete ${_rec.param_name} y/n`))
-      return;
-    this.store.dispatch(param_delete({ id: _rec.param_id, param_type: this.type }));
-  }
-
 
   sortHeader(col_name: string) {
     if (col_name == this.sort_column)
@@ -137,7 +132,18 @@ export class ParamListComponent {
       this.store.dispatch(param_update_selected_rowid({ id: data.row_id, param_type: this.type }));
     }
 
+    if (data.action == 'DELETE') {
+      this.deleteRow(data.rec);
+    }
   }
+
+
+  deleteRow(_rec: iParam) {
+    if (!confirm(`Delete ${_rec.param_name} y/n`))
+      return;
+    this.store.dispatch(param_delete({ id: _rec.param_id, param_type: this.type }));
+  }
+
 
   return2Parent() {
     this.location.back();

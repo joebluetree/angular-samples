@@ -1,6 +1,4 @@
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-
 import { iTable } from '../../models/itable';
 
 
@@ -19,7 +17,6 @@ export class TableComponent {
 
   @Input('row_id_name') row_id_name = "";
   @Input('selected_id') selected_id = 0;
-
 
 
   @Output('callback_table') CallBack_Table = new EventEmitter<any>();
@@ -43,6 +40,7 @@ export class TableComponent {
   }
 
   pageEvents(_action: any) {
+
   }
 
   selectRow(rec: any) {
@@ -50,14 +48,13 @@ export class TableComponent {
   }
 
   deleteRow(rec: any) {
-    if (!confirm(`Delete  y/n`))
-      return;
+    this.CallBack_Table.emit({ action: 'DELETE', rec: rec })
   }
 
   getParam(rec: any, cols: iTable) {
-    let qp: any = cols.qp;
-    qp.id = rec[this.row_id_name];
-    return qp;
+    let param: any = cols.param;
+    param.id = rec[this.row_id_name];
+    return param;
   }
 
   sortHeader(col_name: string) {

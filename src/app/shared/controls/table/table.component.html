@@ -14,18 +14,24 @@
 
         <ng-container *ngFor="let cols of table_data">
 
-          <td *ngIf="cols.col_format == 'EDIT'">
-            <a [routerLink]="cols.link" [queryParams]="getParam(rec, cols)">
-              <i class="fa fa-pencil"></i>
-            </a>
-          </td>
+          <ng-container *ngIf="cols.col_format == 'edit'">
+            <td>
+              <a [routerLink]="cols.link" [queryParams]="getParam(rec, cols)">
+                <i class="fa fa-pencil"></i>
+              </a>
+            </td>
+          </ng-container>
           <ng-container *ngIf="cols.col_format == ''">
             <td>{{rec[cols.col_name]}}</td>
           </ng-container>
           <ng-container *ngIf="cols.col_format == 'datetime'">
             <td>{{rec[cols.col_name] | date: 'dd-MMM-yyyy hh:mm a'}}</td>
           </ng-container>
-
+          <ng-container *ngIf="cols.col_format == 'delete'">
+            <td align="centre" (click)="deleteRow(rec)" class="link">
+              <i class="fa fa-trash"></i>
+            </td>
+          </ng-container>
         </ng-container>
 
       </tr>
