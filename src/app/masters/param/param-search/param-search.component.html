@@ -1,12 +1,11 @@
-<form #frm="ngForm">
+<form [formGroup]="mform">
 
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group row">
         <label class="col-sm-4 form-label form-label-sm" for="">Name</label>
         <div class="col-sm-8">
-          <input class="form-control form-control-sm" type="text" name="module_name" [(ngModel)]="record.param_name"
-            autocomplete="__away">
+          <app-input type="text" [case]="'upper'" formControlName="param_name"></app-input>
         </div>
       </div>
 

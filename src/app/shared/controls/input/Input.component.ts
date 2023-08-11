@@ -24,7 +24,7 @@ export class InputComponent implements ControlValueAccessor {
 
   @Input('validation') _validations: boolean = true;
 
-  id: string = '_id_text';
+  id: string = '';
 
   isDisabled = false;
   ctrl = new FormControl('');
