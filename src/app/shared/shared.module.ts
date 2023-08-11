@@ -10,12 +10,15 @@ import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 
 import { LetModule } from '@ngrx/component';
 import { InputComponent } from './controls/input/Input.component';
+import { TableComponent } from './controls/table/table.component';
+import { RouterLink, RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     PageComponent,
     InputComponent,
+    TableComponent,
     SortPipe,
     CheckboxComponent,
     AutoCompleteComponent
@@ -26,6 +29,7 @@ import { InputComponent } from './controls/input/Input.component';
     ReactiveFormsModule,
     HttpClientModule,
     LetModule,
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -34,6 +38,7 @@ import { InputComponent } from './controls/input/Input.component';
     HttpClientModule,
     PageComponent,
     InputComponent,
+    TableComponent,
     SortPipe,
     CheckboxComponent,
     AutoCompleteComponent,

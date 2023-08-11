@@ -14,6 +14,15 @@
 </div>
 
 <div class="page-body">
+  <ng-container *ngIf="(records$ | async) as records">
+    <app-table [table]="table_data" [data]="records" (callback_table)="callback_table($event)"
+      [sort_column]="sort_column" [sort_order]="sort_order" [row_id_name]="'param_id'" [selected_id]="selected_id">
+    </app-table>
+  </ng-container>
+</div>
+
+<!-- <div class="page-body">
+
   <div class="table-responsive">
     <table class="table table-sm table-hover table-bordered table-striped table-condensed">
       <thead class="table-success">
@@ -40,10 +49,12 @@
 
           <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order " (click)="selectRow(rec.param_id)"
             [ngClass]="{'table-info' : rec.param_id == (selectedRowId$ | async) }">
+
             <td (click)="selectRow(rec.param_id)" class="link" routerLink="/masters/paramEdit"
-              [queryParams]="{id :rec.param_id,menuid:menuid,type:type, title:title}">
+              [queryParams]="{id:rec.param_id,menuid:menuid,type:type,title:title}">
               <i class="fa fa-pencil"></i>
             </td>
+
             <td>{{rec.param_id}}</td>
             <td>{{rec.param_type}}</td>
             <td>{{rec.param_code}}</td>
@@ -63,7 +74,9 @@
       </tbody>
     </table>
   </div>
-</div>
+</div> -->
+
+
 
 <div class="page-pagination line-bottom" *ngIf="(page$ | async) as page">
   <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>

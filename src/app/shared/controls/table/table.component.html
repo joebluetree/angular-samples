@@ -1,0 +1,35 @@
+<div class="table-responsive">
+  <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+    <thead class="table-success">
+      <tr class="table-header">
+        <ng-container *ngFor="let cols of table_data">
+          <th (click)="sortHeader(cols.col_name)">{{cols.col_caption}}<i [class]="getIcon(cols.col_name)"></i></th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let rec  of records | tableSort : sort_column : sort_order" (click)="selectRow(rec)"
+        [ngClass]="{'table-info' : rec[row_id_name] == selected_id }">
+
+        <ng-container *ngFor="let cols of table_data">
+
+          <td *ngIf="cols.col_format == 'EDIT'">
+            <a [routerLink]="cols.link" [queryParams]="getParam(rec, cols)">
+              <i class="fa fa-pencil"></i>
+            </a>
+          </td>
+          <ng-container *ngIf="cols.col_format == ''">
+            <td>{{rec[cols.col_name]}}</td>
+          </ng-container>
+          <ng-container *ngIf="cols.col_format == 'datetime'">
+            <td>{{rec[cols.col_name] | date: 'dd-MMM-yyyy hh:mm a'}}</td>
+          </ng-container>
+
+        </ng-container>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>
