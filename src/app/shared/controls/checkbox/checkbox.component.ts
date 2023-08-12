@@ -65,8 +65,10 @@ export class CheckboxComponent implements ControlValueAccessor {
   // }
 
   changeStatus(e: any) {
-    const isChecked = e.target.checked;
-    this.onChange(isChecked ? "Y" : "N");
+    const value = e.target.checked ? "Y" : "N";
+    this.writeValue(value);
+    this.onChange(value);
+    this.onTouch();
   }
 
 }

@@ -21,9 +21,8 @@ export class MenuEditComponent {
   menuid = '';
   title = '';
   type = '';
-
+  showModel = true;
   mform: FormGroup;
-  showModel = false;
   constructor(
     private gs: GlobalService,
     private service: MenueService,
@@ -123,7 +122,7 @@ export class MenuEditComponent {
 
   callBack(action: { id: string, rec: iModulem }) {
 
-    if (action.id == 'menu_module_id') {
+    if (action.id == 'menu_module_name') {
 
       this.mform.patchValue({
         menu_module_id: action.rec ? action.rec.module_id : 0,

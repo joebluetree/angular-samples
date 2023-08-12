@@ -20,6 +20,8 @@ export class ModuleEditComponent {
   title = '';
   type = '';
 
+  showModel = true;
+
   mform: FormGroup;
   constructor(
     private gs: GlobalService,

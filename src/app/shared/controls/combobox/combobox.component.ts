@@ -57,7 +57,10 @@ export class ComboboxComponent implements ControlValueAccessor {
   // }
 
   changeStatus(e: any) {
-    this.onChange(e.target.value);
+    const value = e.target.value;
+    this.writeValue(value);
+    this.onChange(value);
+    this.onTouch();
   }
 
 }

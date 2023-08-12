@@ -46,3 +46,9 @@
 <div class="page-footer line-bottom">
   <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
 </div>
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

@@ -173,7 +173,12 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   }
 
   onSelection(rec: any) {
-    this.ctrl.setValue(rec[this.display_column]);
+    const value = rec[this.display_column];
+
+    this.writeValue(value);
+    this.onChange(value);
+    this.onTouch();
+
     this.isChanged = false;
     this.showDiv = false;
     this.selectInputBox();
