@@ -2,21 +2,24 @@ import { Component, Input, forwardRef, isDevMode } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.css'],
+  selector: 'app-combobox',
+  templateUrl: './combobox.component.html',
+  styleUrls: ['./combobox.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckboxComponent),
+      useExisting: forwardRef(() => ComboboxComponent),
       multi: true
     }
   ]
 })
-export class CheckboxComponent implements ControlValueAccessor {
+export class ComboboxComponent implements ControlValueAccessor {
   ctrl = new FormControl();
 
   @Input('formControlName') ctrl_name: any;
+  @Input('dataSource') dataSource: any;
+  @Input('displayColumn') displayColumn: any;
+  @Input('valueColumn') valueColumn: any;
 
   id: string;
 
@@ -26,7 +29,6 @@ export class CheckboxComponent implements ControlValueAccessor {
   onTouch: any = () => { };
 
   constructor() {
-
   }
 
   ngOnInit(): void {
@@ -37,18 +39,8 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   }
 
-
-
   writeValue(obj: any): void {
-    const _type = typeof (obj);
-    if (_type == 'string') {
-      if (obj == "Y")
-        this.ctrl.setValue(true);
-      if (obj == "N")
-        this.ctrl.setValue(false);
-    }
-    else
-      this.ctrl.setValue(obj);
+    this.ctrl.setValue(obj);
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -65,8 +57,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   // }
 
   changeStatus(e: any) {
-    const isChecked = e.target.checked;
-    this.onChange(isChecked ? "Y" : "N");
+    this.onChange(e.target.value);
   }
 
 }

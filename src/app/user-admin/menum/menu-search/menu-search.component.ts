@@ -20,6 +20,9 @@ export class MenuSearchComponent {
 
   @Output() output = new EventEmitter<iMenum_Search>();
 
+
+  dataList = [{ key: 'NA', value: 'ALL' }, { key: 'Y', value: 'YES' }, { key: 'N', value: 'NO' }]
+
   constructor(
     private fb: FormBuilder,
     private gs: GlobalService) {

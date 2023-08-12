@@ -13,6 +13,7 @@ import { LetModule, PushModule } from '@ngrx/component';
 import { InputComponent } from './controls/input/Input.component';
 import { TableComponent } from './controls/table/table.component';
 import { RouterModule } from '@angular/router';
+import { ComboboxComponent } from './controls/combobox/combobox.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { RouterModule } from '@angular/router';
     TableComponent,
     SortPipe,
     CheckboxComponent,
-    AutoCompleteComponent
+    AutoCompleteComponent,
+    ComboboxComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { RouterModule } from '@angular/router';
     SortPipe,
     CheckboxComponent,
     AutoCompleteComponent,
+    ComboboxComponent,
     LetModule,
     PushModule,
   ]

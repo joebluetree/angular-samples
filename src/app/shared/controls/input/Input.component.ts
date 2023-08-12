@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 @Component({
@@ -24,7 +24,7 @@ export class InputComponent implements ControlValueAccessor {
 
   @Input('validation') _validations: boolean = true;
 
-  id: string = '';
+  id: string;
 
   isDisabled = false;
   ctrl = new FormControl('');
@@ -33,17 +33,13 @@ export class InputComponent implements ControlValueAccessor {
   onTouch: any = () => { };
 
   ngOnInit(): void {
-
+    this.id = this.ctrl_name;
   }
 
   ngAfterViewInit(): void {
-    this.id = this.ctrl_name;
+
     if (this._validations)
       this.addValidators();
-  }
-
-  test() {
-    console.log(this.ctrl);
   }
 
   addValidators() {

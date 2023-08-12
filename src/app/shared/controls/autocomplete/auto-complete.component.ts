@@ -4,8 +4,6 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { icolumns } from '../../models/icolumns';
 
-
-
 @Component({
   selector: 'auto-complete',
   templateUrl: './auto-complete.component.html',
@@ -33,7 +31,7 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   @ViewChild('inputBox') inputBox: ElementRef;
   @ViewChildren('radio') inputs: QueryList<ElementRef>;
 
-  id: string = '_id_text';
+  id: string;
 
   showDiv = false;
   isDisabled = false;
@@ -56,13 +54,12 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   }
 
   ngOnInit(): void {
+    this.id = this.ctrl_name;
     this.columns = this.service.getColumns(this.table);
     this.setup();
   }
 
   ngAfterViewInit(): void {
-    if (this.ctrl_name)
-      this.id = this.ctrl_name;
     if (this._validations)
       this.addValidators();
   }
