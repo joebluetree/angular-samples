@@ -1,3 +1,8 @@
+ul.dropdown-menu>li {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.356);
+}
+
+
 .menu {
   display: flex;
   flex-direction: row;
@@ -112,6 +117,4 @@
   #chkbox:checked+.nav-bar {
     display: block;
   }
-
-
 }
