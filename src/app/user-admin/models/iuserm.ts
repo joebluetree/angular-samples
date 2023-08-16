@@ -16,6 +16,7 @@ export interface iUserm {
 
 export interface iUserm_Search {
   user_name: string;
+  user_is_admin: string;
   rec_company_id: number;
 }
 

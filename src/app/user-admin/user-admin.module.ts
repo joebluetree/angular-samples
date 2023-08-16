@@ -23,6 +23,11 @@ import { BranchEditComponent } from './branch/branch-edit/branch-edit.component'
 import { BranchSearchComponent } from './branch/branch-search/branch-search.component';
 import { BranchEffects } from './store/branch/branch.effects';
 import { BranchFeatureName, branchReducer } from './store/branch/branch.reducer';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
+import { UserSearchComponent } from './user/user-search/user-search.component';
+import { UserFeatureName, userReducer } from './store/user/user.reducer';
+import { UserEffects } from './store/user/user.effects';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
@@ -33,6 +38,8 @@ const routes: Routes = [
   { path: 'companyEdit', component: CompanyEditComponent },
   { path: 'branchList', component: BranchListComponent },
   { path: 'branchEdit', component: BranchEditComponent },
+  { path: 'userList', component: UserListComponent },
+  { path: 'userEdit', component: UserEditComponent },
 
 ]
 
@@ -50,16 +57,20 @@ const routes: Routes = [
     BranchListComponent,
     BranchEditComponent,
     BranchSearchComponent,
-
+    UserListComponent,
+    UserEditComponent,
+    UserSearchComponent,
   ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(CompanyFeatureName, companyReducer),
     StoreModule.forFeature(BranchFeatureName, branchReducer),
+    StoreModule.forFeature(UserFeatureName, userReducer),
     StoreModule.forFeature(ModuleFeatureName, moduleReducer),
     StoreModule.forFeature(MenuFeatureName, menuReducer),
-    EffectsModule.forFeature([CompanyEffects, BranchEffects, ModuleEffects, MenuEffects]),
+    EffectsModule.forFeature([CompanyEffects, BranchEffects, UserEffects, ModuleEffects, MenuEffects]),
   ]
 })
 export class UserAdminModule { }
+
