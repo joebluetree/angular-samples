@@ -27,7 +27,7 @@ export const initialState: BranchState = adapter.getInitialState({
   error: ''
 });
 
-export const companyReducer = createReducer<BranchState>(
+export const branchReducer = createReducer<BranchState>(
   initialState,
   on(branch_actions.branch_load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });

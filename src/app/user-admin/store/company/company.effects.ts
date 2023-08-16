@@ -27,7 +27,7 @@ export class CompanyEffects {
     );
   }, { dispatch: false });
 
-  comapnyDelete$ = createEffect(() => {
+  companyDelete$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(company_actions.company_delete),
       switchMap((action: any) => this.service.delete(action.id)),

@@ -13,12 +13,27 @@ import { MenuEditComponent } from './menum/menu-edit/menu-edit.component';
 import { MenuListComponent } from './menum/menu-list/menu-list.component';
 import { MenuFeatureName, menuReducer } from './store/menu/menu.reducer';
 import { MenuEffects } from './store/menu/menu.effects';
+import { CompanyListComponent } from './company/company-list/company-list.component';
+import { CompanySearchComponent } from './company/company-search/company-search.component';
+import { CompanyEditComponent } from './company/company-edit/company-edit.component';
+import { CompanyEffects } from './store/company/company.effects';
+import { CompanyFeatureName, companyReducer } from './store/company/company.reducer';
+import { BranchListComponent } from './branch/branch-list/branch-list.component';
+import { BranchEditComponent } from './branch/branch-edit/branch-edit.component';
+import { BranchSearchComponent } from './branch/branch-search/branch-search.component';
+import { BranchEffects } from './store/branch/branch.effects';
+import { BranchFeatureName, branchReducer } from './store/branch/branch.reducer';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
   { path: 'moduleEdit', component: ModuleEditComponent },
   { path: 'menuList', component: MenuListComponent },
-  { path: 'menuEdit', component: MenuEditComponent }
+  { path: 'menuEdit', component: MenuEditComponent },
+  { path: 'companyList', component: CompanyListComponent },
+  { path: 'companyEdit', component: CompanyEditComponent },
+  { path: 'branchList', component: BranchListComponent },
+  { path: 'branchEdit', component: BranchEditComponent },
+
 ]
 
 @NgModule({
@@ -28,14 +43,23 @@ const routes: Routes = [
     ModuleSearchComponent,
     MenuSearchComponent,
     MenuEditComponent,
-    MenuListComponent
+    MenuListComponent,
+    CompanyListComponent,
+    CompanySearchComponent,
+    CompanyEditComponent,
+    BranchListComponent,
+    BranchEditComponent,
+    BranchSearchComponent,
+
   ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
+    StoreModule.forFeature(CompanyFeatureName, companyReducer),
+    StoreModule.forFeature(BranchFeatureName, branchReducer),
     StoreModule.forFeature(ModuleFeatureName, moduleReducer),
     StoreModule.forFeature(MenuFeatureName, menuReducer),
-    EffectsModule.forFeature([ModuleEffects, MenuEffects]),
+    EffectsModule.forFeature([CompanyEffects, BranchEffects, ModuleEffects, MenuEffects]),
   ]
 })
 export class UserAdminModule { }
