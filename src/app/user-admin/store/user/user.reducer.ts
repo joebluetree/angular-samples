@@ -20,7 +20,7 @@ const adapter: EntityAdapter<iUserm> = createEntityAdapter<iUserm>({
 
 export const initialState: UserState = adapter.getInitialState({
   selectid: 0,
-  search_record: <iUserm_Search>{ user_name: '', rec_company_id: 0 },
+  search_record: <iUserm_Search>{ user_name: '', user_is_admin: 'NA', rec_company_id: 0 },
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
   sort_column: '',
   sort_order: '',

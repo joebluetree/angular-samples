@@ -29,7 +29,7 @@ export class UserSearchComponent {
   buildForm() {
     this.mform = this.fb.group({
       user_name: [''],
-      user_is_admin: [''],
+      user_is_admin: ['NA'],
     })
 
   }
