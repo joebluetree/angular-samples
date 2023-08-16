@@ -48,6 +48,7 @@ export class UserListComponent {
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/admin/userEdit', param: param },
       { col_name: "user_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "user_code", col_caption: "CODE", col_format: "", col_sortable: true, link: '', param: {} },
       { col_name: "user_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {} },
       { col_name: "user_is_admin", col_caption: "ADMIN", col_format: "", col_sortable: true, link: '', param: {} },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {} },

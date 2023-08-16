@@ -59,6 +59,7 @@ export class UserEditComponent {
       next: (rec) => {
         this.mform.setValue({
           user_id: rec.user_id,
+          user_code: rec.user_code,
           user_name: rec.user_name,
           user_password: rec.user_password,
           user_email: rec.user_email,

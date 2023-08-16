@@ -60,8 +60,13 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   }
 
   ngAfterViewInit(): void {
-    if (this._validations)
-      this.addValidators();
+
+    setTimeout(() => {
+      if (this._validations)
+        this.addValidators();
+    });
+
+
   }
 
 
