@@ -56,7 +56,6 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   ngOnInit(): void {
     this.id = this.ctrl_name;
     this.columns = this.service.getColumns(this.table);
-    this.setup();
   }
 
   ngAfterViewInit(): void {
@@ -207,34 +206,4 @@ export class AutoCompleteComponent implements ControlValueAccessor {
     this.selectInputBox();
   }
 
-  private setup() {
-    /*
-  this.term$.pipe(
-    switchMap(value => {
-      let search_record = {
-        'table': this.table,
-        'company_id': this.company_id,
-        'search_string': value
-      }
-      return this.service.getList(search_record);
-    }),
-    catchError(error => {
-      throw error;
-    })
-  ).subscribe({
-    next: (v) => {
-      this.records = v.records;
-      if (this.records.length > 0) {
-        this.showDiv = true;
-        this.selectTableRow(0);
-      }
-      this.isChanged = false;
-    },
-    error: (e) => {
-      //this.gs.showScreen([e.error || e.message]);
-      this.gs.showScreen(['error']);
-    }
-  })
-  */
-  }
 }

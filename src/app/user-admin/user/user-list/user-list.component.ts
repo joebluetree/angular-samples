@@ -51,6 +51,8 @@ export class UserListComponent {
       { col_name: "user_code", col_caption: "CODE", col_format: "", col_sortable: true, link: '', param: {} },
       { col_name: "user_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {} },
       { col_name: "user_is_admin", col_caption: "ADMIN", col_format: "", col_sortable: true, link: '', param: {} },
+      { col_name: "rec_branch_name", col_caption: "DEFAULT-BRANCH", col_format: "", col_sortable: true, link: '', param: {} },
+
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {} },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
       { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {} },

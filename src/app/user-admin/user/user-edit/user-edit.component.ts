@@ -67,7 +67,8 @@ export class UserEditComponent {
           user_password: rec.user_password,
           user_email: rec.user_email,
           user_is_admin: rec.user_is_admin,
-          rec_branch_id: rec.rec_branch_id
+          rec_branch_id: rec.rec_branch_id,
+          rec_branch_name: rec.rec_branch_name
         })
       },
       error: (e) => {
@@ -122,7 +123,7 @@ export class UserEditComponent {
 
   callBack(action: { id: string, rec: iBranchm }) {
 
-    if (action.id == 'menu_module_name') {
+    if (action.id == 'rec_branch_name') {
 
       this.mform.patchValue({
         rec_branch_id: action.rec ? action.rec.branch_id : 0,

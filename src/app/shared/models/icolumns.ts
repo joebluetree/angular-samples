@@ -25,3 +25,12 @@ export class table_userm implements table_constants {
     ]
   }
 }
+
+export class table_branchm implements table_constants {
+  public getColumns() {
+    return [
+      <icolumns>{ id: 'ID', value: 'branch_id' },
+      <icolumns>{ id: 'NAME', value: 'branch_name' }
+    ]
+  }
+}
