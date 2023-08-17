@@ -71,7 +71,7 @@ body {
   display: flex;
   justify-content: center;
   margin: 0px 2px 0px 1px;
-  padding: 2px;
+  padding: 6px;
   gap: 2px;
   border-color: lightgray;
   border-style: solid;
@@ -101,4 +101,9 @@ i {
   color: chocolate !important;
   font-weight: bold !important;
   font-size: 9px !important;
+}
+
+
+.btn {
+  box-shadow: 4px 4px 10px 0px lightgray;
 }
