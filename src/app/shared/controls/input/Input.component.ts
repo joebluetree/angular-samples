@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,8 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from
   ]
 })
 export class InputComponent implements ControlValueAccessor {
+
+  @ViewChild('inputBox') inputBox: ElementRef;
 
   @Input() case: string = '';
   @Input('formControlName') ctrl_name: any;
@@ -32,6 +34,12 @@ export class InputComponent implements ControlValueAccessor {
   onChange: any = () => { };
   onTouch: any = () => { };
 
+
+  constructor() {
+
+
+  }
+
   ngOnInit(): void {
     this.id = this.ctrl_name;
   }
@@ -41,6 +49,12 @@ export class InputComponent implements ControlValueAccessor {
     setTimeout(() => {
       if (this._validations)
         this.addValidators();
+
+      this.inputBox.nativeElement.setAttribute('autocomplete', 'off');
+      this.inputBox.nativeElement.setAttribute('autocorrect', 'off');
+      this.inputBox.nativeElement.setAttribute('autocapitalize', 'none');
+      this.inputBox.nativeElement.setAttribute('spellcheck', 'false');
+
     });
 
 

@@ -38,7 +38,7 @@ export class UserEditComponent {
       user_name: ['', [Validators.required, Validators.maxLength(60)]],
       user_password: ['', [Validators.required, Validators.maxLength(20)]],
       user_email: ['', [Validators.required, Validators.maxLength(60)]],
-      user_is_admin: ['Y'],
+      user_is_admin: ['N'],
       rec_branch_id: [0, [Validators.required]],
       rec_branch_name: ['', [Validators.required]],
     })

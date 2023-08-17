@@ -65,6 +65,10 @@ export class AutoCompleteComponent implements ControlValueAccessor {
         this.addValidators();
     });
 
+    this.inputBox.nativeElement.setAttribute('autocomplete', 'off');
+    this.inputBox.nativeElement.setAttribute('autocorrect', 'off');
+    this.inputBox.nativeElement.setAttribute('autocapitalize', 'none');
+    this.inputBox.nativeElement.setAttribute('spellcheck', 'false');
 
   }
 
@@ -205,5 +209,10 @@ export class AutoCompleteComponent implements ControlValueAccessor {
     this.showDiv = false;
     this.selectInputBox();
   }
+
+  getID() {
+    return Date.now().toString(36) + Math.random().toString(36).substring(2);
+  }
+
 
 }

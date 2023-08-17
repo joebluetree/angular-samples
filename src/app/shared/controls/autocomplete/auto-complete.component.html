@@ -4,8 +4,7 @@
 
     <input type="text" class="form-control form-control-sm " [formControl]="ctrl" placeholder="&#61442; Search"
       [id]="id" (focus)="InputBox_OnFocus()" (keydown)="InputBox_OnKeyDown($event)" (blur)="InputBox_OnBlur($event)"
-      #inputBox autocomplete="new-password" [id]="id"
-      [class]="{'error' : ctrl.invalid && ctrl.touched && ctrl.errors?.['required']}">
+      #inputBox [id]="id" [class]="{'error' : ctrl.invalid && ctrl.touched && ctrl.errors?.['required']}">
 
     <div class="input-group-append">
       <button id="btn" class="btn btn-sm btn-outline-secondary" type="button" (click)="onClickSearch()"> <i

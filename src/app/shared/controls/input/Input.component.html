@@ -1,5 +1,5 @@
-<input [type]="ctrl_type" class="form-control form-control-sm" (blur)="onBlur()" [formControl]="ctrl"
-  autocomplete="new-password" [id]="id" [class]="{'error' : ctrl.invalid && ctrl.touched && ctrl.errors?.['required']}">
+<input [type]="ctrl_type" class="form-control form-control-sm" (blur)="onBlur()" [formControl]="ctrl" [id]="id"
+  [class]="{'error' : ctrl.invalid && ctrl.touched && ctrl.errors?.['required']}" #inputBox>
 
 <div class="error-text" *ngIf="ctrl.invalid && ctrl.touched">
   <!-- <span *ngIf="ctrl.errors?.['required']">
