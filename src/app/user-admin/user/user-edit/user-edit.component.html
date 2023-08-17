@@ -49,6 +49,14 @@
             </div>
           </div>
 
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Defautl Branch</label>
+            <div class="col-sm-8">
+              <auto-complete formControlName="rec_branch_name" (CallBack)="callBack($event)" [table]="'branchm'"
+                [company_id]="getCompanyId()" [display_column]="'rec_branch_name'" required></auto-complete>
+            </div>
+          </div>
+
 
         </div>
 

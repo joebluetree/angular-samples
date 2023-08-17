@@ -8,6 +8,7 @@ import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
 import { user_upsert_row } from '../../store/user/user.actions';
 import { UserState } from '../../store/user/user.reducer';
+import { iBranchm } from '../../models/ibranchm';
 
 @Component({
   selector: 'app-user-edit',
@@ -38,6 +39,8 @@ export class UserEditComponent {
       user_password: ['', [Validators.required, Validators.maxLength(20)]],
       user_email: ['', [Validators.required, Validators.maxLength(60)]],
       user_is_admin: ['Y'],
+      rec_branch_id: [0, [Validators.required]],
+      rec_branch_name: ['', [Validators.required]],
     })
   }
 
@@ -64,7 +67,7 @@ export class UserEditComponent {
           user_password: rec.user_password,
           user_email: rec.user_email,
           user_is_admin: rec.user_is_admin,
-
+          rec_branch_id: rec.rec_branch_id
         })
       },
       error: (e) => {
@@ -115,6 +118,22 @@ export class UserEditComponent {
       complete: () => { }
 
     })
+  }
+
+  callBack(action: { id: string, rec: iBranchm }) {
+
+    if (action.id == 'menu_module_name') {
+
+      this.mform.patchValue({
+        rec_branch_id: action.rec ? action.rec.branch_id : 0,
+        rec_branch_name: action.rec ? action.rec.branch_name : '',
+      })
+
+    }
+  }
+
+  getCompanyId() {
+    return this.gs.user.user_company_id;
   }
 
   return2Parent() {
