@@ -25,3 +25,8 @@ export const selectLoginError = createSelector(
   AuthStateSelector,
   (state) => state.error
 );
+
+export const selectMenuList = createSelector(
+  AuthStateSelector,
+  (state) => state.user?.user_menu_list
+);
