@@ -17,26 +17,13 @@ export class AppComponent implements OnInit {
     private router: Router,
     private gs: GlobalService,
     private store: Store) {
-
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      let user = JSON.parse(localStorage.getItem('token') || '{}');
-      const _user: iUser = {
-        user_id: user.user_id,
-        user_code: user.user_code,
-        user_name: user.user_name,
-        user_email: user.user_email,
-        user_token: user.user_token,
-        user_company_id: user.user_company_id,
-        user_branch_id: user.user_branch_id,
-        user_password: ''
-      }
-      this.gs.user = _user;
-      this.store.dispatch(auth_login_success({ user: _user }));
-    }
-  }
 
+    this.gs.getToken('');
+    this.store.dispatch(auth_login_success({ user: this.gs.user }));
+
+  }
 
 }

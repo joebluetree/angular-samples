@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { httpInterceptor } from './http.interceptor';
 import { ProgressScreenComponent } from './progress-screen/progress-screen.component';
 import { ToastComponent } from './toast/toast.component';
+import { LoginBranchComponent } from './login-branch/login-branch.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -32,6 +33,7 @@ const routes: Routes = [
     ContactusComponent,
     AboutusComponent,
     LoginComponent,
+    LoginBranchComponent,
     ProgressScreenComponent,
     ToastComponent
   ],

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { iUser } from '../models/user';
 
+import ShortUniqueId from 'short-unique-id';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +17,7 @@ export class GlobalService {
   public readonly toast$ = this._toast.asObservable();
 
 
+  public app_id = '';
   public user: iUser;
 
   constructor(private location: Location) {
@@ -70,6 +73,42 @@ export class GlobalService {
   }
   public hideScreen() {
     this._toast.next([]);
+  }
+
+  public saveToken() {
+    this.app_id = this.getShortUId();
+    const token_name = 'token-' + this.app_id;
+    localStorage.setItem(token_name, JSON.stringify(this.user));
+  }
+
+  public getToken(_app_id: string) {
+    let bRet = false;
+    const token_name = 'token-' + _app_id;
+    if (localStorage.getItem(token_name)) {
+      let user = JSON.parse(localStorage.getItem(token_name) || '{}');
+      const _user: iUser = {
+        user_id: user.user_id,
+        user_code: user.user_code,
+        user_name: user.user_name,
+        user_email: user.user_email,
+        user_token: user.user_token,
+        user_company_id: user.user_company_id,
+        user_branch_id: user.user_branch_id,
+        user_password: ''
+      }
+      this.app_id = _app_id;
+      this.user = _user;
+      bRet = true;
+    }
+    return bRet;
+  }
+
+
+
+
+  public getShortUId() {
+    const uid = new ShortUniqueId();
+    return uid();
   }
 
 
