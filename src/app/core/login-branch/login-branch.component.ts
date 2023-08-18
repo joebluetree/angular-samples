@@ -6,9 +6,9 @@ import { LoginService } from '../services/login.service';
 import { iBranchm } from 'src/app/user-admin/models/ibranchm';
 import { AuthState } from '../store/auth/auth.reducer';
 import { Store } from '@ngrx/store';
-import { auth_branch_login, auth_login_success } from '../store/auth/auth.actions';
-
-
+import { auth_branch_login } from '../store/auth/auth.actions';
+import { selectLoginError } from '../store/auth/auth.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login-branch',
@@ -22,6 +22,9 @@ export class LoginBranchComponent {
 
   records: iBranchm[] = [];
 
+  loginError$: Observable<String | undefined>
+
+
   constructor(
     private store: Store<AuthState>,
     private gs: GlobalService,
@@ -32,6 +35,8 @@ export class LoginBranchComponent {
     this.mForm = new FormGroup({
       branch_id: new FormControl(this.gs.user.user_branch_id),
     })
+
+    this.loginError$ = this.store.select(selectLoginError)
 
     this.route.queryParams.forEach(rec => {
       this.source = rec["source"];
@@ -62,12 +67,12 @@ export class LoginBranchComponent {
   }
 
   loginBranch(branch_id: number) {
-    const search_data = {
-      company_id: this.gs.user.user_branch_id,
+    const data = {
+      company_id: this.gs.user.user_company_id,
       branch_id: branch_id,
       user_id: this.gs.user.user_id,
     }
-    this.store.dispatch(auth_branch_login({ data: search_data }));
+    this.store.dispatch(auth_branch_login(data));
   }
 
   cancel() {

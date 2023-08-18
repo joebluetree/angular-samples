@@ -9,7 +9,7 @@ export const auth_login = createAction(
 
 export const auth_branch_login = createAction(
   '[Auth] Branch Login',
-  props<{ data: any }>()
+  props<{ company_id: number, branch_id: number, user_id: number }>()
 );
 
 export const auth_login_success = createAction(

@@ -34,16 +34,8 @@ export class LoginService {
 
 
   branchLogin(data: any) {
-    const params = new HttpParams()
-      .set("company_id", data.company_id)
-      .set("branch_id", data.branch_id)
-      .set("user_id", data.user_id)
 
-    const options = {
-      params: params
-    }
-
-    return this.http.get(this.gs.getUrl('api/Auth/BranchLogin'), options);
+    return this.http.post(this.gs.getUrl('api/Auth/BranchLoginAsync'), data);
   }
 
   public showScreen() {

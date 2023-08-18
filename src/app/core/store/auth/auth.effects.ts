@@ -47,13 +47,14 @@ export class AuthEffects {
   baranch_login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(auth_branch_login),
-      switchMap((search_data: any) => this.loginService.branchLogin(search_data).pipe(
-        tap((user: any) => {
-          if (user == undefined) {
+      switchMap(search_data => this.loginService.branchLogin(search_data).pipe(
+        tap((result: any) => {
+          if (result == undefined) {
             this.store.dispatch(auth_login_failure({ error: 'Login Error' }));
           }
           else {
-            this.gs.user.user_branch_id = search_data.branch_id;
+            this.gs.user.user_branch_id = result.branch_id;
+            this.gs.user.user_menu_list = result.menu_list;
             localStorage.setItem("token", JSON.stringify(this.gs.user));
             this.store.dispatch(auth_login_success({ user: this.gs.user }));
             this.router.navigate(['/home']);
