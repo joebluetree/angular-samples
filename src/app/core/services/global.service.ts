@@ -94,7 +94,9 @@ export class GlobalService {
         user_token: user.user_token,
         user_company_id: user.user_company_id,
         user_branch_id: user.user_branch_id,
-        user_password: ''
+        user_password: '',
+        user_menu_list: [],
+        user_rights: []
       }
       this.app_id = _app_id;
       this.user = _user;

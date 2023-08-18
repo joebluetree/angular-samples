@@ -7,6 +7,11 @@ export const auth_login = createAction(
   props<{ code: string, password: string }>()
 );
 
+export const auth_branch_login = createAction(
+  '[Auth] Branch Login',
+  props<{ data: any }>()
+);
+
 export const auth_login_success = createAction(
   '[Auth] Login Success',
   props<{ user: iUser }>()

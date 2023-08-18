@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { auth_login, auth_login_failure } from '../store/auth/auth.actions';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthState } from '../store/auth/auth.store';
+import { AuthState } from '../store/auth/auth.reducer';
 import { selectLoginError } from '../store/auth/auth.selectors';
 
 @Component({
@@ -17,7 +17,9 @@ export class LoginComponent {
   loginError$: Observable<String | undefined>
   loginForm: FormGroup;
 
-  constructor(private store: Store<AuthState>, private router: Router) {
+  constructor(
+    private store: Store<AuthState>,
+    private router: Router) {
     this.loginError$ = this.store.select(selectLoginError)
     this.loginForm = new FormGroup({
       code: new FormControl('admin'),

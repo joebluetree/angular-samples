@@ -7,4 +7,6 @@ export interface iUser {
   user_token: string;
   user_company_id: number;
   user_branch_id: number;
+  user_menu_list: any;
+  user_rights: any;
 }

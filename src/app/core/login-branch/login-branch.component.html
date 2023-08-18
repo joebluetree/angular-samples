@@ -6,7 +6,7 @@
 
       <div class="row page-header">
         <div class="col-sm-12 text-center">
-          <label for="">Login</label>
+          <label for="">Branch Login</label>
         </div>
       </div>
 
@@ -15,10 +15,13 @@
         <div class="col-sm-12">
 
           <div class="form-group row">
-            <label class="col-sm-4 form-label form-label-sm" for="">Code</label>
+            <label class="col-sm-4 form-label form-label-sm" for="">Branch</label>
+
             <div class="col-sm-8">
-              <input type="text" class="form-control form-control-sm" formControlName="branch_id">
+              <app-combobox [dataSource]="records" [displayColumn]="'branch_name'" [valueColumn]="'branch_id'"
+                formControlName="branch_id"></app-combobox>
             </div>
+
           </div>
 
         </div>
