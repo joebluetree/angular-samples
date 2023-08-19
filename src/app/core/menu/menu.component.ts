@@ -50,7 +50,8 @@ export class MenuComponent {
     console.log('param', menu.menu_param);
     let param = JSON.parse(menu.menu_param);
     console.log('param', param);
-    return { menuid: '', type: '', title: '' }
+    return param;
+    //return { menuid: '', type: '', title: '' }
     //return { menuid: param.menuid, type: param.type, title: param.title }
   }
 
