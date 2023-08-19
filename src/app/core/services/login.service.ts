@@ -29,7 +29,8 @@ export class LoginService {
   }
 
   loadBranches(search_record: any) {
-    return this.http.post<any>(this.gs.getUrl('/api/Auth/GetBranchListAsync'), search_record);
+    const url = this.gs.getUrl('/api/Auth/GetBranchListAsync');
+    return this.http.post<any>(url, search_record);
   }
 
 

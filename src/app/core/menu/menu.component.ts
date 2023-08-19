@@ -7,6 +7,7 @@ import { auth_logout } from '../store/auth/auth.actions';
 import { selectIsLogin, selectIsLogout, selectMenuList, selectModuleList, selectUserName } from '../store/auth/auth.selectors';
 import { CoreState } from '../store/index';
 import { iMenum } from 'src/app/user-admin/models/imenum';
+import { GlobalService } from '../services/global.service';
 
 
 
@@ -28,6 +29,7 @@ export class MenuComponent {
 
   constructor(
     private store: Store<CoreState>,
+    private gs: GlobalService,
     private router: Router
   ) {
 
@@ -40,6 +42,8 @@ export class MenuComponent {
     this.records$ = this.store.select(selectMenuList).pipe(
       tap(e => console.log(e))
     );
+
+
   }
 
   isOk(module: any, menu: any) {
@@ -47,7 +51,9 @@ export class MenuComponent {
   }
 
   getParam(menu: iMenum) {
-    return JSON.parse(menu.menu_param.replaceAll("'", '"'));
+    const param = JSON.parse(menu.menu_param.replaceAll("'", '"'));
+    param.appid = this.gs.app_id;
+    return param;
   }
 
   ngOnInit(): void {

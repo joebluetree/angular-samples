@@ -56,7 +56,7 @@ export class AuthEffects {
           else {
             this.gs.user.user_branch_id = result.branch_id;
             this.gs.user.user_menu_list = <iMenum[]>result.menu_list;
-            localStorage.setItem("token", JSON.stringify(this.gs.user));
+            this.gs.saveToken();
             this.store.dispatch(auth_login_success({ user: this.gs.user }));
             this.router.navigate(['/home']);
           }

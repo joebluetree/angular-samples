@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.gs.getToken('');
+    this.gs.readToken();
     this.store.dispatch(auth_login_success({ user: this.gs.user }));
 
   }

@@ -27,7 +27,8 @@ export class GlobalService {
 
   public getUrl(path: string = '') {
     let sep = path.startsWith("/") ? "" : "/";
-    return this.url + sep + path;
+    const _url = this.url + sep + path;
+    return _url;
   }
 
   updateURL(param: any) {
@@ -81,9 +82,12 @@ export class GlobalService {
     localStorage.setItem(token_name, JSON.stringify(this.user));
   }
 
-  public getToken(_app_id: string) {
+  public readToken() {
     let bRet = false;
-    const token_name = 'token-' + _app_id;
+    const _app_id = this.getURLParam('appid');
+    if (_app_id)
+      this.app_id = _app_id;
+    const token_name = 'token-' + this.app_id;
     if (localStorage.getItem(token_name)) {
       let user = JSON.parse(localStorage.getItem(token_name) || '{}');
       const _user: iUser = {
@@ -98,15 +102,15 @@ export class GlobalService {
         user_menu_list: [],
         user_rights: []
       }
-      this.app_id = _app_id;
       this.user = _user;
       bRet = true;
     }
     return bRet;
   }
 
-
-
+  getURLParam(param: string) {
+    return new URLSearchParams(window.location.search).get(param);
+  }
 
   public getShortUId() {
     const uid = new ShortUniqueId();
