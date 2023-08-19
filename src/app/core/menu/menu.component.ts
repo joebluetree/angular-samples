@@ -46,13 +46,8 @@ export class MenuComponent {
     return module.name == menu.menu_module_name
   }
 
-  getParam(menu: any) {
-    console.log('param', menu.menu_param);
-    let param = JSON.parse(menu.menu_param);
-    console.log('param', param);
-    return param;
-    //return { menuid: '', type: '', title: '' }
-    //return { menuid: param.menuid, type: param.type, title: param.title }
+  getParam(menu: iMenum) {
+    return JSON.parse(menu.menu_param.replaceAll("'", '"'));
   }
 
   ngOnInit(): void {
