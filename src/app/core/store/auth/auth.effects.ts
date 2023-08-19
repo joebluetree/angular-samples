@@ -7,6 +7,7 @@ import { auth_login, auth_login_success, auth_login_failure, auth_branch_login }
 import { iUser } from '../../models/user';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../services/global.service';
+import { iMenum } from 'src/app/user-admin/models/imenum';
 
 @Injectable()
 export class AuthEffects {
@@ -54,7 +55,7 @@ export class AuthEffects {
           }
           else {
             this.gs.user.user_branch_id = result.branch_id;
-            this.gs.user.user_menu_list = result.menu_list;
+            this.gs.user.user_menu_list = <iMenum[]>result.menu_list;
             localStorage.setItem("token", JSON.stringify(this.gs.user));
             this.store.dispatch(auth_login_success({ user: this.gs.user }));
             this.router.navigate(['/home']);

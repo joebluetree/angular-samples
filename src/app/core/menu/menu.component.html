@@ -17,9 +17,28 @@
       <li><a class="links" routerLink="/home">Home</a></li>
       <li><a class="links" routerLink="/aboutus">About Us</a></li>
       <li><a class="links" routerLink="/contactus">Contact Us</a></li>
+
+      <li class="dropdown" *ngIf="(moduleList$ | async ) as mlist">
+        <ng-container *ngFor="let module of mlist">
+          <a class="dropdown-toggle links" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{module.name}}
+          </a>
+          <ul class="dropdown-menu" *ngIf="(records$ | async ) as records">
+            <ng-container *ngFor="let menu of records">
+              <li *ngIf="isOk(module,menu)">
+                <a class="dropdown-item" routerLink="{{menu.menu_route}}" [queryParams]="getParam(menu)">
+                  {{menu.menu_name}}
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </li>
+
+
       <li class="dropdown">
         <a class="dropdown-toggle links" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Masters
+          Masters1
         </a>
         <ul class="dropdown-menu">
 
@@ -48,6 +67,7 @@
 
         </ul>
       </li>
+
     </ul>
   </div>
   <span class="spacer"></span>

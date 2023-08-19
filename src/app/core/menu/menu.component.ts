@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject, map, tap } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { auth_logout } from '../store/auth/auth.actions';
-import { selectIsLogin, selectIsLogout, selectUserName } from '../store/auth/auth.selectors';
+import { selectIsLogin, selectIsLogout, selectMenuList, selectModuleList, selectUserName } from '../store/auth/auth.selectors';
 import { CoreState } from '../store/index';
+import { iMenum } from 'src/app/user-admin/models/imenum';
+
+
 
 @Component({
   selector: 'app-menu',
@@ -19,6 +22,10 @@ export class MenuComponent {
   isLoggedOut$: Observable<boolean>;
   userName$: Observable<string | undefined>;
 
+  moduleList$: Observable<any>;
+
+  records$: Observable<iMenum[]>;
+
   constructor(
     private store: Store<CoreState>,
     private router: Router
@@ -27,6 +34,24 @@ export class MenuComponent {
     this.isLoggedIn$ = this.store.select(selectIsLogin);
     this.isLoggedOut$ = this.store.select(selectIsLogout);
     this.userName$ = this.store.select(selectUserName);
+    this.moduleList$ = this.store.select(selectModuleList).pipe(
+      tap(e => console.log(e))
+    );
+    this.records$ = this.store.select(selectMenuList).pipe(
+      tap(e => console.log(e))
+    );
+  }
+
+  isOk(module: any, menu: any) {
+    return module.name == menu.menu_module_name
+  }
+
+  getParam(menu: any) {
+    console.log('param', menu.menu_param);
+    let param = JSON.parse(menu.menu_param);
+    console.log('param', param);
+    return { menuid: '', type: '', title: '' }
+    //return { menuid: param.menuid, type: param.type, title: param.title }
   }
 
   ngOnInit(): void {
