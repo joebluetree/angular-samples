@@ -40,7 +40,7 @@ export class GlobalService {
   }
 
   public IsValidToken(token: any) {
-    const decodedToken = this.decodeToken(token.user_token);
+    const decodedToken = this.decodeToken(token);
     let bRet = true;
     if (Date.now() >= decodedToken.exp * 1000) {
       bRet = false;
@@ -76,18 +76,35 @@ export class GlobalService {
     this._toast.next([]);
   }
 
-  public saveToken() {
+  public saveAuthState() {
     this.app_id = this.getShortUId();
-    const token_name = 'token-' + this.app_id;
+    const token_name = this.getTokenName();
     localStorage.setItem(token_name, JSON.stringify(this.user));
   }
 
-  public readToken() {
+  public getTokenName() {
+    if (this.app_id)
+      return 'token-' + this.app_id;
+    else
+      return '';
+  }
+
+  public getToken() {
+    if (this.user)
+      return this.user.user_token;
+    else
+      return '';
+  }
+
+
+  public readAuthState() {
     let bRet = false;
     const _app_id = this.getURLParam('appid');
     if (_app_id)
       this.app_id = _app_id;
-    const token_name = 'token-' + this.app_id;
+    else
+      return;
+    const token_name = this.getTokenName();
     if (localStorage.getItem(token_name)) {
       let user = JSON.parse(localStorage.getItem(token_name) || '{}');
       const _user: iUser = {

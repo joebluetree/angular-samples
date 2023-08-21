@@ -17,7 +17,9 @@ export class httpInterceptor implements HttpInterceptor {
   totalRequest = 0;
 
   anonymousApis = [
-    'api/Auth/Login'
+    'api/auth/login',
+    'api/auth/GetBranchListAsync',
+    'api/auth/BranchLoginAsync'
   ];
 
   constructor(
@@ -27,14 +29,20 @@ export class httpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    let token: any = JSON.parse(localStorage.getItem('token') || '{}');
+    //let _token = localStorage.getItem('token')
+    //let token = undefined;
+    //if (_token != undefined)
+    //token = JSON.parse(_token);
+
+    let token = this.gs.getToken();
+
     let _headers;
     let _request: HttpRequest<unknown>;
 
 
-    if (token != undefined) {
+    if (token != '') {
       _headers = request.headers;
-      _headers = _headers.append('Authorization', 'bearer ' + token.user_token)
+      _headers = _headers.append('Authorization', 'bearer ' + token)
     }
 
     let isAllowAnonymous = this.anonymousApis.reduce((acc, value) => {
@@ -45,7 +53,7 @@ export class httpInterceptor implements HttpInterceptor {
     }, false);
 
     if (!isAllowAnonymous) {
-      if (token != undefined) {
+      if (token != '') {
         if (!this.gs.IsValidToken(token)) {
           alert('Token Expired');
           return EMPTY;

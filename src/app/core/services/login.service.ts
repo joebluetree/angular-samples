@@ -11,11 +11,9 @@ export class LoginService {
   private _loadScreen: Subject<Boolean> = new Subject<Boolean>();
   public readonly loadScreen$ = this._loadScreen.asObservable();
 
-
   constructor(
     private gs: GlobalService,
     private http: HttpClient) {
-
   }
 
   login(login: any) {
@@ -25,18 +23,19 @@ export class LoginService {
     const options = {
       params: params
     }
-    return this.http.get(this.gs.getUrl('api/Auth/Login'), options);
+    const url = this.gs.getUrl('api/auth/login');
+    return this.http.get(url, options);
   }
 
   loadBranches(search_record: any) {
-    const url = this.gs.getUrl('/api/Auth/GetBranchListAsync');
+    const url = this.gs.getUrl('/api/auth/GetBranchListAsync');
     return this.http.post<any>(url, search_record);
   }
 
 
   branchLogin(data: any) {
 
-    return this.http.post(this.gs.getUrl('api/Auth/BranchLoginAsync'), data);
+    return this.http.post(this.gs.getUrl('api/auth/BranchLoginAsync'), data);
   }
 
   public showScreen() {
