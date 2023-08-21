@@ -39,6 +39,7 @@
     </ul>
   </div>
   <span class="spacer"></span>
+
   <div class="login">
     <span id="userName" *ngIf="userName$ | async as userName">{{userName}}</span>
     <ng-container *ngIf="isLoggedOut$ | async as isLoggedOut">
@@ -48,4 +49,5 @@
       <button class="ms-4 btn btn-sm btn-success" (click)="logout()">Logout</button>
     </ng-container>
   </div>
+
 </div>
