@@ -16,9 +16,9 @@
   <div class="nav-bar">
     <ul class="nav-links">
 
-      <!-- <li><a class="links" routerLink="/home">Home</a></li>
+      <li><a class="links" routerLink="/home">Home</a></li>
       <li><a class="links" routerLink="/aboutus">About Us</a></li>
-      <li><a class="links" routerLink="/contactus">Contact Us</a></li> -->
+      <li><a class="links" routerLink="/contactus">Contact Us</a></li>
 
       <li class="dropdown" *ngIf="(moduleList$ | async ) as mlist">
         <ng-container *ngFor="let module of mlist">
@@ -38,6 +38,7 @@
       </li>
     </ul>
   </div>
+
   <span class="spacer"></span>
 
   <div class="login">

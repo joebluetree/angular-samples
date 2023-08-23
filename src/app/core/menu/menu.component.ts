@@ -65,7 +65,7 @@ export class MenuComponent {
 
   logout() {
     this.store.dispatch(auth_logout());
-    this.router.navigate(['login']);
+    this.router.navigate(['home']);
   }
 
 
