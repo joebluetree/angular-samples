@@ -9,8 +9,6 @@ import { CoreState } from '../store/index';
 import { iMenum } from 'src/app/user-admin/models/imenum';
 import { GlobalService } from '../services/global.service';
 
-
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -42,8 +40,6 @@ export class MenuComponent {
     this.records$ = this.store.select(selectMenuList).pipe(
       tap(e => console.log(e))
     );
-
-
   }
 
   isOk(module: any, menu: any) {
@@ -67,6 +63,5 @@ export class MenuComponent {
     this.store.dispatch(auth_logout());
     this.router.navigate(['home']);
   }
-
 
 }
