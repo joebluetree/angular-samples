@@ -1,3 +1,4 @@
+import { iUserBranches } from "./iuserbranches";
 
 export interface iUserm {
   user_id: number;
@@ -13,6 +14,7 @@ export interface iUserm {
   rec_created_date: string;
   rec_edited_by: string;
   rec_edited_date: string;
+  userbranches: iUserBranches[];
 }
 
 export interface iUserm_Search {
@@ -20,5 +22,4 @@ export interface iUserm_Search {
   user_is_admin: string;
   rec_company_id: number;
 }
-
 

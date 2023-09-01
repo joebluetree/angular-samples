@@ -103,7 +103,7 @@ export class GlobalService {
     if (_app_id)
       this.app_id = _app_id;
     else
-      return;
+      return bRet;
     const token_name = this.getTokenName();
     if (localStorage.getItem(token_name)) {
       let user = JSON.parse(localStorage.getItem(token_name) || '{}');

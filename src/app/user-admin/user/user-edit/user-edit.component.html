@@ -60,6 +60,31 @@
 
         </div>
 
+        <div class="col-sm-6">
+
+          <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+
+            <thead class="table-success">
+              <tr class="table-header">
+                <th>Selected</th>
+                <th>Branch</th>
+              </tr>
+            </thead>
+
+            <tbody formArrayName="userbranches">
+
+              <tr *ngFor="let iRow of formArray.controls; let i=index;" [formGroupName]="i">
+                <td> <app-checkbox formControlName="ub_selected"></app-checkbox> </td>
+                <td>
+                  <input formControlName="rec_branch_name" class="form-control form-control-sm">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
       </div>
 
     </form>

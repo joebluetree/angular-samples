@@ -17,8 +17,9 @@ export class UserService {
     return this.http.post<any>(this.gs.getUrl('/api/user/GetListAsync'), data);
   }
 
-  public getRecord(id: number) {
+  public getRecord(comp_id: number, id: number) {
     const param = new HttpParams()
+      .set('comp_id', comp_id)
       .set('id', id)
     const options = {
       params: param
