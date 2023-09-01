@@ -28,6 +28,8 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserSearchComponent } from './user/user-search/user-search.component';
 import { UserFeatureName, userReducer } from './store/user/user.reducer';
 import { UserEffects } from './store/user/user.effects';
+import { RightsEffects } from './store/rights/rights.effects';
+import { RightsFeatureName, rightsReducer } from './store/rights/rights.reducer';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
@@ -69,7 +71,8 @@ const routes: Routes = [
     StoreModule.forFeature(UserFeatureName, userReducer),
     StoreModule.forFeature(ModuleFeatureName, moduleReducer),
     StoreModule.forFeature(MenuFeatureName, menuReducer),
-    EffectsModule.forFeature([CompanyEffects, BranchEffects, UserEffects, ModuleEffects, MenuEffects]),
+    StoreModule.forFeature(RightsFeatureName, rightsReducer),
+    EffectsModule.forFeature([CompanyEffects, BranchEffects, UserEffects, ModuleEffects, MenuEffects, RightsEffects]),
   ]
 })
 export class UserAdminModule { }
