@@ -1,5 +1,3 @@
-
-
 export interface iUserBranches {
   ub_id: number;
   ub_user_id: number;

@@ -1,0 +1,23 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-sm-6">
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">User</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="user_name"> </app-input>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

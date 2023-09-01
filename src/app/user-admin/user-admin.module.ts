@@ -30,6 +30,8 @@ import { UserFeatureName, userReducer } from './store/user/user.reducer';
 import { UserEffects } from './store/user/user.effects';
 import { RightsEffects } from './store/rights/rights.effects';
 import { RightsFeatureName, rightsReducer } from './store/rights/rights.reducer';
+import { RightsSearchComponent } from './rights/rights-search/rights-search.component';
+import { RightsListComponent } from './rights/rights-list/rights-list.component';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
@@ -42,6 +44,7 @@ const routes: Routes = [
   { path: 'branchEdit', component: BranchEditComponent },
   { path: 'userList', component: UserListComponent },
   { path: 'userEdit', component: UserEditComponent },
+  { path: 'rightsList', component: RightsListComponent },
 
 ]
 
@@ -62,6 +65,8 @@ const routes: Routes = [
     UserListComponent,
     UserEditComponent,
     UserSearchComponent,
+    RightsSearchComponent,
+    RightsListComponent
   ],
   imports: [
     SharedModule,
