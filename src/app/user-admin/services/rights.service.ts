@@ -14,7 +14,8 @@ export class RightsService {
 
   public getList(action: string, search_record: iUserBranches_Search, page: iPage) {
     const data = { 'action': action, ...search_record, ...page }
-    return this.http.post<any>(this.gs.getUrl('/api/rights/GetListAsync'), data);
+    const url = this.gs.getUrl('/api/rights/GetListAsync');
+    return this.http.post<any>(url, data);
   }
 
   public getRecord(id: number) {
