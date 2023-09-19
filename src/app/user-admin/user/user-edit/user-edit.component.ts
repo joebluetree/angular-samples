@@ -25,7 +25,7 @@ export class UserEditComponent {
   showModel = true;
 
   mform: FormGroup;
-  theFormArray: any;
+  //theFormArray: any;
   constructor(
     private gs: GlobalService,
     private service: UserService,
@@ -34,7 +34,7 @@ export class UserEditComponent {
     private location: Location,
     private store: Store<UserState>
   ) {
-    this.theFormArray = new FormArray([]);
+    //this.theFormArray = new FormArray([]);
     this.mform = this.fb.group({
       user_id: [0],
       user_code: ['', [Validators.required, Validators.maxLength(20)]],

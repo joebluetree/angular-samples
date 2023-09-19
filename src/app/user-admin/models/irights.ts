@@ -1,16 +1,19 @@
-export interface rights_header_dto {
+export interface iRights_header {
+  id: number;
   comp_id: number;
   branch_id: number;
   user_id: number;
-  record: iRights[];
+  records: iRights[];
 }
 
 export interface iRights {
   rights_id: number;
+  rights_parent_id: number;
   rights_user_id: number;
   rights_user_name: string;
   rights_menu_id: number;
   rights_menu_name: string;
+  rights_module_name: string;
   rights_selected: string;
   rights_company: string;
   rights_admin: string;
@@ -25,7 +28,6 @@ export interface iRights {
   rights_value: string;
   rec_company_id: number;
   rec_branch_id: number;
-  rec_branch_name: string;
   rec_created_by: string;
   rec_created_date: string;
   rec_edited_by: string;

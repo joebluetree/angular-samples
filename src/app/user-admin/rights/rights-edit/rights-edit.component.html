@@ -1,0 +1,73 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button class="btn btn-sm btn-success" routerLink="/admin/rightsEdit" [queryParams]="{id :0, _id:id+1}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<div class="page-body">
+
+  <div class="container-fluid">
+    <form [formGroup]="mform">
+      <div class="row">
+
+        <div class="col-sm-12">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+              <thead class="table-success">
+                <tr class="table-header">
+                  <th>Module</th>
+                  <th>Menu</th>
+                  <th>Selected</th>
+                  <th>Company</th>
+                  <th>Admin</th>
+                  <th>Add</th>
+                  <th>Edit</th>
+                  <th>View</th>
+                  <th>Delete</th>
+                  <th>Print</th>
+                  <th>Doc-Upload</th>
+                  <th>Doc-View</th>
+                  <th>Approver</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="records">
+                <tr *ngFor="let iRow of formArray.controls; let i=index;" [formGroupName]="i">
+                  <td> {{iRow.get('rights_module_name')?.value}}</td>
+                  <td> {{iRow.get('rights_menu_name')?.value}}</td>
+                  <td> <app-checkbox formControlName="rights_selected"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_company"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_admin"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_add"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_edit"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_view"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_delete"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_print"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_doc_upload"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_doc_view"></app-checkbox> </td>
+                  <td> <app-checkbox formControlName="rights_approver"></app-checkbox> </td>
+                  <td>
+                    <input formControlName="rights_value" class="form-control form-control-sm">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<div class="page-footer line-bottom">
+  <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div>
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

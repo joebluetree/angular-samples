@@ -32,6 +32,7 @@ import { RightsEffects } from './store/rights/rights.effects';
 import { RightsFeatureName, rightsReducer } from './store/rights/rights.reducer';
 import { RightsSearchComponent } from './rights/rights-search/rights-search.component';
 import { RightsListComponent } from './rights/rights-list/rights-list.component';
+import { RightsEditComponent } from './rights/rights-edit/rights-edit.component';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'userList', component: UserListComponent },
   { path: 'userEdit', component: UserEditComponent },
   { path: 'rightsList', component: RightsListComponent },
+  { path: 'rightsEdit', component: RightsEditComponent },
 
 ]
 
@@ -66,7 +68,8 @@ const routes: Routes = [
     UserEditComponent,
     UserSearchComponent,
     RightsSearchComponent,
-    RightsListComponent
+    RightsListComponent,
+    RightsEditComponent
   ],
   imports: [
     SharedModule,
@@ -81,4 +84,3 @@ const routes: Routes = [
   ]
 })
 export class UserAdminModule { }
-

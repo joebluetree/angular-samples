@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { iUserBranches, iUserBranches_Search } from '../models/iuserbranches';
 import { GlobalService } from '../../core/services/global.service';
 import { iPage } from 'src/app/shared/models/ipage';
+import { iRights_header } from '../models/irights';
 
 @Injectable({ providedIn: 'root' })
 export class RightsService {
@@ -24,10 +25,10 @@ export class RightsService {
     const options = {
       params: param
     }
-    return this.http.get<iUserBranches>(this.gs.getUrl('api/rights/getRecordAsync'), options);
+    return this.http.get<iRights_header>(this.gs.getUrl('api/rights/getRecordAsync'), options);
   }
 
-  public save(id: number, record: iUserBranches) {
+  public save(id: number, record: iRights_header) {
 
     const params = {
       'id': id
@@ -35,7 +36,7 @@ export class RightsService {
     const options = {
       params: params
     }
-    return this.http.post<iUserBranches>(this.gs.getUrl('/api/rights/SaveAsync'), record, options);
+    return this.http.post<iRights_header>(this.gs.getUrl('/api/rights/SaveAsync'), record, options);
 
   }
 
