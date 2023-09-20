@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as  user_actions from './user.actions';
 import { UserService } from '../../services/user.service';
-import { EMPTY, catchError, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
+import { catchError, switchMap, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserState } from './user.reducer';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -18,7 +18,8 @@ export class UserEffects {
         this.store.select(selectUserPage)
       ),
       switchMap(([action, search_record, page]) => {
-        const data: any = this.service.getList(action.action, search_record, page);
+        const _search_record = { ...search_record, ...this.gs.getGlobalConstants() };
+        const data: any = this.service.getList(action.action, _search_record, page);
         return data;
       }),
       tap((result: any) => {

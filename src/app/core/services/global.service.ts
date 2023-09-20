@@ -96,6 +96,17 @@ export class GlobalService {
       return '';
   }
 
+  public getGlobalConstants() {
+    return {
+      global_user_id: this.user.user_id,
+      global_user_code: this.user.user_code,
+      global_user_name: this.user.user_name,
+      global_user_email: this.user.user_email,
+      global_user_company_id: this.user.user_company_id,
+      global_user_branch_id: this.user.user_branch_id,
+    };
+  }
+
 
   public readAuthState() {
     let bRet = false;

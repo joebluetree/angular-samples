@@ -45,7 +45,7 @@ export class AuthEffects {
     )
   }, { dispatch: false });
 
-  baranch_login$ = createEffect(() => {
+  branch_login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(auth_branch_login),
       switchMap(search_data => this.loginService.branchLogin(search_data).pipe(

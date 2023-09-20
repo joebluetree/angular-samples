@@ -68,9 +68,9 @@ export class LoginBranchComponent {
 
   loginBranch(branch_id: number) {
     const data = {
+      user_id: this.gs.user.user_id,
       company_id: this.gs.user.user_company_id,
       branch_id: branch_id,
-      user_id: this.gs.user.user_id,
     }
     this.store.dispatch(auth_branch_login(data));
   }
