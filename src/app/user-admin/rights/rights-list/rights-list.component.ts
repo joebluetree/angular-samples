@@ -15,6 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./rights-list.component.css']
 })
 export class RightsListComponent {
+  appid = '';
   menuid = '';
   title = '';
   type = '';
@@ -38,12 +39,13 @@ export class RightsListComponent {
   ngOnInit(): void {
 
     this.route.queryParams.forEach(rec => {
+      this.appid = rec["appid"];
       this.menuid = rec["menuid"];
       this.title = rec["title"];
       this.type = rec["type"];
     })
 
-    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title }
+    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid };
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/admin/rightsEdit', param: param },
       { col_name: "ub_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },

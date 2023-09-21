@@ -16,6 +16,7 @@ import { selectUser } from '../../store/user/user.selectors';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent {
+  appid = '';
   menuid = '';
   title = '';
   type = '';
@@ -39,12 +40,13 @@ export class UserListComponent {
   ngOnInit(): void {
 
     this.route.queryParams.forEach(rec => {
+      this.appid = rec["appid"];
       this.menuid = rec["menuid"];
       this.title = rec["title"];
       this.type = rec["type"];
     })
 
-    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title }
+    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid };
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/admin/userEdit', param: param },
       { col_name: "user_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },

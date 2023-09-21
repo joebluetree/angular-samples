@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ParamListComponent {
 
+  appid = '';
   menuid = '';
   title = '';
   type = '';
@@ -35,6 +36,7 @@ export class ParamListComponent {
   ) {
 
     this.route.queryParams.forEach(rec => {
+      this.appid = rec["appid"];
       this.menuid = rec["menuid"];
       this.title = rec["title"];
       this.type = rec["type"];
@@ -48,7 +50,7 @@ export class ParamListComponent {
     this.sort_order$ = this.store.select(selectParamPage_SortOrder);
     this.page$ = this.store.select(selectParamPage);
 
-    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title }
+    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid };
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/masters/paramEdit', param: param },
       { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },
