@@ -31,7 +31,7 @@ export class AuthEffects {
               user_company_id: user.user_company_id,
               user_branch_id: user.user_branch_id,
               user_menu_list: [],
-              user_rights: []
+              //user_rights: []
             }
             this.gs.user = _user;
             this.router.navigate(['/loginBranch'], { queryParams: { 'source': 'login' } });

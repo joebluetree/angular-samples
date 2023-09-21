@@ -10,5 +10,4 @@ export interface iUser {
   user_company_id: number;
   user_branch_id: number;
   user_menu_list: iMenum[];
-  user_rights: any;
 }

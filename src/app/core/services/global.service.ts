@@ -127,8 +127,7 @@ export class GlobalService {
         user_company_id: user.user_company_id,
         user_branch_id: user.user_branch_id,
         user_password: '',
-        user_menu_list: [],
-        user_rights: []
+        user_menu_list: user.user_menu_list,
       }
       this.user = _user;
       bRet = true;
