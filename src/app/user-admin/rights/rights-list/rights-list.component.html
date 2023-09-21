@@ -1,7 +1,6 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <button class="btn btn-success btn-sm" routerLink="/rights/rightsEdit"
-    [queryParams]="{id :0,menuid:menuid,type:type, title:title,appid:appid}">New</button>
+
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
@@ -10,6 +9,7 @@
     <app-rights-search [input]="record" (output)="search($event)"></app-rights-search>
   </ng-container>
 </div>
+
 
 <div class="page-pagination" *ngIf="(page$ | async) as page">
   <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
