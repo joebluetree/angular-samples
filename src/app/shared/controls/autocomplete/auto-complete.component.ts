@@ -49,8 +49,10 @@ export class AutoCompleteComponent implements ControlValueAccessor {
 
   columns: icolumns[];
 
-  constructor(private service: CommonService, private gs: GlobalService) {
-
+  constructor(
+    private service: CommonService,
+    private gs: GlobalService
+  ) {
   }
 
   ngOnInit(): void {

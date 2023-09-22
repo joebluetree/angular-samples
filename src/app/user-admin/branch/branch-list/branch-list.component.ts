@@ -8,6 +8,7 @@ import { iBranchm, iBranchm_Search } from '../../models/ibranchm';
 import { iPage } from 'src/app/shared/models/ipage';
 import { BranchState } from '../../store/branch/branch.reducer';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
   selector: 'app-branch-list',
@@ -34,6 +35,7 @@ export class BranchListComponent {
     private store: Store<BranchState>,
     private route: ActivatedRoute,
     private location: Location,
+    private gs: GlobalService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +46,9 @@ export class BranchListComponent {
       this.title = rec["title"];
       this.type = rec["type"];
     })
+
+    if (!this.gs.IsValidAppId(this.appid))
+      return;
 
     const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid };
     this.table_data = [

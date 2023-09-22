@@ -8,6 +8,7 @@ import { iMenum, iMenum_Search } from '../../models/imenum';
 import { selectMenu, selectMenuPage, selectMenuPage_RowId, selectMenuPage_SortColumn, selectMenuPage_SortOrder, selectMenuSearch_Record } from '../../store/menu/menu.selectors';
 import { MenuState } from '../../store/menu/menu.reducer';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class MenuListComponent {
   constructor(
     private store: Store<MenuState>,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private gs: GlobalService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,9 @@ export class MenuListComponent {
       this.title = rec["title"];
       this.type = rec["type"];
     })
+
+    if (!this.gs.IsValidAppId(this.appid))
+      return;
 
     const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid }
     this.table_data = [

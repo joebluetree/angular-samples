@@ -15,6 +15,7 @@ import { ParamService } from '../../services/param.service';
 })
 export class ParamEditComponent {
   id = 0;
+  appid = '';
   menuid = '';
   title = '';
   type = '';
@@ -44,11 +45,16 @@ export class ParamEditComponent {
   ngOnInit() {
     this.id = 0;
     this.route.queryParams.forEach(rec => {
+      this.appid = rec["appid"];
       this.id = +rec["id"];
       this.menuid = rec["menuid"];
       this.title = rec["title"];
       this.type = rec["type"];
     })
+
+    if (!this.gs.IsValidAppId(this.appid))
+      return;
+
     this.getRecord();
   }
 

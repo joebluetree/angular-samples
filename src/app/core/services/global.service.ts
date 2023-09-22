@@ -4,6 +4,9 @@ import { Subject } from 'rxjs';
 import { iUser } from '../models/user';
 
 import ShortUniqueId from 'short-unique-id';
+import { Store } from '@ngrx/store';
+import { auth_logout } from '../store/auth/auth.actions';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +23,11 @@ export class GlobalService {
   public app_id = '';
   public user: iUser;
 
-  constructor(private location: Location) {
+  constructor(
+    private location: Location,
+    private store: Store,
+    private router: Router
+  ) {
     this.url = "https:/jsonplaceholder.typicode.com";
     this.url = "http://localhost:5153";
   }
@@ -133,6 +140,25 @@ export class GlobalService {
       bRet = true;
     }
     return bRet;
+  }
+
+  IsValidAppId(_app_id: string) {
+    let bflag = true;
+    if (_app_id == '')
+      bflag = false;
+    if (_app_id != this.app_id)
+      bflag = false;
+    if (bflag == false) {
+      alert('Invalid App Id');
+      this.logout();
+    }
+    return bflag;
+  }
+
+
+  logout() {
+    this.store.dispatch(auth_logout());
+    this.router.navigate(['home']);
   }
 
   getURLParam(param: string) {

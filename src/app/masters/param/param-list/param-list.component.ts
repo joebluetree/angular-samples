@@ -8,6 +8,7 @@ import { iParam, iParam_Search } from '../../models/iparam';
 import { iPage } from 'src/app/shared/models/ipage';
 import { ParamGroupState } from '../../store/param/param.reducer';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
   selector: 'app-param-list',
@@ -32,7 +33,8 @@ export class ParamListComponent {
   constructor(
     private store: Store<ParamGroupState>,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private gs: GlobalService
   ) {
 
     this.route.queryParams.forEach(rec => {
@@ -42,6 +44,8 @@ export class ParamListComponent {
       this.type = rec["type"];
     })
 
+    if (!this.gs.IsValidAppId(this.appid))
+      return;
 
     this.records$ = this.store.select(selectParamRecords);
     this.search_record$ = this.store.select(selectParamSearch_Record);

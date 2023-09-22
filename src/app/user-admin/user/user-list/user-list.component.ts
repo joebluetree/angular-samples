@@ -9,6 +9,7 @@ import { iPage } from 'src/app/shared/models/ipage';
 import { UserState } from '../../store/user/user.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { selectUser } from '../../store/user/user.selectors';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
   selector: 'app-user-list',
@@ -35,6 +36,7 @@ export class UserListComponent {
     private store: Store<UserState>,
     private route: ActivatedRoute,
     private location: Location,
+    private gs: GlobalService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,11 @@ export class UserListComponent {
       this.title = rec["title"];
       this.type = rec["type"];
     })
+
+
+    if (!this.gs.IsValidAppId(this.appid))
+      return;
+
 
     const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid };
     this.table_data = [
