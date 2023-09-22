@@ -25,8 +25,9 @@ export class AuthService {
     //your logic goes here
     return this.store.select(selectIsLogin).pipe(
       map(flag => {
-        if (!flag)
+        if (!flag) {
           this.gs.logout();
+        }
         return flag;
       })
     )
