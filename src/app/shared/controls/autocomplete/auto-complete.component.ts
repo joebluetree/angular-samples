@@ -50,8 +50,7 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   columns: icolumns[];
 
   constructor(
-    private service: CommonService,
-    private gs: GlobalService
+    private service: CommonService
   ) {
   }
 
@@ -102,7 +101,8 @@ export class AutoCompleteComponent implements ControlValueAccessor {
         this.isChanged = false;
       },
       error: (e) => {
-        this.gs.showScreen([e.error || e.message]);
+        alert([e.error || e.message]);
+        //this.gs.showScreen([e.error || e.message]);
       }
     })
   }
