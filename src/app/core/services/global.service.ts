@@ -155,7 +155,6 @@ export class GlobalService {
     return bflag;
   }
 
-
   logout() {
     this.store.dispatch(auth_logout());
     this.router.navigate(['home']);
@@ -169,6 +168,5 @@ export class GlobalService {
     const uid = new ShortUniqueId();
     return uid();
   }
-
 
 }
