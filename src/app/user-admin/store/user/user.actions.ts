@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { iUserm, iUserm_Search } from '../../models/iuserm';
-import { iPage } from 'src/app/shared/models/ipage';
-import { iUser } from '../../../core/models/user';
+import { iPage } from '../../../library/models/ipage';
+
 
 export const user_load_records = createAction(
   '[User Master] Load Records',

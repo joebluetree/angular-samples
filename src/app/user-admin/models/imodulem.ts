@@ -1,4 +1,4 @@
-import { iPage } from "src/app/shared/models/ipage";
+
 
 export interface iModulem {
   module_id: number;

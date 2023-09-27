@@ -2,7 +2,7 @@ import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iParam, iParam_Search } from '../../models/iparam';
 import { param_load_success, param_update_selected_rowid, param_update_search, param_upsert_row, param_delete_complete, param_sort } from './param.actions';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../../library/models/ipage';
 
 export interface ParamState extends EntityState<iParam> {
   selectid: number;

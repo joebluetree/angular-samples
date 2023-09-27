@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { iUserBranches, iUserBranches_Search } from '../../models/iuserbranches';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../../library/models/ipage';
 import { iRights_header } from '../../models/irights';
 
 export const rights_load_records = createAction(

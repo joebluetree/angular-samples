@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as allActions from '../../store/user/user.actions';
 import { Observable } from 'rxjs';
 import { iUserm, iUserm_Search } from '../../models/iuserm';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../../library/models/ipage';
 import { UserState } from '../../store/user/user.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { selectUser } from '../../store/user/user.selectors';

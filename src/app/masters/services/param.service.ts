@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { iParam, iParam_Search } from '../models/iparam';
 import { GlobalService } from '../../core/services/global.service';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../library/models/ipage';
 
 @Injectable({ providedIn: 'root' })
 export class ParamService {

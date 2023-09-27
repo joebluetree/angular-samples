@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as allActions from '../../store/company/company.actions';
 import { Observable } from 'rxjs';
 import { iCompanym, iCompanym_Search } from '../../models/icompanym';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../../library/models/ipage';
 import { CompanyState } from '../../store/company/company.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';

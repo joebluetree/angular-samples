@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { LibraryModule } from '../library/library.module';
 import { SharedModule } from '../shared/shared.module';
 import { ModuleListComponent } from './module/module-list/module-list.component';
 import { ModuleEditComponent } from './module/module-edit/module-edit.component';
@@ -73,6 +74,7 @@ const routes: Routes = [
   ],
   imports: [
     SharedModule,
+    LibraryModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(CompanyFeatureName, companyReducer),
     StoreModule.forFeature(BranchFeatureName, branchReducer),

@@ -2,7 +2,7 @@ import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iUserm, iUserm_Search } from '../../models/iuserm';
 import * as user_actions from './user.actions';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../../library/models/ipage';
 
 export interface UserState extends EntityState<iUserm> {
   selectid: number;

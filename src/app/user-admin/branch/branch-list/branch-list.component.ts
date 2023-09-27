@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as allActions from '../../store/branch/branch.actions';
 import { Observable } from 'rxjs';
 import { iBranchm, iBranchm_Search } from '../../models/ibranchm';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../../library/models/ipage';
 import { BranchState } from '../../store/branch/branch.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';

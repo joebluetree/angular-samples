@@ -1,7 +1,7 @@
 
 import { createAction, props } from '@ngrx/store';
 import { iCompanym, iCompanym_Search } from '../../models/icompanym';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../../library/models/ipage';
 
 
 export const company_load_records = createAction(

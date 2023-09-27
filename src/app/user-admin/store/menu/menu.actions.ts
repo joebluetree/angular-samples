@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { iMenum, iMenum_Search } from '../../models/imenum';
-import { iPage } from 'src/app/shared/models/ipage';
+import { iPage } from '../../../library/models/ipage';
 
 export const menu_load_records = createAction(
   '[Menu Master] Load Records',
