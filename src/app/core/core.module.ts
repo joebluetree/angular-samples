@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
-import { LibraryModule } from '../library/library.module';
+// import { LibraryModule } from '../library/library.module';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { LoginComponent } from './login/login.component';
@@ -42,7 +42,7 @@ const routes: Routes = [
   ],
   imports: [
     SharedModule,
-    LibraryModule,
+    // LibraryModule,
     RouterModule.forRoot(routes),
     StoreModule.forFeature(CORE_FEATURE_NAME, coreReducers),
     EffectsModule.forFeature([AuthEffects]),

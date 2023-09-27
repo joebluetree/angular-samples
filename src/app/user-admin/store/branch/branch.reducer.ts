@@ -2,7 +2,7 @@ import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iBranchm, iBranchm_Search } from '../../models/ibranchm';
 import * as branch_actions from './branch.actions';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 export interface BranchState extends EntityState<iBranchm> {
   selectid: number;

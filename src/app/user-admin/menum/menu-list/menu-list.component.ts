@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as allActions from '../../store/menu/menu.actions';
 import { Observable } from 'rxjs';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 import { iMenum, iMenum_Search } from '../../models/imenum';
 import { selectMenu, selectMenuPage, selectMenuPage_RowId, selectMenuPage_SortColumn, selectMenuPage_SortOrder, selectMenuSearch_Record } from '../../store/menu/menu.selectors';
 import { MenuState } from '../../store/menu/menu.reducer';

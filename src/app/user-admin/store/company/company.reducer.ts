@@ -2,7 +2,7 @@ import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iCompanym, iCompanym_Search } from '../../models/icompanym';
 import * as user_actions from './company.actions';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 export interface CompanyState extends EntityState<iCompanym> {
   selectid: number;

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { iUserm, iUserm_Search } from '../../models/iuserm';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 
 export const user_load_records = createAction(

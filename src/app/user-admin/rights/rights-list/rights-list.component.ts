@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as allActions from '../../store/rights/rights.actions';
 import { Observable } from 'rxjs';
 import { iUserBranches, iUserBranches_Search } from '../../models/iuserbranches';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 import { RightsState } from '../../store/rights/rights.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';

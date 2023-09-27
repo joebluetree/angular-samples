@@ -2,7 +2,7 @@ import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iMenum, iMenum_Search } from '../../models/imenum';
 import * as allActions from './menu.actions';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 export interface MenuState extends EntityState<iMenum> {
   selectid: number;

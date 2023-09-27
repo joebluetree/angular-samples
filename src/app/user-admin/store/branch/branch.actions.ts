@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { iBranchm, iBranchm_Search } from '../../models/ibranchm';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 export const branch_load_records = createAction(
   '[Branch Master] Load Records',

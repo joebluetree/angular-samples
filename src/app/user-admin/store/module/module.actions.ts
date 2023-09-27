@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 export const module_load_records = createAction(
   '[Module Master] Load Records',

@@ -1,8 +1,7 @@
 
 import { createAction, props } from '@ngrx/store';
 import { iCompanym, iCompanym_Search } from '../../models/icompanym';
-import { iPage } from '../../../library/models/ipage';
-
+import { iPage } from 'ngx-jrt-controls';
 
 export const company_load_records = createAction(
   '[Company Master] Load Records',

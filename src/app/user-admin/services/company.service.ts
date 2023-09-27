@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { iCompanym, iCompanym_Search } from '../models/icompanym';
 import { GlobalService } from '../../core/services/global.service';
-import { iPage } from '../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 @Injectable({ providedIn: 'root' })
 export class CompanyService {

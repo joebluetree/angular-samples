@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { iUserBranches, iUserBranches_Search } from '../models/iuserbranches';
+import { iUserBranches_Search } from '../models/iuserbranches';
 import { GlobalService } from '../../core/services/global.service';
-import { iPage } from '../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 import { iRights_header } from '../models/irights';
 
 @Injectable({ providedIn: 'root' })

@@ -1,6 +1,7 @@
+
 import { createAction, props } from '@ngrx/store';
 import { iParam, iParam_Search } from '../../models/iparam';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 export const param_load_records = createAction(
   '[Param Master] Load Records',

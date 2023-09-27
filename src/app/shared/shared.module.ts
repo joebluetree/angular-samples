@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LetModule, PushModule } from '@ngrx/component';
 import { RouterModule } from '@angular/router';
+import { ControlsModule } from 'ngx-jrt-controls';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { RouterModule } from '@angular/router';
     LetModule,
     PushModule,
     RouterModule,
+    ControlsModule
   ],
   exports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     LetModule,
     PushModule,
+    ControlsModule
   ]
 })
 export class SharedModule { }

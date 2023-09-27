@@ -36,13 +36,13 @@ import { ComboboxComponent } from './controls/combobox/combobox.component';
     RouterModule,
   ],
   exports: [
-    PageComponent,
-    InputComponent,
-    TableComponent,
-    SortPipe,
-    CheckboxComponent,
-    AutoCompleteComponent,
-    ComboboxComponent,
+    // InputComponent,
+    //TableComponent,
+    //SortPipe,
+    //CheckboxComponent,
+    //AutoCompleteComponent,
+    //ComboboxComponent,
+    //PageComponent,
   ]
 })
 export class LibraryModule { }

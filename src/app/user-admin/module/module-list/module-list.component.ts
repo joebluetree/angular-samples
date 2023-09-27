@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { module_load_records, module_delete, module_update_search, module_update_selected_rowid, module_sort } from '../../store/module/module.actions';
 import { Observable } from 'rxjs';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 import { ModuleState } from '../../store/module/module.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';

@@ -2,7 +2,7 @@ import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iUserBranches, iUserBranches_Search } from '../../models/iuserbranches';
 import * as rights_actions from './rights.actions';
-import { iPage } from '../../../library/models/ipage';
+import { iPage } from 'ngx-jrt-controls';
 
 export interface RightsState extends EntityState<iUserBranches> {
   selectid: number;

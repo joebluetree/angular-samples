@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { iUserBranches, iUserBranches_Search } from '../../models/iuserbranches';
-import { iPage } from '../../../library/models/ipage';
-import { iRights_header } from '../../models/irights';
+import { iPage } from 'ngx-jrt-controls';
+
 
 export const rights_load_records = createAction(
   '[Rights Master] Load Records',
