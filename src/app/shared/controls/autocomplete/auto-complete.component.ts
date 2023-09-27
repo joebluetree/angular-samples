@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, Output, QueryList, ViewChild, ViewChildren, forwardRef, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
-import { CommonService } from 'src/app/shared/services/common.service';
-import { GlobalService } from 'src/app/core/services/global.service';
+import { CommonService } from '../../services/common.service';
 import { icolumns } from '../../models/icolumns';
 
 @Component({

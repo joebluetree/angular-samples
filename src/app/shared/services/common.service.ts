@@ -11,7 +11,6 @@ const classMapping: iclassMappings = {
   'modulem': ac.table_modulem,
   'userm': ac.table_userm,
   'branchm': ac.table_branchm,
-
 };
 
 @Injectable({ providedIn: 'root' })
