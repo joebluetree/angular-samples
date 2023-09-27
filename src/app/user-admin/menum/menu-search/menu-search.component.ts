@@ -38,6 +38,10 @@ export class MenuSearchComponent {
     })
   }
 
+  public get url() {
+    return this.gs.url;
+  }
+
   ngOnInit(): void {
     this.mform.setValue({
       menu_name: this.record.menu_name,

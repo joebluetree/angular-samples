@@ -45,6 +45,11 @@ export class MenuEditComponent {
     })
   }
 
+  public get url() {
+    return this.gs.url;
+  }
+
+
   ngOnInit() {
     this.id = 0;
     this.route.queryParams.forEach(rec => {

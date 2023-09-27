@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { iParam, iParam_Search } from '../models/iparam';
 import { GlobalService } from '../../core/services/global.service';
-import { iPage } from '../../library/models/ipage';
+
 
 @Injectable({ providedIn: 'root' })
 export class ParamService {
@@ -12,7 +12,7 @@ export class ParamService {
     private gs: GlobalService) {
   }
 
-  public getList(action: any, search_record: iParam_Search, page: iPage) {
+  public getList(action: any, search_record: iParam_Search, page: any) {
     const data = { ...action, ...search_record, ...page }
     return this.http.post<any>(this.gs.getUrl('/api/param/GetListAsync'), data);
   }

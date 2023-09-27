@@ -44,7 +44,7 @@
             <label class="col-sm-4 form-label form-lable-sm" for="">Module</label>
             <div class="col-sm-8">
               <auto-complete formControlName="menu_module_name" (CallBack)="callBack($event)" [table]="'modulem'"
-                [company_id]="getCompanyId()" [display_column]="'module_name'" required></auto-complete>
+                [company_id]="getCompanyId()" [display_column]="'module_name'" [url]="url" required></auto-complete>
             </div>
           </div>
 

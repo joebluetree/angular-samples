@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { param_load_records, param_delete, param_update_search, param_update_selected_rowid, param_sort } from '../../store/param/param.actions';
 import { Observable } from 'rxjs';
 import { iParam, iParam_Search } from '../../models/iparam';
-import { iPage } from '../../../library/models/ipage';
 import { ParamGroupState } from '../../store/param/param.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -24,7 +23,7 @@ export class ParamListComponent {
 
   search_record$: Observable<iParam_Search>;
   records$: Observable<iParam[]>;
-  page$: Observable<iPage>;
+  page$: Observable<any>;
   selected_id$: Observable<number>;
   sort_column$: Observable<string>;
   sort_order$: Observable<string>;

@@ -53,7 +53,7 @@
             <label class="col-sm-4 form-label form-lable-sm" for="">Default Branch</label>
             <div class="col-sm-8">
               <auto-complete formControlName="rec_branch_name" (CallBack)="callBack($event)" [table]="'branchm'"
-                [company_id]="getCompanyId()" [display_column]="'branch_name'" required></auto-complete>
+                [company_id]="getCompanyId()" [display_column]="'branch_name'" [url]="url" url required></auto-complete>
             </div>
           </div>
 

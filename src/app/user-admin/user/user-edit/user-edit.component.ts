@@ -59,6 +59,9 @@ export class UserEditComponent {
     })
   }
 
+  public get url() {
+    return this.gs.url;
+  }
 
   ngOnInit() {
     this.id = 0;

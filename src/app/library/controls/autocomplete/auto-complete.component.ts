@@ -24,6 +24,7 @@ export class AutoCompleteComponent implements ControlValueAccessor {
   @Input('branch_id') branch_id: number = 0;
   @Input('table') table: string = '';
   @Input('display_column') display_column: string = '';
+  @Input('url') url: string = '';
 
   @Output() CallBack = new EventEmitter<{ id: string, rec: any }>();
 
@@ -90,7 +91,7 @@ export class AutoCompleteComponent implements ControlValueAccessor {
       'company_id': this.company_id,
       'search_string': data
     };
-    this.service.getList(search_record).subscribe({
+    this.service.getList(this.url, search_record).subscribe({
       next: (v) => {
         this.records = v.records;
         if (this.records.length > 0) {
