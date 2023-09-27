@@ -3,7 +3,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { paramFeatureName, paramReducer } from './store/param/param.reducer';
 import { ParamEffects } from './store/param/param.effects';
-// import { LibraryModule } from '../library/library.module';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ParamListComponent } from './param/param-list/param-list.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
   ],
   imports: [
     SharedModule,
-    // LibraryModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(paramFeatureName, paramReducer),
     EffectsModule.forFeature([ParamEffects])
