@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, of, tap, switchMap } from 'rxjs';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../services/login.service';
 import { auth_login, auth_login_success, auth_login_failure, auth_branch_login } from './auth.actions';
-import { iUser } from '../../models/user';
+import { iUser } from '../models/user';
 import { Router } from '@angular/router';
-import { GlobalService } from '../../services/global.service';
+import { GlobalService } from '../services/global.service';
 import { iMenum } from 'src/app/user-admin/models/imenum';
 
 @Injectable()

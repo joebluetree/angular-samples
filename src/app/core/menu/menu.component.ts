@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject, map, tap } from 'rxjs';
 
 import { Router } from '@angular/router';
-import { auth_logout } from '../store/auth/auth.actions';
-import { selectIsLogin, selectIsLogout, selectMenuList, selectModuleList, selectUserName } from '../store/auth/auth.selectors';
+import { auth_logout } from '../store/auth.actions';
+import { selectIsLogin, selectIsLogout, selectMenuList, selectModuleList, selectUserName } from '../store/auth.selectors';
 import { CoreState } from '../store/index';
 import { iMenum } from 'src/app/user-admin/models/imenum';
 import { GlobalService } from '../services/global.service';

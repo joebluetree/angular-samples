@@ -8,7 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { LoginComponent } from './login/login.component';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './store/auth/auth.effects';
+import { AuthEffects } from './store/auth.effects';
 import { coreReducers, CORE_FEATURE_NAME } from './store/index';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { httpInterceptor } from './http.interceptor';

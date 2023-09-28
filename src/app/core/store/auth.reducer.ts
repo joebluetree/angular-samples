@@ -1,5 +1,5 @@
 import { createFeatureSelector, createReducer, createSelector, on, props } from '@ngrx/store';
-import { iUser } from '../../models/user';
+import { iUser } from '../models/user';
 import { auth_login_success, auth_login_failure, auth_logout } from './auth.actions';
 
 // reducers

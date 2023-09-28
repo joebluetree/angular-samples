@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
 import { iBranchm } from 'src/app/user-admin/models/ibranchm';
-import { AuthState } from '../store/auth/auth.reducer';
+import { AuthState } from '../store/auth.reducer';
 import { Store } from '@ngrx/store';
-import { auth_branch_login } from '../store/auth/auth.actions';
-import { selectLoginError } from '../store/auth/auth.selectors';
+import { auth_branch_login } from '../store/auth.actions';
+import { selectLoginError } from '../store/auth.selectors';
 import { Observable } from 'rxjs';
 
 @Component({

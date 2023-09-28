@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { GlobalService } from './global.service';
 import { Store } from '@ngrx/store';
-import { selectIsLogin, selectIsLogout } from '../store/auth/auth.selectors';
+import { selectIsLogin } from '../store/auth.selectors';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
@@ -18,7 +18,6 @@ export class AuthService {
     private gs: GlobalService) {
     this.isLoggedIn$ = this.store.select(selectIsLogin);
   }
-
 
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {

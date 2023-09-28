@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { CoreFeatureSelector } from '../index';
+import { CoreFeatureSelector } from './index';
 import { iMenum } from 'src/app/user-admin/models/imenum';
 
 export const AuthStateSelector = createSelector(

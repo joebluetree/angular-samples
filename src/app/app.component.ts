@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { iUser } from './core/models/user';
 import { Store } from '@ngrx/store';
-import { auth_login_success } from './core/store/auth/auth.actions';
+import { auth_login_success } from './core/store/auth.actions';
 import { GlobalService } from './core/services/global.service';
 
 @Component({

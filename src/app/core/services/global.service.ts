@@ -5,7 +5,7 @@ import { iUser } from '../models/user';
 
 import ShortUniqueId from 'short-unique-id';
 import { Store } from '@ngrx/store';
-import { auth_logout } from '../store/auth/auth.actions';
+import { auth_logout } from '../store/auth.actions';
 import { Router } from '@angular/router';
 
 @Injectable({
