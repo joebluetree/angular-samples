@@ -10,17 +10,17 @@ export interface iMenum {
   menu_visible: string;
   menu_order: number;
 
-  rights_selected: number;
-  rights_company: number;
-  rights_admin: number;
-  rights_add: number;
-  rights_edit: number;
-  rights_delete: number;
-  rights_view: number;
-  rights_print: number;
-  rights_doc_upload: number;
-  rights_doc_view: number;
-  rights_approver: number;
+  rights_selected: string;
+  rights_company: string;
+  rights_admin: string;
+  rights_add: string;
+  rights_edit: string;
+  rights_delete: string;
+  rights_view: string;
+  rights_print: string;
+  rights_doc_upload: string;
+  rights_doc_view: string;
+  rights_approver: string;
   rights_value: number;
 
 

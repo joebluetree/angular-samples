@@ -22,6 +22,10 @@ export class ParamListComponent {
   title = '';
   type = '';
 
+  bAdd = false;
+  bEdit = false;
+  bDelete = false;
+
   menum: iMenum | null;
 
   search_record$: Observable<iParam_Search>;
@@ -45,8 +49,12 @@ export class ParamListComponent {
       this.menuid = rec["menuid"];
       this.type = rec["type"];
       this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum)
+      if (this.menum) {
         this.title = this.menum.menu_name;
+        this.bAdd = this.menum.rights_add == "Y" ? true : false;
+        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
+        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
+      }
     })
 
     if (!this.gs.IsValidAppId(this.appid))
@@ -59,18 +67,18 @@ export class ParamListComponent {
     this.sort_order$ = this.store.select(selectParamPage_SortOrder);
     this.page$ = this.store.select(selectParamPage);
 
-    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid };
+    const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
-      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/masters/paramEdit', param: param },
-      { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "param_type", col_caption: "TYPE", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "param_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "param_order", col_caption: "ORDER", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
-      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {} },
+      { col_name: "edit", col_caption: "VIEW/EDIT", col_format: "edit", col_sortable: false, link: '/masters/paramEdit', param: param, col_show: this.bAdd },
+      { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
+      { col_name: "param_type", col_caption: "TYPE", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
+      { col_name: "param_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
+      { col_name: "param_order", col_caption: "ORDER", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
+      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
+      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {}, col_show: true },
+      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
+      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {}, col_show: true },
+      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {}, col_show: this.bDelete },
     ];
   }
 
@@ -108,5 +116,6 @@ export class ParamListComponent {
   }
 
 }
+
 
 

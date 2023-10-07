@@ -21,6 +21,10 @@ export class ParamEditComponent {
   title = '';
   type = '';
 
+  bAdd = false;
+  bEdit = false;
+  bDelete = false;
+
   menum: iMenum | null;
 
   mform: FormGroup;
@@ -53,8 +57,12 @@ export class ParamEditComponent {
       this.menuid = rec["menuid"];
       this.type = rec["type"];
       this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum)
+      if (this.menum) {
         this.title = this.menum.menu_name;
+        this.bAdd = this.menum.rights_add == "Y" ? true : false;
+        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
+        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
+      }
     })
 
     if (!this.gs.IsValidAppId(this.appid))
