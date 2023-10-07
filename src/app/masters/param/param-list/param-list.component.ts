@@ -8,6 +8,7 @@ import { iParam, iParam_Search } from '../../models/iparam';
 import { ParamGroupState } from '../../store/param/param.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
+import { iMenum } from 'src/app/user-admin/models/imenum';
 
 @Component({
   selector: 'app-param-list',
@@ -20,6 +21,8 @@ export class ParamListComponent {
   menuid = '';
   title = '';
   type = '';
+
+  menum: iMenum | null;
 
   search_record$: Observable<iParam_Search>;
   records$: Observable<iParam[]>;
@@ -36,11 +39,14 @@ export class ParamListComponent {
     private gs: GlobalService
   ) {
 
+
     this.route.queryParams.forEach(rec => {
       this.appid = rec["appid"];
       this.menuid = rec["menuid"];
-      this.title = rec["title"];
       this.type = rec["type"];
+      this.menum = this.gs.getUserRights(this.menuid);
+      if (this.menum)
+        this.title = this.menum.menu_name;
     })
 
     if (!this.gs.IsValidAppId(this.appid))

@@ -8,6 +8,8 @@ import { Store } from '@ngrx/store';
 import { auth_logout } from '../store/auth.actions';
 import { Router } from '@angular/router';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -140,6 +142,15 @@ export class GlobalService {
       bRet = true;
     }
     return bRet;
+  }
+
+
+  public getUserRights(menu_id: string) {
+    const rec = this.user.user_menu_list.find(f => f.menu_code == menu_id);
+    if (rec == null)
+      return null;
+    else
+      return rec;
   }
 
   IsValidAppId(_app_id: string) {

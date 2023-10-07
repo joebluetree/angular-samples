@@ -7,6 +7,7 @@ import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
 import { param_upsert_row } from '../../store/param/param.actions';
 import { ParamService } from '../../services/param.service';
+import { iMenum } from 'src/app/user-admin/models/imenum';
 
 @Component({
   selector: 'app-param-edit',
@@ -19,6 +20,8 @@ export class ParamEditComponent {
   menuid = '';
   title = '';
   type = '';
+
+  menum: iMenum | null;
 
   mform: FormGroup;
   constructor(
@@ -48,8 +51,10 @@ export class ParamEditComponent {
       this.appid = rec["appid"];
       this.id = +rec["id"];
       this.menuid = rec["menuid"];
-      this.title = rec["title"];
       this.type = rec["type"];
+      this.menum = this.gs.getUserRights(this.menuid);
+      if (this.menum)
+        this.title = this.menum.menu_name;
     })
 
     if (!this.gs.IsValidAppId(this.appid))
