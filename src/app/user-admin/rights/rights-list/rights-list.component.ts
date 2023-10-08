@@ -9,6 +9,7 @@ import { iPage } from 'ngx-jrt-controls';
 import { RightsState } from '../../store/rights/rights.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
+import { iMenum } from '../../models/imenum';
 
 @Component({
   selector: 'app-rights-list',
@@ -20,6 +21,14 @@ export class RightsListComponent {
   menuid = '';
   title = '';
   type = '';
+  bAdmin = false;
+  bAdd = false;
+  bEdit = false;
+  bView = false;
+  bDelete = false;
+
+  menum: iMenum | null;
+
 
   search_record$: Observable<iUserBranches_Search>;
   records$: Observable<iUserBranches[]>;
@@ -45,6 +54,15 @@ export class RightsListComponent {
       this.menuid = rec["menuid"];
       this.title = rec["title"];
       this.type = rec["type"];
+      this.menum = this.gs.getUserRights(this.menuid);
+      if (this.menum) {
+        this.title = this.menum.menu_name;
+        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
+        this.bAdd = this.menum.rights_add == "Y" ? true : false;
+        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
+        this.bView = this.menum.rights_view == "Y" ? true : false;
+        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
+      }
     })
 
     if (!this.gs.IsValidAppId(this.appid))
@@ -52,15 +70,15 @@ export class RightsListComponent {
 
     const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid };
     this.table_data = [
-      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/admin/rightsEdit', param: param },
-      { col_name: "ub_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "ub_user_name", col_caption: "USER", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_branch_name", col_caption: "BRANCH", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
-      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {} },
+      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/admin/rightsEdit', col_param: param, col_show: this.bEdit || this.bView },
+      { col_name: "ub_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "ub_user_name", col_caption: "USER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_branch_name", col_caption: "BRANCH", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: true },
     ];
 
 

@@ -25,6 +25,7 @@ export class ParamListComponent {
   bAdmin = false;
   bAdd = false;
   bEdit = false;
+  bView = false;
   bDelete = false;
 
   menum: iMenum | null;
@@ -51,11 +52,11 @@ export class ParamListComponent {
       this.type = rec["type"];
       this.menum = this.gs.getUserRights(this.menuid);
       if (this.menum) {
-
         this.title = this.menum.menu_name;
         this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
         this.bAdd = this.menum.rights_add == "Y" ? true : false;
         this.bEdit = this.menum.rights_edit == "Y" ? true : false;
+        this.bView = this.menum.rights_view == "Y" ? true : false;
         this.bDelete = this.menum.rights_delete == "Y" ? true : false;
       }
     })
@@ -73,7 +74,7 @@ export class ParamListComponent {
 
     const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
-      { col_name: "edit", col_caption: "VIEW/EDIT", col_format: "edit", col_sortable: false, col_link: '/masters/paramEdit', col_param: param, col_show: this.bEdit },
+      { col_name: "edit", col_caption: "VIEW/EDIT", col_format: "edit", col_sortable: false, col_link: '/masters/paramEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "param_type", col_caption: "TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "param_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
