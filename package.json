@@ -28,7 +28,7 @@
     "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0",
-    "ngx-jrt-controls": "0.0.3",
+    "ngx-jrt-controls": "0.0.7",
     "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
     "short-unique-id": "^4.4.4",

@@ -57,6 +57,7 @@ export class ParamListComponent {
       }
     })
 
+
     if (!this.gs.IsValidAppId(this.appid))
       return;
 
@@ -69,16 +70,16 @@ export class ParamListComponent {
 
     const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
-      { col_name: "edit", col_caption: "VIEW/EDIT", col_format: "edit", col_sortable: false, link: '/masters/paramEdit', param: param, col_show: this.bAdd },
-      { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
-      { col_name: "param_type", col_caption: "TYPE", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
-      { col_name: "param_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
-      { col_name: "param_order", col_caption: "ORDER", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
-      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
-      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {}, col_show: true },
-      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {}, col_show: true },
-      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {}, col_show: true },
-      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {}, col_show: this.bDelete },
+      { col_name: "edit", col_caption: "VIEW/EDIT", col_format: "edit", col_sortable: false, col_link: '/masters/paramEdit', col_param: param, col_show: this.bEdit },
+      { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "param_type", col_caption: "TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "param_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "param_order", col_caption: "ORDER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete },
     ];
   }
 
