@@ -21,8 +21,10 @@ export class ParamEditComponent {
   title = '';
   type = '';
 
+  bAdmin = false;
   bAdd = false;
   bEdit = false;
+  bView = false;
   bDelete = false;
 
   menum: iMenum | null;
@@ -59,6 +61,7 @@ export class ParamEditComponent {
       this.menum = this.gs.getUserRights(this.menuid);
       if (this.menum) {
         this.title = this.menum.menu_name;
+        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
         this.bAdd = this.menum.rights_add == "Y" ? true : false;
         this.bEdit = this.menum.rights_edit == "Y" ? true : false;
         this.bDelete = this.menum.rights_delete == "Y" ? true : false;
