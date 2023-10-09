@@ -56,7 +56,6 @@ export class BranchEditComponent {
       this.appid = rec["appid"];
       this.id = +rec["id"];
       this.menuid = rec["menuid"];
-      this.title = rec["title"];
       this.type = rec["type"];
       this.menum = this.gs.getUserRights(this.menuid);
       if (this.menum) {

@@ -50,7 +50,6 @@ export class BranchListComponent {
     this.route.queryParams.forEach(rec => {
       this.appid = rec["appid"];
       this.menuid = rec["menuid"];
-      this.title = rec["title"];
       this.type = rec["type"];
       this.menum = this.gs.getUserRights(this.menuid);
       if (this.menum) {

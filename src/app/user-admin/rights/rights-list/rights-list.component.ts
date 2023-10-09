@@ -68,7 +68,7 @@ export class RightsListComponent {
     if (!this.gs.IsValidAppId(this.appid))
       return;
 
-    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid };
+    const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/admin/rightsEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "ub_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
