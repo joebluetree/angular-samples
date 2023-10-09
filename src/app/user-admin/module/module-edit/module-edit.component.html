@@ -1,6 +1,7 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <button class="btn btn-sm btn-success" routerLink="/admin/moduleEdit" [queryParams]="{id :0, _id:id+1}">New</button>
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/admin/moduleEdit"
+    [queryParams]="{id :0, _id:id+1}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
@@ -44,7 +45,7 @@
 </div>
 
 <div class="page-footer line-bottom">
-  <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
 </div>
 
 <div *ngIf="showModel">

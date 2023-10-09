@@ -9,6 +9,7 @@ import { iPage } from 'ngx-jrt-controls';
 import { ModuleState } from '../../store/module/module.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
+import { iMenum } from '../../models/imenum';
 
 @Component({
   selector: 'app-module-list',
@@ -20,6 +21,17 @@ export class ModuleListComponent {
   menuid = '';
   title = '';
   type = '';
+
+  bAdmin = false;
+  bAdd = false;
+  bEdit = false;
+  bView = false;
+  bDelete = false;
+
+  menum: iMenum | null;
+
+
+
 
   search_record$: Observable<iModulem_Search>;
   records$: Observable<iModulem[]>;
@@ -43,25 +55,33 @@ export class ModuleListComponent {
     this.route.queryParams.forEach(rec => {
       this.appid = rec["appid"];
       this.menuid = rec["menuid"];
-      this.title = rec["title"];
       this.type = rec["type"];
+      this.menum = this.gs.getUserRights(this.menuid);
+      if (this.menum) {
+        this.title = this.menum.menu_name;
+        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
+        this.bAdd = this.menum.rights_add == "Y" ? true : false;
+        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
+        this.bView = this.menum.rights_view == "Y" ? true : false;
+        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
+      }
     })
 
     if (!this.gs.IsValidAppId(this.appid))
       return;
 
-    const param = { id: 0, menuid: this.menuid, type: this.type, title: this.title, appid: this.appid }
+    const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid }
     this.table_data = [
-      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, link: '/admin/moduleEdit', param: param },
-      { col_name: "module_id", col_caption: "ID", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "module_name", col_caption: "NAME", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "module_is_installed", col_caption: "VISIBLE", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "module_order", col_caption: "ORDER", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, link: '', param: {} },
-      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, link: '', param: {} },
-      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, link: '', param: {} },
+      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/admin/moduleEdit', col_param: param, col_show: this.bEdit || this.bView },
+      { col_name: "module_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "module_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "module_is_installed", col_caption: "VISIBLE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "module_order", col_caption: "ORDER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: true },
     ];
 
 
