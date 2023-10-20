@@ -95,25 +95,25 @@ export class AccGroupListComponent {
   }
 
   search(search_record: iAccGroupm_Search) {
-    this.store.dispatch(allActions.accgroup_update_search({ search_record: search_record }))
+    this.store.dispatch(allActions.update_search({ search_record: search_record }))
     this.pageEvents({ 'action': 'search' });
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(allActions.accgroup_load_records({ action: _action.action }))
+    this.store.dispatch(allActions.load_records({ action: _action.action }))
   }
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(allActions.accgroup_sort({ sort_column: data.sort_column, sort_order: data.sort_order }));
+      this.store.dispatch(allActions.sort_data({ sort_column: data.sort_column, sort_order: data.sort_order }));
     }
     if (data.action == 'ROW-SELECTED') {
-      this.store.dispatch(allActions.accgroup_update_selected_rowid({ id: data.row_id }));
+      this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id }));
     }
     if (data.action == 'DELETE') {
       if (!confirm(`Delete ${data.rec.comp_name} y/n`))
         return;
-      this.store.dispatch(allActions.accgroup_delete({ id: data.rec.comp_id }));
+      this.store.dispatch(allActions.delete_record({ id: data.rec.grp_id }));
     }
   }
 

@@ -12,7 +12,7 @@ import { selectAccGroupPage, selectAccGroupSearch_Record } from './accgroup.sele
 export class AccGroupEffects {
   accGroupList$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(accgroup_actions.accgroup_load_records),
+      ofType(accgroup_actions.load_records),
       withLatestFrom(
         this.store.select(selectAccGroupSearch_Record),
         this.store.select(selectAccGroupPage)
@@ -22,18 +22,18 @@ export class AccGroupEffects {
         return data;
       }),
       tap((result: any) => {
-        return this.store.dispatch(accgroup_actions.accgroup_load_success({ records: result.records, page: result.page }));
+        return this.store.dispatch(accgroup_actions.load_success({ records: result.records, page: result.page }));
       })
     );
   }, { dispatch: false });
 
   accGroupDelete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(accgroup_actions.accgroup_delete),
+      ofType(accgroup_actions.delete_record),
       switchMap((action: any) => this.service.delete(action.id)),
       tap((result: any) => {
         if (result.status)
-          this.store.dispatch(accgroup_actions.accgroup_delete_complete({ id: result.id }));
+          this.store.dispatch(accgroup_actions.delete_complete({ id: result.id }));
         else {
           throw new Error(result.message);
         }

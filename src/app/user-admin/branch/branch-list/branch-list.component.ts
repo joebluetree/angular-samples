@@ -111,7 +111,7 @@ export class BranchListComponent {
     if (data.action == 'DELETE') {
       if (!confirm(`Delete ${data.rec.branch_name} y/n`))
         return;
-      this.store.dispatch(allActions.branch_delete({ id: data.rec.comp_id }));
+      this.store.dispatch(allActions.branch_delete({ id: data.rec.branch_id }));
     }
   }
 

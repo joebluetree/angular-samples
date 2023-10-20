@@ -6,7 +6,7 @@ import { iAccGroupm } from '../../models/iaccgroupm';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
-import { accgroup_upsert_row } from '../../store/accgroup/accgroup.actions';
+import { upsert_row } from '../../store/accgroup/accgroup.actions';
 import { AccGroupState } from '../../store/accgroup/accgroup.reducer';
 import { iMenum } from 'src/app/user-admin/models/imenum';
 
@@ -132,7 +132,7 @@ export class AccGroupEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.store.dispatch(accgroup_upsert_row({ record: v }));
+        this.store.dispatch(upsert_row({ record: v }));
 
         this.gs.showScreen(["Save Complete"]);
 
