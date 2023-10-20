@@ -21,6 +21,7 @@ export class ParamEditComponent {
   title = '';
   type = '';
 
+
   bAdmin = false;
   bAdd = false;
   bEdit = false;
