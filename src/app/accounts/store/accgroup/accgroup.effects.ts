@@ -11,7 +11,7 @@ import { select_Page, select_Search_Record } from './accgroup.selectors';
 
 @Injectable()
 export class AccGroupEffects {
-  accGroupList$ = createEffect(() => {
+  List$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(all_actions.load_records),
       withLatestFrom(
@@ -28,7 +28,7 @@ export class AccGroupEffects {
     );
   }, { dispatch: false });
 
-  accGroupDelete$ = createEffect(() => {
+  Delete$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(all_actions.delete_record),
       switchMap((action: any) => this.service.delete(action.id)),
