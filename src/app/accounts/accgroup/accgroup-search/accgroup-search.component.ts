@@ -14,11 +14,26 @@ export class AccGroupSearchComponent {
   mform: FormGroup;
   record!: iAccGroupm_Search;
 
+
   @Input() set input(v: iAccGroupm_Search) {
     this.record = { ...v };
   }
 
   @Output() output = new EventEmitter<iAccGroupm_Search>();
+
+
+
+  dataList = [
+    { key: 'NA', value: 'NA' },
+    { key: 'DIRECT INCOME', value: 'DIRECT INCOME' },
+    { key: 'DIRECT EXPENSE', value: 'DIRECT EXPENSE' },
+    { key: 'INDIRECT INCOME', value: 'INDIRECT INCOME' },
+    { key: 'INDIRECT EXPENSE', value: 'INDIRECT EXPENSE' },
+    { key: 'ASSET', value: 'ASSET' },
+    { key: 'LIABILITIES', value: 'LIABILITIES' },
+  ]
+
+
 
   constructor(private fb: FormBuilder,
     private gs: GlobalService) {
@@ -28,6 +43,7 @@ export class AccGroupSearchComponent {
   buildForm() {
     this.mform = this.fb.group({
       grp_name: [''],
+      grp_type: [''],
     })
 
   }
@@ -35,12 +51,14 @@ export class AccGroupSearchComponent {
   ngOnInit(): void {
     this.mform.setValue({
       grp_name: this.record.grp_name,
+      grp_type: this.record.grp_type,
     })
   }
 
   search(_action: string) {
     if (this.output) {
       this.record.grp_name = this.mform.value.grp_name;
+      this.record.grp_type = this.mform.value.grp_type;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit(this.record);
     }

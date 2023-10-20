@@ -14,6 +14,7 @@ export interface iAccGroupm {
 
 export interface iAccGroupm_Search {
   grp_name: string;
+  grp_type: string;
   rec_company_id: number;
 }
 

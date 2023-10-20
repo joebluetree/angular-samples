@@ -20,7 +20,7 @@ const adapter: EntityAdapter<iAccGroupm> = createEntityAdapter<iAccGroupm>({
 
 export const initialState: AccGroupState = adapter.getInitialState({
   selectid: 0,
-  search_record: <iAccGroupm_Search>{ grp_name: '', grp_Type: '', rec_company_id: 0 },
+  search_record: <iAccGroupm_Search>{ grp_name: '', grp_type: 'NA', rec_company_id: 0 },
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
   sort_column: '',
   sort_order: '',
