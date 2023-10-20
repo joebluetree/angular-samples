@@ -26,6 +26,7 @@ const routes: Routes = [
   { path: 'loginBranch', component: LoginBranchComponent },
   { path: 'admin', loadChildren: () => import('../user-admin/user-admin.module').then(m => m.UserAdminModule), canActivate: [AuthGuard] },
   { path: 'masters', loadChildren: () => import('../masters/masters.module').then(m => m.MastersModule), canActivate: [AuthGuard] },
+  { path: 'accounts', loadChildren: () => import('../accounts/accounts.module').then(m => m.AccountsModule), canActivate: [AuthGuard] },
 ]
 
 @NgModule({

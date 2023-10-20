@@ -29,11 +29,6 @@ export class httpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    //let _token = localStorage.getItem('token')
-    //let token = undefined;
-    //if (_token != undefined)
-    //token = JSON.parse(_token);
-
     let token = this.gs.getToken();
 
     let _headers;
