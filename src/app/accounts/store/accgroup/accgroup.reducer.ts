@@ -1,7 +1,7 @@
 import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iAccGroupm, iAccGroupm_Search } from '../../models/iaccgroupm';
-import * as user_actions from './accgroup.actions';
+import * as all_actions from './accgroup.actions';
 import { iPage } from 'ngx-jrt-controls';
 
 export interface AccGroupState extends EntityState<iAccGroupm> {
@@ -27,32 +27,32 @@ export const initialState: AccGroupState = adapter.getInitialState({
   error: ''
 });
 
-export const accGroupReducer = createReducer<AccGroupState>(
+export const Reducer = createReducer<AccGroupState>(
   initialState,
-  on(user_actions.load_success, (state, action) => {
+  on(all_actions.load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
-  on(user_actions.load_failure, (state, action) => {
+  on(all_actions.load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
   }),
-  on(user_actions.update_selected_rowid, (state, action) => {
+  on(all_actions.update_selected_rowid, (state, action) => {
     return { ...state, selectid: action.id };
   }),
-  on(user_actions.update_search, (state, action) => {
+  on(all_actions.update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
   }),
-  on(user_actions.upsert_row, (state, action) => {
+  on(all_actions.upsert_row, (state, action) => {
     return adapter.upsertOne(action.record, state)
   }),
-  on(user_actions.delete_complete, (state, action) => {
+  on(all_actions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(user_actions.sort_data, (state, action) => {
+  on(all_actions.sort_data, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
 
-export const AccgroupFeatureName = 'accGroupState';
-export const accgroupFeature = createFeatureSelector<AccGroupState>(AccgroupFeatureName);
+export const FeatureName = 'accGroupState';
+export const Feature = createFeatureSelector<AccGroupState>(FeatureName);

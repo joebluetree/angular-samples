@@ -1,37 +1,37 @@
 import { createSelector } from '@ngrx/store';
-import { AccGroupState, accgroupFeature, selectAll } from './accgroup.reducer';
+import { AccGroupState, Feature, selectAll } from './accgroup.reducer';
 
-export const selectAccGroup = createSelector(
-  accgroupFeature,
+export const selectRecords = createSelector(
+  Feature,
   selectAll
 )
 
-export const selectAccGroupState = createSelector(
-  accgroupFeature,
+export const selectState = createSelector(
+  Feature,
   (state: AccGroupState) => state
 )
 
-export const selectAccGroupSearch_Record = createSelector(
-  accgroupFeature,
+export const select_Search_Record = createSelector(
+  Feature,
   (a) => a.search_record
 )
 
-export const selectAccGroupPage = createSelector(
-  accgroupFeature,
+export const select_Page = createSelector(
+  Feature,
   (a) => a.page
 )
 
-export const selectAccGroupPage_RowId = createSelector(
-  accgroupFeature,
+export const select_Page_RowId = createSelector(
+  Feature,
   (a) => a.selectid
 )
 
-export const selectAccGroupPage_SortColumn = createSelector(
-  accgroupFeature,
+export const select_Page_SortColumn = createSelector(
+  Feature,
   (a) => a.sort_column
 )
 
-export const selectAccGroupPage_SortOrder = createSelector(
-  accgroupFeature,
+export const select_Page_SortOrder = createSelector(
+  Feature,
   (a) => a.sort_order
 )

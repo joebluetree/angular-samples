@@ -24,7 +24,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(accGroupReducer.AccgroupFeatureName, accGroupReducer.accGroupReducer),
+    StoreModule.forFeature(accGroupReducer.FeatureName, accGroupReducer.Reducer),
     EffectsModule.forFeature([accGroupEffects.AccGroupEffects])
   ]
 })

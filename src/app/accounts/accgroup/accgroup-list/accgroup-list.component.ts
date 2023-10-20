@@ -11,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { iMenum } from 'src/app/user-admin/models/imenum';
 
-
 @Component({
   selector: 'app-accgroup-list',
   templateUrl: './accgroup-list.component.html',
@@ -85,12 +84,12 @@ export class AccGroupListComponent {
     ];
 
 
-    this.records$ = this.store.select(allSelectors.selectAccGroup);
-    this.search_record$ = this.store.select(allSelectors.selectAccGroupSearch_Record);
-    this.selected_id$ = this.store.select(allSelectors.selectAccGroupPage_RowId);
-    this.sort_column$ = this.store.select(allSelectors.selectAccGroupPage_SortColumn);
-    this.sort_order$ = this.store.select(allSelectors.selectAccGroupPage_SortOrder);
-    this.page$ = this.store.select(allSelectors.selectAccGroupPage);
+    this.records$ = this.store.select(allSelectors.selectRecords);
+    this.search_record$ = this.store.select(allSelectors.select_Search_Record);
+    this.selected_id$ = this.store.select(allSelectors.select_Page_RowId);
+    this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);
+    this.sort_order$ = this.store.select(allSelectors.select_Page_SortOrder);
+    this.page$ = this.store.select(allSelectors.select_Page);
 
   }
 
