@@ -43,7 +43,7 @@ export class AccGroupSearchComponent {
   buildForm() {
     this.mform = this.fb.group({
       grp_name: [''],
-      grp_type: [''],
+      grp_main_group: [''],
     })
 
   }
@@ -51,14 +51,14 @@ export class AccGroupSearchComponent {
   ngOnInit(): void {
     this.mform.setValue({
       grp_name: this.record.grp_name,
-      grp_type: this.record.grp_type,
+      grp_main_group: this.record.grp_main_group,
     })
   }
 
   search(_action: string) {
     if (this.output) {
       this.record.grp_name = this.mform.value.grp_name;
-      this.record.grp_type = this.mform.value.grp_type;
+      this.record.grp_main_group = this.mform.value.grp_main_group;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit(this.record);
     }

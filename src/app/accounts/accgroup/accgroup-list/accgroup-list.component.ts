@@ -72,7 +72,7 @@ export class AccGroupListComponent {
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/accounts/accgroupEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "grp_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "grp_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "grp_type", col_caption: "TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "grp_main_group", col_caption: "GROUP", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "grp_order", col_caption: "ORDER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
 
 

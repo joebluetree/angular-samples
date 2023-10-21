@@ -54,7 +54,7 @@ export class AccGroupEditComponent {
     this.mform = this.fb.group({
       grp_id: [0],
       grp_name: ['', [Validators.required, Validators.maxLength(100)]],
-      grp_type: ['', [Validators.required, Validators.maxLength(20)]],
+      grp_main_group: ['', [Validators.required, Validators.maxLength(20)]],
       grp_order: [0, [Validators.required]],
     })
   }
@@ -91,7 +91,7 @@ export class AccGroupEditComponent {
         this.mform.setValue({
           grp_id: rec.grp_id,
           grp_name: rec.grp_name,
-          grp_type: rec.grp_type,
+          grp_main_group: rec.grp_main_group,
           grp_order: rec.grp_order,
         })
       },

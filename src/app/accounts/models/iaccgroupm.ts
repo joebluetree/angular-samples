@@ -2,7 +2,7 @@
 export interface iAccGroupm {
   grp_id: number;
   grp_name: string;
-  grp_type: string;
+  grp_main_group: string;
   grp_order: number;
 
   rec_company_id: number;
@@ -14,7 +14,7 @@ export interface iAccGroupm {
 
 export interface iAccGroupm_Search {
   grp_name: string;
-  grp_type: string;
+  grp_main_group: string;
   rec_company_id: number;
 }
 
