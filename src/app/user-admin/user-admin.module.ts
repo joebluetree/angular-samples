@@ -17,12 +17,12 @@ import { CompanyListComponent } from './company/company-list/company-list.compon
 import { CompanySearchComponent } from './company/company-search/company-search.component';
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { CompanyEffects } from './store/company/company.effects';
-import { CompanyFeatureName, companyReducer } from './store/company/company.reducer';
+import * as companyReducer from './store/company/company.reducer';
 import { BranchListComponent } from './branch/branch-list/branch-list.component';
 import { BranchEditComponent } from './branch/branch-edit/branch-edit.component';
 import { BranchSearchComponent } from './branch/branch-search/branch-search.component';
 import { BranchEffects } from './store/branch/branch.effects';
-import { BranchFeatureName, branchReducer } from './store/branch/branch.reducer';
+import * as branchReducer from './store/branch/branch.reducer';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserSearchComponent } from './user/user-search/user-search.component';
@@ -74,8 +74,8 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(CompanyFeatureName, companyReducer),
-    StoreModule.forFeature(BranchFeatureName, branchReducer),
+    StoreModule.forFeature(companyReducer.FeatureName, companyReducer.Reducer),
+    StoreModule.forFeature(branchReducer.FeatureName, branchReducer.Reducer),
     StoreModule.forFeature(UserFeatureName, userReducer),
     StoreModule.forFeature(ModuleFeatureName, moduleReducer),
     StoreModule.forFeature(MenuFeatureName, menuReducer),

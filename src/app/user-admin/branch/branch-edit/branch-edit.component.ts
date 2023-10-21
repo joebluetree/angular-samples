@@ -6,7 +6,7 @@ import { iBranchm } from '../../models/ibranchm';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
-import { branch_upsert_row } from '../../store/branch/branch.actions';
+import { upsert_row } from '../../store/branch/branch.actions';
 import { BranchState } from '../../store/branch/branch.reducer';
 import { iMenum } from '../../models/imenum';
 
@@ -127,7 +127,7 @@ export class BranchEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.store.dispatch(branch_upsert_row({ record: v }));
+        this.store.dispatch(upsert_row({ record: v }));
 
         this.gs.showScreen(["Save Complete"]);
 

@@ -27,32 +27,32 @@ export const initialState: CompanyState = adapter.getInitialState({
   error: ''
 });
 
-export const companyReducer = createReducer<CompanyState>(
+export const Reducer = createReducer<CompanyState>(
   initialState,
-  on(user_actions.company_load_success, (state, action) => {
+  on(user_actions.load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
-  on(user_actions.company_load_failure, (state, action) => {
+  on(user_actions.load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
   }),
-  on(user_actions.company_update_selected_rowid, (state, action) => {
+  on(user_actions.update_selected_rowid, (state, action) => {
     return { ...state, selectid: action.id };
   }),
-  on(user_actions.company_update_search, (state, action) => {
+  on(user_actions.update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
   }),
-  on(user_actions.company_upsert_row, (state, action) => {
+  on(user_actions.upsert_row, (state, action) => {
     return adapter.upsertOne(action.record, state)
   }),
-  on(user_actions.company_delete_complete, (state, action) => {
+  on(user_actions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(user_actions.company_sort, (state, action) => {
+  on(user_actions.sort_data, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
 
-export const CompanyFeatureName = 'companyState';
-export const companyFeature = createFeatureSelector<CompanyState>(CompanyFeatureName);
+export const FeatureName = 'companyState';
+export const Feature = createFeatureSelector<CompanyState>(FeatureName);

@@ -1,37 +1,37 @@
 import { createSelector } from '@ngrx/store';
-import { BranchState, branchFeature, selectAll } from './branch.reducer';
+import { BranchState, Feature, selectAll } from './branch.reducer';
 
-export const selectBranch = createSelector(
-  branchFeature,
+export const select_Records = createSelector(
+  Feature,
   selectAll
 )
 
-export const selectBranchState = createSelector(
-  branchFeature,
+export const selectState = createSelector(
+  Feature,
   (state: BranchState) => state
 )
 
-export const selectBranchSearch_Record = createSelector(
-  branchFeature,
+export const select_Search_Record = createSelector(
+  Feature,
   (a) => a.search_record
 )
 
-export const selectBranchPage = createSelector(
-  branchFeature,
+export const select_Page = createSelector(
+  Feature,
   (a) => a.page
 )
 
-export const selectBranchPage_RowId = createSelector(
-  branchFeature,
+export const select_Page_RowId = createSelector(
+  Feature,
   (a) => a.selectid
 )
 
-export const selectBranchPage_SortColumn = createSelector(
-  branchFeature,
+export const select_Page_SortColumn = createSelector(
+  Feature,
   (a) => a.sort_column
 )
 
-export const selectBranchPage_SortOrder = createSelector(
-  branchFeature,
+export const select_Page_SortOrder = createSelector(
+  Feature,
   (a) => a.sort_order
 )

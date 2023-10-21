@@ -30,7 +30,9 @@ import { CustomSerializer } from './custom-route-serializer';
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer
     }),
-    StoreDevtoolsModule.instrument(),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
   ],
   providers: [
     {

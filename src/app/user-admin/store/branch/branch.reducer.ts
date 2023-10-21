@@ -27,32 +27,32 @@ export const initialState: BranchState = adapter.getInitialState({
   error: ''
 });
 
-export const branchReducer = createReducer<BranchState>(
+export const Reducer = createReducer<BranchState>(
   initialState,
-  on(branch_actions.branch_load_success, (state, action) => {
+  on(branch_actions.load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
-  on(branch_actions.branch_load_failure, (state, action) => {
+  on(branch_actions.load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
   }),
-  on(branch_actions.branch_update_selected_rowid, (state, action) => {
+  on(branch_actions.update_selected_rowid, (state, action) => {
     return { ...state, selectid: action.id };
   }),
-  on(branch_actions.branch_update_search, (state, action) => {
+  on(branch_actions.update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
   }),
-  on(branch_actions.branch_upsert_row, (state, action) => {
+  on(branch_actions.upsert_row, (state, action) => {
     return adapter.upsertOne(action.record, state)
   }),
-  on(branch_actions.branch_delete_complete, (state, action) => {
+  on(branch_actions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(branch_actions.branch_sort, (state, action) => {
+  on(branch_actions.sort_data, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
 
-export const BranchFeatureName = 'branchState';
-export const branchFeature = createFeatureSelector<BranchState>(BranchFeatureName);
+export const FeatureName = 'branchState';
+export const Feature = createFeatureSelector<BranchState>(FeatureName);

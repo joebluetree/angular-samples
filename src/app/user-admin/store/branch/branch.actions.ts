@@ -2,47 +2,49 @@ import { createAction, props } from '@ngrx/store';
 import { iBranchm, iBranchm_Search } from '../../models/ibranchm';
 import { iPage } from 'ngx-jrt-controls';
 
-export const branch_load_records = createAction(
-  '[Branch Master] Load Records',
+const prefix = '[Branch Master] ';
+
+export const load_records = createAction(
+  prefix + 'Load Records',
   props<{ action: string }>()
 );
 
-export const branch_load_success = createAction(
-  '[Branch Master] Load Success',
+export const load_success = createAction(
+  prefix + 'Load Success',
   props<{ records: iBranchm[], page: iPage }>()
 );
 
-export const branch_load_failure = createAction(
-  '[Branch Master] Load Error',
+export const load_failure = createAction(
+  prefix + 'Load Error',
   props<{ erorr: string }>()
 );
 
-export const branch_update_selected_rowid = createAction(
-  '[Branch Master] Update Selected Row Id',
+export const update_selected_rowid = createAction(
+  prefix + 'Update Selected Row Id',
   props<{ id: number }>()
 )
 
-export const branch_update_search = createAction(
-  '[Branch Master] Update Search',
+export const update_search = createAction(
+  prefix + 'Update Search',
   props<{ search_record: iBranchm_Search }>()
 );
 
-export const branch_upsert_row = createAction(
-  '[Branch Master] Add / Update Row',
+export const upsert_row = createAction(
+  prefix + 'Add / Update Row',
   props<{ record: iBranchm }>()
 );
 
-export const branch_delete = createAction(
-  '[Branch Master] Delete',
+export const delete_records = createAction(
+  prefix + 'Delete',
   props<{ id: number }>()
 );
 
-export const branch_delete_complete = createAction(
-  '[Branch Master] Delete Complete',
+export const delete_complete = createAction(
+  prefix + 'Delete Complete',
   props<{ id: number }>()
 );
 
-export const branch_sort = createAction(
-  '[Branch Master] Sort Column',
+export const sort_data = createAction(
+  prefix + 'Sort Column',
   props<{ sort_column: string, sort_order: string }>()
 );

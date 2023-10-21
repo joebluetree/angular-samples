@@ -3,47 +3,49 @@ import { createAction, props } from '@ngrx/store';
 import { iCompanym, iCompanym_Search } from '../../models/icompanym';
 import { iPage } from 'ngx-jrt-controls';
 
-export const company_load_records = createAction(
-  '[Company Master] Load Records',
+const prefix = '[Company Master] ';
+
+export const load_records = createAction(
+  prefix + 'Load Records',
   props<{ action: string }>()
 );
 
-export const company_load_success = createAction(
-  '[Company Master] Load Success',
+export const load_success = createAction(
+  prefix + 'Load Success',
   props<{ records: iCompanym[], page: iPage }>()
 );
 
-export const company_load_failure = createAction(
-  '[Company Master] Load Error',
+export const load_failure = createAction(
+  prefix + 'Load Error',
   props<{ erorr: string }>()
 );
 
-export const company_update_selected_rowid = createAction(
-  '[Company Master] Update Selected Row Id',
+export const update_selected_rowid = createAction(
+  prefix + 'Update Selected Row Id',
   props<{ id: number }>()
 )
 
-export const company_update_search = createAction(
-  '[Company Master] Update Search',
+export const update_search = createAction(
+  prefix + 'Update Search',
   props<{ search_record: iCompanym_Search }>()
 );
 
-export const company_upsert_row = createAction(
-  '[Company Master] Add / Update Row',
+export const upsert_row = createAction(
+  prefix + 'Add / Update Row',
   props<{ record: iCompanym }>()
 );
 
-export const company_delete = createAction(
-  '[Company Master] Delete',
+export const delete_records = createAction(
+  prefix + 'Delete',
   props<{ id: number }>()
 );
 
-export const company_delete_complete = createAction(
-  '[Company Master] Delete Complete',
+export const delete_complete = createAction(
+  prefix + 'Delete Complete',
   props<{ id: number }>()
 );
 
-export const company_sort = createAction(
-  '[Company Master] Sort Column',
+export const sort_data = createAction(
+  prefix + 'Sort Column',
   props<{ sort_column: string, sort_order: string }>()
 );

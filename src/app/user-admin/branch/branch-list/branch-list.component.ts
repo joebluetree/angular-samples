@@ -9,6 +9,7 @@ import { BranchState } from '../../store/branch/branch.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { iMenum } from '../../models/imenum';
+import { sort_records } from '../../../accounts/store/accgroup/accgroup.actions';
 
 @Component({
   selector: 'app-branch-list',
@@ -83,35 +84,35 @@ export class BranchListComponent {
     ];
 
 
-    this.records$ = this.store.select(allSelectors.selectBranch);
-    this.search_record$ = this.store.select(allSelectors.selectBranchSearch_Record);
-    this.selected_id$ = this.store.select(allSelectors.selectBranchPage_RowId);
-    this.sort_column$ = this.store.select(allSelectors.selectBranchPage_SortColumn);
-    this.sort_order$ = this.store.select(allSelectors.selectBranchPage_SortOrder);
-    this.page$ = this.store.select(allSelectors.selectBranchPage);
+    this.records$ = this.store.select(allSelectors.select_Records);
+    this.search_record$ = this.store.select(allSelectors.select_Search_Record);
+    this.selected_id$ = this.store.select(allSelectors.select_Page_RowId);
+    this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);
+    this.sort_order$ = this.store.select(allSelectors.select_Page_SortOrder);
+    this.page$ = this.store.select(allSelectors.select_Page);
 
   }
 
   search(search_record: iBranchm_Search) {
-    this.store.dispatch(allActions.branch_update_search({ search_record: search_record }))
+    this.store.dispatch(allActions.update_search({ search_record: search_record }))
     this.pageEvents({ 'action': 'search' });
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(allActions.branch_load_records({ action: _action.action }))
+    this.store.dispatch(allActions.load_records({ action: _action.action }))
   }
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(allActions.branch_sort({ sort_column: data.sort_column, sort_order: data.sort_order }));
+      this.store.dispatch(allActions.sort_data({ sort_column: data.sort_column, sort_order: data.sort_order }));
     }
     if (data.action == 'ROW-SELECTED') {
-      this.store.dispatch(allActions.branch_update_selected_rowid({ id: data.row_id }));
+      this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id }));
     }
     if (data.action == 'DELETE') {
       if (!confirm(`Delete ${data.rec.branch_name} y/n`))
         return;
-      this.store.dispatch(allActions.branch_delete({ id: data.rec.branch_id }));
+      this.store.dispatch(allActions.delete_records({ id: data.rec.branch_id }));
     }
   }
 

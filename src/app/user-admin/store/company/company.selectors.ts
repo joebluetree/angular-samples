@@ -1,37 +1,37 @@
 import { createSelector } from '@ngrx/store';
-import { CompanyState, companyFeature, selectAll } from './company.reducer';
+import { CompanyState, Feature, selectAll } from './company.reducer';
 
-export const selectCompany = createSelector(
-  companyFeature,
+export const selectRecords = createSelector(
+  Feature,
   selectAll
 )
 
-export const selectCompanyState = createSelector(
-  companyFeature,
+export const selectState = createSelector(
+  Feature,
   (state: CompanyState) => state
 )
 
-export const selectCompanySearch_Record = createSelector(
-  companyFeature,
+export const select_Search_Record = createSelector(
+  Feature,
   (a) => a.search_record
 )
 
-export const selectCompanyPage = createSelector(
-  companyFeature,
+export const select_Page = createSelector(
+  Feature,
   (a) => a.page
 )
 
-export const selectCompanyPage_RowId = createSelector(
-  companyFeature,
+export const select_Page_RowId = createSelector(
+  Feature,
   (a) => a.selectid
 )
 
-export const selectCompanyPage_SortColumn = createSelector(
-  companyFeature,
+export const select_Page_SortColumn = createSelector(
+  Feature,
   (a) => a.sort_column
 )
 
-export const selectCompanyPage_SortOrder = createSelector(
-  companyFeature,
+export const select_Page_SortOrder = createSelector(
+  Feature,
   (a) => a.sort_order
 )

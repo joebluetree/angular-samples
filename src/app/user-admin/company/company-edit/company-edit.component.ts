@@ -6,7 +6,7 @@ import { iCompanym } from '../../models/icompanym';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
-import { company_upsert_row } from '../../store/company/company.actions';
+import { upsert_row } from '../../store/company/company.actions';
 import { CompanyState } from '../../store/company/company.reducer';
 import { iMenum } from '../../models/imenum';
 
@@ -127,7 +127,7 @@ export class CompanyEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.store.dispatch(company_upsert_row({ record: v }));
+        this.store.dispatch(upsert_row({ record: v }));
 
         this.gs.showScreen(["Save Complete"]);
 
