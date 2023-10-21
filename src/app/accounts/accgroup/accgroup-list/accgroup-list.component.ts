@@ -84,7 +84,7 @@ export class AccGroupListComponent {
     ];
 
 
-    this.records$ = this.store.select(allSelectors.selectRecords);
+    this.records$ = this.store.select(allSelectors.select_Records);
     this.search_record$ = this.store.select(allSelectors.select_Search_Record);
     this.selected_id$ = this.store.select(allSelectors.select_Page_RowId);
     this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);

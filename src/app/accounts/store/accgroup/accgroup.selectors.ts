@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { AccGroupState, Feature, selectAll } from './accgroup.reducer';
 
-export const selectRecords = createSelector(
+export const select_Records = createSelector(
   Feature,
   selectAll
 )

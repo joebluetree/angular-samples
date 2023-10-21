@@ -11,7 +11,7 @@ import { ModuleFeatureName, moduleReducer } from './store/module/module.reducer'
 import { MenuSearchComponent } from './menum/menu-search/menu-search.component';
 import { MenuEditComponent } from './menum/menu-edit/menu-edit.component';
 import { MenuListComponent } from './menum/menu-list/menu-list.component';
-import { MenuFeatureName, menuReducer } from './store/menu/menu.reducer';
+import * as menuReducer from './store/menu/menu.reducer';
 import { MenuEffects } from './store/menu/menu.effects';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { CompanySearchComponent } from './company/company-search/company-search.component';
@@ -78,7 +78,7 @@ const routes: Routes = [
     StoreModule.forFeature(branchReducer.FeatureName, branchReducer.Reducer),
     StoreModule.forFeature(UserFeatureName, userReducer),
     StoreModule.forFeature(ModuleFeatureName, moduleReducer),
-    StoreModule.forFeature(MenuFeatureName, menuReducer),
+    StoreModule.forFeature(menuReducer.FeatureName, menuReducer.Reducer),
     StoreModule.forFeature(RightsFeatureName, rightsReducer),
     EffectsModule.forFeature([CompanyEffects, BranchEffects, UserEffects, ModuleEffects, MenuEffects, RightsEffects]),
   ]

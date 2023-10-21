@@ -86,7 +86,7 @@ export class CompanyListComponent {
     ];
 
 
-    this.records$ = this.store.select(allSelectors.selectRecords);
+    this.records$ = this.store.select(allSelectors.select_Records);
     this.search_record$ = this.store.select(allSelectors.select_Search_Record);
     this.selected_id$ = this.store.select(allSelectors.select_Page_RowId);
     this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);
@@ -106,7 +106,7 @@ export class CompanyListComponent {
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(allActions.sort_data({ sort_column: data.sort_column, sort_order: data.sort_order }));
+      this.store.dispatch(allActions.sort_records({ sort_column: data.sort_column, sort_order: data.sort_order }));
     }
     if (data.action == 'ROW-SELECTED') {
       this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id }));

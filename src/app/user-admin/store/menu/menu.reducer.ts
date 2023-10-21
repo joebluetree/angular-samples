@@ -26,31 +26,31 @@ export const initialState: MenuState = adapter.getInitialState({
   error: ''
 });
 
-export const menuReducer = createReducer<MenuState>(
+export const Reducer = createReducer<MenuState>(
   initialState,
-  on(allActions.menu_load_success, (state, action) => {
+  on(allActions.load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
-  on(allActions.menu_load_failure, (state, action) => {
+  on(allActions.load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
   }),
-  on(allActions.menu_update_selected_rowid, (state, action) => {
+  on(allActions.update_selected_rowid, (state, action) => {
     return { ...state, selectid: action.id };
   }),
-  on(allActions.menu_update_search, (state, action) => {
+  on(allActions.update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
   }),
-  on(allActions.menu_upsert_row, (state, action) => {
+  on(allActions.upsert_row, (state, action) => {
     return adapter.upsertOne(action.record, state)
   }),
-  on(allActions.menu_delete_complete, (state, action) => {
+  on(allActions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(allActions.menu_sort, (state, action) => {
+  on(allActions.sort_records, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
-export const MenuFeatureName = 'menuState';
-export const menuFeature = createFeatureSelector<MenuState>(MenuFeatureName);
+export const FeatureName = 'menuState';
+export const Feature = createFeatureSelector<MenuState>(FeatureName);

@@ -6,34 +6,34 @@ import { Store } from '@ngrx/store';
 import { MenuState } from './menu.reducer';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { MenueService } from '../../services/menu.service';
-import { selectMenuPage, selectMenuSearch_Record } from './menu.selectors';
+import { select_Page, select_Search_Record } from './menu.selectors';
 
 @Injectable()
 export class MenuEffects {
-  moduleList$ = createEffect(() => {
+  List$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(allActions.menu_load_records),
+      ofType(allActions.load_records),
       withLatestFrom(
-        this.store.select(selectMenuSearch_Record),
-        this.store.select(selectMenuPage)
+        this.store.select(select_Search_Record),
+        this.store.select(select_Page)
       ),
       switchMap(([action, search_record, page]) => {
         const data: any = this.service.getList(action.action, search_record, page);
         return data;
       }),
       tap((result: any) => {
-        return this.store.dispatch(allActions.menu_load_success({ records: result.records, page: result.page }));
+        return this.store.dispatch(allActions.load_success({ records: result.records, page: result.page }));
       })
     );
   }, { dispatch: false });
 
-  moduleDelete$ = createEffect(() => {
+  Delete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(allActions.menu_delete),
+      ofType(allActions.delete_record),
       switchMap((action: any) => this.service.delete(action.id)),
       tap((result: any) => {
         if (result.status)
-          this.store.dispatch(allActions.menu_delete_complete({ id: result.id }));
+          this.store.dispatch(allActions.delete_complete({ id: result.id }));
         else {
           throw new Error(result.message);
         }

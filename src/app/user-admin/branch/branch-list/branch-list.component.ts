@@ -104,7 +104,7 @@ export class BranchListComponent {
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(allActions.sort_data({ sort_column: data.sort_column, sort_order: data.sort_order }));
+      this.store.dispatch(allActions.sort_records({ sort_column: data.sort_column, sort_order: data.sort_order }));
     }
     if (data.action == 'ROW-SELECTED') {
       this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id }));

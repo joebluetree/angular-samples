@@ -45,7 +45,7 @@ export const delete_complete = createAction(
   props<{ id: number }>()
 );
 
-export const sort_data = createAction(
+export const sort_records = createAction(
   prefix + 'Sort Column',
   props<{ sort_column: string, sort_order: string }>()
 );

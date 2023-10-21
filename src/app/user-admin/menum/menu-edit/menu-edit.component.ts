@@ -31,10 +31,6 @@ export class MenuEditComponent {
 
   menum: iMenum | null;
 
-
-
-
-
   showModel = true;
   mform: FormGroup;
   constructor(
@@ -138,7 +134,7 @@ export class MenuEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.store.dispatch(allActions.menu_upsert_row({ record: v }));
+        this.store.dispatch(allActions.upsert_row({ record: v }));
 
         this.gs.showScreen(["Save Complete"]);
 

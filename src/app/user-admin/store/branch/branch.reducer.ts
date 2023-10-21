@@ -47,7 +47,7 @@ export const Reducer = createReducer<BranchState>(
   on(branch_actions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(branch_actions.sort_data, (state, action) => {
+  on(branch_actions.sort_records, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )

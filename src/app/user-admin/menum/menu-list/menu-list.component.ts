@@ -5,7 +5,7 @@ import * as allActions from '../../store/menu/menu.actions';
 import { Observable } from 'rxjs';
 import { iPage } from 'ngx-jrt-controls';
 import { iMenum, iMenum_Search } from '../../models/imenum';
-import { selectMenu, selectMenuPage, selectMenuPage_RowId, selectMenuPage_SortColumn, selectMenuPage_SortOrder, selectMenuSearch_Record } from '../../store/menu/menu.selectors';
+import * as allSelectors from '../../store/menu/menu.selectors';
 import { MenuState } from '../../store/menu/menu.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -87,34 +87,34 @@ export class MenuListComponent {
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete }
     ];
 
-    this.records$ = this.store.select(selectMenu);
-    this.search_record$ = this.store.select(selectMenuSearch_Record);
-    this.selected_id$ = this.store.select(selectMenuPage_RowId);
-    this.sort_column$ = this.store.select(selectMenuPage_SortColumn);
-    this.sort_order$ = this.store.select(selectMenuPage_SortOrder);
-    this.page$ = this.store.select(selectMenuPage);
+    this.records$ = this.store.select(allSelectors.select_Records);
+    this.search_record$ = this.store.select(allSelectors.select_Search_Record);
+    this.selected_id$ = this.store.select(allSelectors.select_Page_RowId);
+    this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);
+    this.sort_order$ = this.store.select(allSelectors.select_Page_SortOrder);
+    this.page$ = this.store.select(allSelectors.select_Page);
   }
 
   search(search_record: iMenum_Search) {
-    this.store.dispatch(allActions.menu_update_search({ search_record: search_record }))
+    this.store.dispatch(allActions.update_search({ search_record: search_record }))
     this.pageEvents({ 'action': 'search' });
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(allActions.menu_load_records({ action: _action.action }))
+    this.store.dispatch(allActions.load_records({ action: _action.action }))
   }
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(allActions.menu_sort({ sort_column: data.sort_column, sort_order: data.sort_order }));
+      this.store.dispatch(allActions.sort_records({ sort_column: data.sort_column, sort_order: data.sort_order }));
     }
     if (data.action == 'ROW-SELECTED') {
-      this.store.dispatch(allActions.menu_update_selected_rowid({ id: data.row_id }));
+      this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id }));
     }
     if (data.action == 'DELETE') {
       if (!confirm(`Delete ${data.rec.menu_name} y/n`))
         return;
-      this.store.dispatch(allActions.menu_delete({ id: data.rec.menu_id }));
+      this.store.dispatch(allActions.delete_record({ id: data.rec.menu_id }));
     }
   }
 

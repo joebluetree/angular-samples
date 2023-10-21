@@ -1,37 +1,37 @@
 import { createSelector } from '@ngrx/store';
-import { MenuState, menuFeature, selectAll } from './menu.reducer';
+import { MenuState, Feature, selectAll } from './menu.reducer';
 
-export const selectMenu = createSelector(
-  menuFeature,
+export const select_Records = createSelector(
+  Feature,
   selectAll
 )
 
-export const selectMenuState = createSelector(
-  menuFeature,
+export const select_State = createSelector(
+  Feature,
   (state: MenuState) => state
 )
 
-export const selectMenuPage_RowId = createSelector(
-  menuFeature,
+export const select_Page_RowId = createSelector(
+  Feature,
   (a) => a.selectid
 )
 
-export const selectMenuSearch_Record = createSelector(
-  menuFeature,
+export const select_Search_Record = createSelector(
+  Feature,
   (a) => a.search_record
 )
 
-export const selectMenuPage = createSelector(
-  menuFeature,
+export const select_Page = createSelector(
+  Feature,
   (a) => a.page
 )
 
-export const selectMenuPage_SortColumn = createSelector(
-  menuFeature,
+export const select_Page_SortColumn = createSelector(
+  Feature,
   (a) => a.sort_column
 )
 
-export const selectMenuPage_SortOrder = createSelector(
-  menuFeature,
+export const select_Page_SortOrder = createSelector(
+  Feature,
   (a) => a.sort_order
 )
