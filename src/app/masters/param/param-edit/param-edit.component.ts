@@ -5,7 +5,7 @@ import { iParam } from '../../models/iparam';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
-import { param_upsert_row } from '../../store/param/param.actions';
+import { upsert_row } from '../../store/param/param.actions';
 import { ParamService } from '../../services/param.service';
 import { iMenum } from 'src/app/user-admin/models/imenum';
 
@@ -120,7 +120,7 @@ export class ParamEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.store.dispatch(param_upsert_row({ record: v, param_type: this.type }));
+        this.store.dispatch(upsert_row({ record: v, param_type: this.type }));
 
         this.gs.showScreen(["Save Complete"]);
 

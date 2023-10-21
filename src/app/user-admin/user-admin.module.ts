@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ModuleEffects } from './store/module/module.effects';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleSearchComponent } from './module/module-search/module-search.component';
-import { ModuleFeatureName, moduleReducer } from './store/module/module.reducer';
+import * as moduleReducer from './store/module/module.reducer';
 import { MenuSearchComponent } from './menum/menu-search/menu-search.component';
 import { MenuEditComponent } from './menum/menu-edit/menu-edit.component';
 import { MenuListComponent } from './menum/menu-list/menu-list.component';
@@ -26,10 +26,10 @@ import * as branchReducer from './store/branch/branch.reducer';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserSearchComponent } from './user/user-search/user-search.component';
-import { UserFeatureName, userReducer } from './store/user/user.reducer';
+import * as userReducer from './store/user/user.reducer';
 import { UserEffects } from './store/user/user.effects';
 import { RightsEffects } from './store/rights/rights.effects';
-import { RightsFeatureName, rightsReducer } from './store/rights/rights.reducer';
+import * as  rightsReducer from './store/rights/rights.reducer';
 import { RightsSearchComponent } from './rights/rights-search/rights-search.component';
 import { RightsListComponent } from './rights/rights-list/rights-list.component';
 import { RightsEditComponent } from './rights/rights-edit/rights-edit.component';
@@ -76,10 +76,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreModule.forFeature(companyReducer.FeatureName, companyReducer.Reducer),
     StoreModule.forFeature(branchReducer.FeatureName, branchReducer.Reducer),
-    StoreModule.forFeature(UserFeatureName, userReducer),
-    StoreModule.forFeature(ModuleFeatureName, moduleReducer),
+    StoreModule.forFeature(userReducer.FeatureName, userReducer.Reducer),
+    StoreModule.forFeature(moduleReducer.FeatureName, moduleReducer.Reducer),
     StoreModule.forFeature(menuReducer.FeatureName, menuReducer.Reducer),
-    StoreModule.forFeature(RightsFeatureName, rightsReducer),
+    StoreModule.forFeature(rightsReducer.FeatureName, rightsReducer.Reducer),
     EffectsModule.forFeature([CompanyEffects, BranchEffects, UserEffects, ModuleEffects, MenuEffects, RightsEffects]),
   ]
 })

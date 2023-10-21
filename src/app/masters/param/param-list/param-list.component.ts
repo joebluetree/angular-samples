@@ -1,8 +1,8 @@
-import { selectParamPage, selectParamPage_RowId, selectParamPage_SortColumn, selectParamPage_SortOrder, selectParamRecords, selectParamSearch_Record } from './../../store/param/param.selectors';
+import * as allSelectors from './../../store/param/param.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { param_load_records, param_delete, param_update_search, param_update_selected_rowid, param_sort } from '../../store/param/param.actions';
+import * as allActions from '../../store/param/param.actions';
 import { Observable } from 'rxjs';
 import { iParam, iParam_Search } from '../../models/iparam';
 import { ParamGroupState } from '../../store/param/param.reducer';
@@ -65,12 +65,12 @@ export class ParamListComponent {
     if (!this.gs.IsValidAppId(this.appid))
       return;
 
-    this.records$ = this.store.select(selectParamRecords);
-    this.search_record$ = this.store.select(selectParamSearch_Record);
-    this.selected_id$ = this.store.select(selectParamPage_RowId);
-    this.sort_column$ = this.store.select(selectParamPage_SortColumn);
-    this.sort_order$ = this.store.select(selectParamPage_SortOrder);
-    this.page$ = this.store.select(selectParamPage);
+    this.records$ = this.store.select(allSelectors.select_Records);
+    this.search_record$ = this.store.select(allSelectors.select_Search_Record);
+    this.selected_id$ = this.store.select(allSelectors.select_Page_RowId);
+    this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);
+    this.sort_order$ = this.store.select(allSelectors.select_Page_SortOrder);
+    this.page$ = this.store.select(allSelectors.select_Page);
 
     const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
@@ -91,25 +91,25 @@ export class ParamListComponent {
   }
 
   search(search_record: iParam_Search) {
-    this.store.dispatch(param_update_search({ search_record: search_record, param_type: this.type }))
+    this.store.dispatch(allActions.update_search({ search_record: search_record, param_type: this.type }))
     this.pageEvents({ 'action': 'search' });
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(param_load_records({ action: _action.action, param_type: this.type }))
+    this.store.dispatch(allActions.load_records({ action: _action.action, param_type: this.type }))
   }
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(param_sort({ sort_column: data.sort_column, sort_order: data.sort_order, param_type: this.type }));
+      this.store.dispatch(allActions.sort_records({ sort_column: data.sort_column, sort_order: data.sort_order, param_type: this.type }));
     }
     if (data.action == 'ROW-SELECTED') {
-      this.store.dispatch(param_update_selected_rowid({ id: data.row_id, param_type: this.type }));
+      this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id, param_type: this.type }));
     }
     if (data.action == 'DELETE') {
       if (!confirm(`Delete ${data.rec.param_name} y/n`))
         return;
-      this.store.dispatch(param_delete({ id: data.rec.param_id, param_type: this.type }));
+      this.store.dispatch(allActions.delete_record({ id: data.rec.param_id, param_type: this.type }));
     }
   }
 

@@ -3,47 +3,49 @@ import { createAction, props } from '@ngrx/store';
 import { iParam, iParam_Search } from '../../models/iparam';
 import { iPage } from 'ngx-jrt-controls';
 
-export const param_load_records = createAction(
-  '[Param Master] Load Records',
+const prefix = '[Param Master] ';
+
+export const load_records = createAction(
+  prefix + 'Load Records',
   props<{ action: string, param_type: string }>()
 );
 
-export const param_load_success = createAction(
-  '[Param Master] Load Success',
+export const load_success = createAction(
+  prefix + 'Load Success',
   props<{ records: iParam[], page: iPage, param_type: string }>()
 );
 
-export const param_load_failure = createAction(
-  '[Param Master] Load Error',
+export const load_failure = createAction(
+  prefix + 'Load Error',
   props<{ erorr: string }>()
 );
 
-export const param_update_selected_rowid = createAction(
-  '[Param Master] Update Selected Row Id',
+export const update_selected_rowid = createAction(
+  prefix + 'Update Selected Row Id',
   props<{ id: number, param_type: string }>()
 )
 
-export const param_update_search = createAction(
-  '[Param Master] Update Search',
+export const update_search = createAction(
+  prefix + 'Update Search',
   props<{ search_record: iParam_Search, param_type: string }>()
 );
 
-export const param_upsert_row = createAction(
-  '[Param Master] Add / Update Row',
+export const upsert_row = createAction(
+  prefix + 'Add / Update Row',
   props<{ record: iParam, param_type: string }>()
 );
 
-export const param_delete = createAction(
-  '[Param Master] Delete',
+export const delete_record = createAction(
+  prefix + 'Delete',
   props<{ id: number, param_type: string }>()
 );
 
-export const param_delete_complete = createAction(
-  '[Param Master] Delete Complete',
+export const delete_complete = createAction(
+  prefix + 'Delete Complete',
   props<{ id: number, param_type: string }>()
 );
 
-export const param_sort = createAction(
-  '[Param Master] Sort Column',
+export const sort_records = createAction(
+  prefix + 'Sort Column',
   props<{ sort_column: string, sort_order: string, param_type: string }>()
 );

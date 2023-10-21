@@ -6,7 +6,7 @@ import { iModulem } from '../../models/imodulem';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
-import { module_upsert_row } from '../../store/module/module.actions';
+import { upsert_row } from '../../store/module/module.actions';
 import { ModuleState } from '../../store/module/module.reducer';
 import { iMenum } from '../../models/imenum';
 
@@ -123,7 +123,7 @@ export class ModuleEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.store.dispatch(module_upsert_row({ record: v }));
+        this.store.dispatch(upsert_row({ record: v }));
 
         this.gs.showScreen(["Save Complete"]);
 

@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { param_load_records, param_load_success, param_delete, param_delete_complete } from './param.actions';
+import * as allActions from './param.actions';
 import { ParamService } from '../../services/param.service';
 import { EMPTY, catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ParamGroupState } from './param.reducer';
-import { selectParamPage, selectParamSearch_Record } from './param.selectors';
+import { select_Page, select_Search_Record } from './param.selectors';
 import { GlobalService } from 'src/app/core/services/global.service';
 
 @Injectable()
 export class ParamEffects {
-  paramList$ = createEffect(() => {
+  List$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(param_load_records),
+      ofType(allActions.load_records),
       withLatestFrom(
-        this.store.select(selectParamSearch_Record),
-        this.store.select(selectParamPage)
+        this.store.select(select_Search_Record),
+        this.store.select(select_Page)
       ),
       switchMap(([action, search_record, page]) => this.service.getList(action, search_record, page).pipe(
-        map(result => this.store.dispatch(param_load_success({ records: result.records, page: result.page, param_type: action.param_type }))),
+        map(result => this.store.dispatch(allActions.load_success({ records: result.records, page: result.page, param_type: action.param_type }))),
       )),
       catchError(error => {
         const err = !!error.error ? error.error : error;
@@ -28,13 +28,13 @@ export class ParamEffects {
     );
   }, { dispatch: false });
 
-  paramDelete$ = createEffect(() => {
+  Delete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(param_delete),
+      ofType(allActions.delete_record),
       switchMap((action: any) => this.service.delete(action.id).pipe(
         map(result => {
           if (result.status)
-            this.store.dispatch(param_delete_complete({ id: result.id, param_type: action.param_type }));
+            this.store.dispatch(allActions.delete_complete({ id: result.id, param_type: action.param_type }));
           else {
             throw new Error(result.message);
           }

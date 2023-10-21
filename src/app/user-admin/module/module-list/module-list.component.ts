@@ -1,8 +1,8 @@
-import { selectModule, selectModulePage, selectModulePage_RowId, selectModulePage_SortColumn, selectModulePage_SortOrder, selectModuleSearch_Record } from './../../store/module/module.selectors';
+import * as allSelectors from './../../store/module/module.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { module_load_records, module_delete, module_update_search, module_update_selected_rowid, module_sort } from '../../store/module/module.actions';
+import * as allActions from '../../store/module/module.actions';
 import { Observable } from 'rxjs';
 import { iModulem, iModulem_Search } from '../../models/imodulem';
 import { iPage } from 'ngx-jrt-controls';
@@ -85,35 +85,35 @@ export class ModuleListComponent {
     ];
 
 
-    this.records$ = this.store.select(selectModule);
-    this.search_record$ = this.store.select(selectModuleSearch_Record);
-    this.selected_id$ = this.store.select(selectModulePage_RowId);
-    this.sort_column$ = this.store.select(selectModulePage_SortColumn);
-    this.sort_order$ = this.store.select(selectModulePage_SortOrder);
-    this.page$ = this.store.select(selectModulePage);
+    this.records$ = this.store.select(allSelectors.select_Records);
+    this.search_record$ = this.store.select(allSelectors.select_Search_Record);
+    this.selected_id$ = this.store.select(allSelectors.select_Page_RowId);
+    this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);
+    this.sort_order$ = this.store.select(allSelectors.select_Page_SortOrder);
+    this.page$ = this.store.select(allSelectors.select_Page);
 
   }
 
   search(search_record: iModulem_Search) {
-    this.store.dispatch(module_update_search({ search_record: search_record }))
+    this.store.dispatch(allActions.update_search({ search_record: search_record }))
     this.pageEvents({ 'action': 'search' });
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(module_load_records({ action: _action.action }))
+    this.store.dispatch(allActions.load_records({ action: _action.action }))
   }
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(module_sort({ sort_column: data.sort_column, sort_order: data.sort_order }));
+      this.store.dispatch(allActions.sort_records({ sort_column: data.sort_column, sort_order: data.sort_order }));
     }
     if (data.action == 'ROW-SELECTED') {
-      this.store.dispatch(module_update_selected_rowid({ id: data.row_id }));
+      this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id }));
     }
     if (data.action == 'DELETE') {
       if (!confirm(`Delete ${data.rec.module_name} y/n`))
         return;
-      this.store.dispatch(module_delete({ id: data.rec.module_id }));
+      this.store.dispatch(allActions.delete_record({ id: data.rec.module_id }));
     }
   }
 

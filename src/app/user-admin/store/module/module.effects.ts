@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { module_load_records, module_load_success, module_delete, module_delete_complete } from './module.actions';
+import * as allActions from './module.actions';
 import { ModuleService } from '../../services/module.service';
 import { EMPTY, catchError, of, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ModuleState } from './module.reducer';
 import { GlobalService } from 'src/app/core/services/global.service';
-import { selectModulePage, selectModuleSearch_Record } from './module.selectors';
+import { select_Page, select_Search_Record } from './module.selectors';
 
 
 @Injectable()
 export class ModuleEffects {
-  moduleList$ = createEffect(() => {
+  List$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(module_load_records),
+      ofType(allActions.load_records),
       withLatestFrom(
-        this.store.select(selectModuleSearch_Record),
-        this.store.select(selectModulePage)
+        this.store.select(select_Search_Record),
+        this.store.select(select_Page)
       ),
       switchMap(([action, search_record, page]) => {
         const data: any = this.service.getList(action.action, search_record, page);
         return data;
       }),
       tap((result: any) => {
-        return this.store.dispatch(module_load_success({ records: result.records, page: result.page }));
+        return this.store.dispatch(allActions.load_success({ records: result.records, page: result.page }));
       })
     );
   }, { dispatch: false });
 
-  moduleDelete$ = createEffect(() => {
+  Delete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(module_delete),
+      ofType(allActions.delete_record),
       switchMap((action: any) => this.service.delete(action.id)),
       tap((result: any) => {
         if (result.status)
-          this.store.dispatch(module_delete_complete({ id: result.id }));
+          this.store.dispatch(allActions.delete_complete({ id: result.id }));
         else {
           throw new Error(result.message);
         }
@@ -46,7 +46,6 @@ export class ModuleEffects {
       })
     );
   }, { dispatch: false });
-
 
   constructor(
     private actions$: Actions,

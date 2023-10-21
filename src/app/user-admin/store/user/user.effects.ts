@@ -6,16 +6,16 @@ import { catchError, switchMap, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserState } from './user.reducer';
 import { GlobalService } from 'src/app/core/services/global.service';
-import { selectUserPage, selectUserSearch_Record } from './user.selectors';
+import { select_Page, select_Search_Record } from './user.selectors';
 
 @Injectable()
 export class UserEffects {
-  userList$ = createEffect(() => {
+  List$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(user_actions.user_load_records),
+      ofType(user_actions.load_records),
       withLatestFrom(
-        this.store.select(selectUserSearch_Record),
-        this.store.select(selectUserPage)
+        this.store.select(select_Search_Record),
+        this.store.select(select_Page)
       ),
       switchMap(([action, search_record, page]) => {
         const _search_record = { ...search_record, ...this.gs.getGlobalConstants() };
@@ -23,18 +23,18 @@ export class UserEffects {
         return data;
       }),
       tap((result: any) => {
-        return this.store.dispatch(user_actions.user_load_success({ records: result.records, page: result.page }));
+        return this.store.dispatch(user_actions.load_success({ records: result.records, page: result.page }));
       })
     );
   }, { dispatch: false });
 
-  userDelete$ = createEffect(() => {
+  Delete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(user_actions.user_delete),
+      ofType(user_actions.delete_record),
       switchMap((action: any) => this.service.delete(action.id)),
       tap((result: any) => {
         if (result.status)
-          this.store.dispatch(user_actions.user_delete_complete({ id: result.id }));
+          this.store.dispatch(user_actions.delete_complete({ id: result.id }));
         else {
           throw new Error(result.message);
         }

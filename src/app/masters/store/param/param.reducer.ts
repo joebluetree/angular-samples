@@ -1,7 +1,7 @@
 import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iParam, iParam_Search } from '../../models/iparam';
-import { param_load_success, param_update_selected_rowid, param_update_search, param_upsert_row, param_delete_complete, param_sort } from './param.actions';
+import * as allActions from './param.actions';
 import { iPage } from 'ngx-jrt-controls';
 
 export interface ParamState extends EntityState<iParam> {
@@ -38,9 +38,9 @@ export const InitialParamGroupState: ParamGroupState = {
   'STATE': initialParamState,
 }
 
-export const paramReducer = createReducer<ParamGroupState>(
+export const Reducer = createReducer<ParamGroupState>(
   InitialParamGroupState,
-  on(param_load_success, (state, action) => {
+  on(allActions.load_success, (state, action) => {
     return {
       ...state,
       [action.param_type]: adapter.setAll(action.records, { ...state[action.param_type], page: action.page, error: '' })
@@ -49,25 +49,25 @@ export const paramReducer = createReducer<ParamGroupState>(
   // on(param_load_failure, (state, action) => {
   //   return adapter.removeAll({ ...state, error: action.erorr })
   // }),
-  on(param_update_selected_rowid, (state, action) => {
+  on(allActions.update_selected_rowid, (state, action) => {
     return { ...state, [action.param_type]: { ...state[action.param_type], selectid: action.id } };
   }),
-  on(param_update_search, (state, action) => {
+  on(allActions.update_search, (state, action) => {
     return { ...state, [action.param_type]: { ...state[action.param_type], search_record: action.search_record } };
   }),
-  on(param_upsert_row, (state, action) => {
+  on(allActions.upsert_row, (state, action) => {
     return {
       ...state,
       [action.param_type]: adapter.upsertOne(action.record, state[action.param_type])
     }
   }),
-  on(param_delete_complete, (state, action) => {
+  on(allActions.delete_complete, (state, action) => {
     return {
       ...state,
       [action.param_type]: adapter.removeOne(action.id, state[action.param_type])
     }
   }),
-  on(param_sort, (state, action) => {
+  on(allActions.sort_records, (state, action) => {
     return {
       ...state,
       [action.param_type]: { ...state[action.param_type], sort_column: action.sort_column, sort_order: action.sort_order }
@@ -76,5 +76,5 @@ export const paramReducer = createReducer<ParamGroupState>(
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
-export const paramFeatureName = 'paramGroupState';
-export const paramFeature = createFeatureSelector<ParamGroupState>(paramFeatureName);
+export const FeatureName = 'paramGroupState';
+export const Feature = createFeatureSelector<ParamGroupState>(FeatureName);

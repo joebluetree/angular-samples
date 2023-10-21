@@ -82,35 +82,35 @@ export class RightsListComponent {
     ];
 
 
-    this.records$ = this.store.select(allSelectors.selectRights);
-    this.search_record$ = this.store.select(allSelectors.selectRightsSearch_Record);
-    this.selected_id$ = this.store.select(allSelectors.selectRightsPage_RowId);
-    this.sort_column$ = this.store.select(allSelectors.selectRightsPage_SortColumn);
-    this.sort_order$ = this.store.select(allSelectors.selectRightsPage_SortOrder);
-    this.page$ = this.store.select(allSelectors.selectRightsPage);
+    this.records$ = this.store.select(allSelectors.select_Records);
+    this.search_record$ = this.store.select(allSelectors.select_Search_Record);
+    this.selected_id$ = this.store.select(allSelectors.select_Page_RowId);
+    this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);
+    this.sort_order$ = this.store.select(allSelectors.select_Page_SortOrder);
+    this.page$ = this.store.select(allSelectors.select_Page);
 
   }
 
   search(search_record: iUserBranches_Search) {
-    this.store.dispatch(allActions.rights_update_search({ search_record: search_record }))
+    this.store.dispatch(allActions.update_search({ search_record: search_record }))
     this.pageEvents({ 'action': 'search' });
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(allActions.rights_load_records({ action: _action.action }))
+    this.store.dispatch(allActions.load_records({ action: _action.action }))
   }
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(allActions.rights_sort({ sort_column: data.sort_column, sort_order: data.sort_order }));
+      this.store.dispatch(allActions.sort_records({ sort_column: data.sort_column, sort_order: data.sort_order }));
     }
     if (data.action == 'ROW-SELECTED') {
-      this.store.dispatch(allActions.rights_update_selected_rowid({ id: data.row_id }));
+      this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id }));
     }
     if (data.action == 'DELETE') {
       if (!confirm(`Delete ${data.rec.ub_user_name} y/n`))
         return;
-      this.store.dispatch(allActions.rights_delete({ id: data.rec.ub_id }));
+      this.store.dispatch(allActions.delete_record({ id: data.rec.ub_id }));
     }
   }
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { paramFeatureName, paramReducer } from './store/param/param.reducer';
+import * as paramReducer from './store/param/param.reducer';
 import { ParamEffects } from './store/param/param.effects';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,7 +23,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(paramFeatureName, paramReducer),
+    StoreModule.forFeature(paramReducer.FeatureName, paramReducer.Reducer),
     EffectsModule.forFeature([ParamEffects])
   ]
 })

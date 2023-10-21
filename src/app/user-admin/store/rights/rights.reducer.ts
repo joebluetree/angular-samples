@@ -27,32 +27,32 @@ export const initialState: RightsState = adapter.getInitialState({
   error: ''
 });
 
-export const rightsReducer = createReducer<RightsState>(
+export const Reducer = createReducer<RightsState>(
   initialState,
-  on(rights_actions.rights_load_success, (state, action) => {
+  on(rights_actions.load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
-  on(rights_actions.rights_load_failure, (state, action) => {
+  on(rights_actions.load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
   }),
-  on(rights_actions.rights_update_selected_rowid, (state, action) => {
+  on(rights_actions.update_selected_rowid, (state, action) => {
     return { ...state, selectid: action.id };
   }),
-  on(rights_actions.rights_update_search, (state, action) => {
+  on(rights_actions.update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
   }),
-  on(rights_actions.rights_upsert_row, (state, action) => {
+  on(rights_actions.upsert_row, (state, action) => {
     return adapter.upsertOne(action.record, state)
   }),
-  on(rights_actions.rights_delete_complete, (state, action) => {
+  on(rights_actions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(rights_actions.rights_sort, (state, action) => {
+  on(rights_actions.sort_records, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
 
-export const RightsFeatureName = 'rightsState';
-export const rightsFeature = createFeatureSelector<RightsState>(RightsFeatureName);
+export const FeatureName = 'rightsState';
+export const Feature = createFeatureSelector<RightsState>(FeatureName);

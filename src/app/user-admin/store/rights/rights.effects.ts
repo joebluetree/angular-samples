@@ -6,35 +6,35 @@ import { EMPTY, catchError, of, switchMap, tap, throwError, withLatestFrom } fro
 import { Store } from '@ngrx/store';
 import { RightsState } from './rights.reducer';
 import { GlobalService } from 'src/app/core/services/global.service';
-import { selectRightsPage, selectRightsSearch_Record } from './rights.selectors';
+import { select_Page, select_Search_Record } from './rights.selectors';
 
 
 @Injectable()
 export class RightsEffects {
-  rightsList$ = createEffect(() => {
+  List$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(rights_actions.rights_load_records),
+      ofType(rights_actions.load_records),
       withLatestFrom(
-        this.store.select(selectRightsSearch_Record),
-        this.store.select(selectRightsPage)
+        this.store.select(select_Search_Record),
+        this.store.select(select_Page)
       ),
       switchMap(([action, search_record, page]) => {
         const data: any = this.service.getList(action.action, search_record, page);
         return data;
       }),
       tap((result: any) => {
-        return this.store.dispatch(rights_actions.rights_load_success({ records: result.records, page: result.page }));
+        return this.store.dispatch(rights_actions.load_success({ records: result.records, page: result.page }));
       })
     );
   }, { dispatch: false });
 
-  rightsDelete$ = createEffect(() => {
+  Delete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(rights_actions.rights_delete),
+      ofType(rights_actions.delete_record),
       switchMap((action: any) => this.service.delete(action.id)),
       tap((result: any) => {
         if (result.status)
-          this.store.dispatch(rights_actions.rights_delete_complete({ id: result.id }));
+          this.store.dispatch(rights_actions.delete_complete({ id: result.id }));
         else {
           throw new Error(result.message);
         }

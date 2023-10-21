@@ -1,7 +1,7 @@
 import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iModulem, iModulem_Search } from '../../models/imodulem';
-import { module_load_success, module_load_failure, module_update_selected_rowid, module_update_search, module_upsert_row, module_delete_complete, module_sort } from './module.actions';
+import * as allActions from './module.actions';
 import { iPage } from 'ngx-jrt-controls';
 
 export interface ModuleState extends EntityState<iModulem> {
@@ -27,32 +27,32 @@ export const initialState: ModuleState = adapter.getInitialState({
   error: ''
 });
 
-export const moduleReducer = createReducer<ModuleState>(
+export const Reducer = createReducer<ModuleState>(
   initialState,
-  on(module_load_success, (state, action) => {
+  on(allActions.load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
-  on(module_load_failure, (state, action) => {
+  on(allActions.load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
   }),
-  on(module_update_selected_rowid, (state, action) => {
+  on(allActions.update_selected_rowid, (state, action) => {
     return { ...state, selectid: action.id };
   }),
-  on(module_update_search, (state, action) => {
+  on(allActions.update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
   }),
-  on(module_upsert_row, (state, action) => {
+  on(allActions.upsert_row, (state, action) => {
     return adapter.upsertOne(action.record, state)
   }),
-  on(module_delete_complete, (state, action) => {
+  on(allActions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(module_sort, (state, action) => {
+  on(allActions.sort_records, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
 
-export const ModuleFeatureName = 'moduleState';
-export const moduleFeature = createFeatureSelector<ModuleState>(ModuleFeatureName);
+export const FeatureName = 'moduleState';
+export const Feature = createFeatureSelector<ModuleState>(FeatureName);

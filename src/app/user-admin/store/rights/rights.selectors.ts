@@ -1,37 +1,37 @@
 import { createSelector } from '@ngrx/store';
-import { RightsState, rightsFeature, selectAll } from './rights.reducer';
+import { RightsState, Feature, selectAll } from './rights.reducer';
 
-export const selectRights = createSelector(
-  rightsFeature,
+export const select_Records = createSelector(
+  Feature,
   selectAll
 )
 
-export const selectRightState = createSelector(
-  rightsFeature,
+export const select_State = createSelector(
+  Feature,
   (state: RightsState) => state
 )
 
-export const selectRightsSearch_Record = createSelector(
-  rightsFeature,
+export const select_Search_Record = createSelector(
+  Feature,
   (a) => a.search_record
 )
 
-export const selectRightsPage = createSelector(
-  rightsFeature,
+export const select_Page = createSelector(
+  Feature,
   (a) => a.page
 )
 
-export const selectRightsPage_RowId = createSelector(
-  rightsFeature,
+export const select_Page_RowId = createSelector(
+  Feature,
   (a) => a.selectid
 )
 
-export const selectRightsPage_SortColumn = createSelector(
-  rightsFeature,
+export const select_Page_SortColumn = createSelector(
+  Feature,
   (a) => a.sort_column
 )
 
-export const selectRightsPage_SortOrder = createSelector(
-  rightsFeature,
+export const select_Page_SortOrder = createSelector(
+  Feature,
   (a) => a.sort_order
 )

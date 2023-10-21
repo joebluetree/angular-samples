@@ -2,48 +2,49 @@ import { createAction, props } from '@ngrx/store';
 import { iUserm, iUserm_Search } from '../../models/iuserm';
 import { iPage } from 'ngx-jrt-controls';
 
+const prefix = '[User Master] ';
 
-export const user_load_records = createAction(
-  '[User Master] Load Records',
+export const load_records = createAction(
+  prefix + 'Load Records',
   props<{ action: string }>()
 );
 
-export const user_load_success = createAction(
-  '[User Master] Load Success',
+export const load_success = createAction(
+  prefix + 'Load Success',
   props<{ records: iUserm[], page: iPage }>()
 );
 
-export const user_load_failure = createAction(
-  '[User Master] Load Error',
+export const load_failure = createAction(
+  prefix + 'Load Error',
   props<{ erorr: string }>()
 );
 
-export const user_update_selected_rowid = createAction(
-  '[User Master] Update Selected Row Id',
+export const update_selected_rowid = createAction(
+  prefix + 'Update Selected Row Id',
   props<{ id: number }>()
 )
 
-export const user_update_search = createAction(
-  '[User Master] Update Search',
+export const update_search = createAction(
+  prefix + 'Update Search',
   props<{ search_record: iUserm_Search }>()
 );
 
-export const user_upsert_row = createAction(
-  '[User Master] Add / Update Row',
+export const upsert_row = createAction(
+  prefix + 'Add / Update Row',
   props<{ record: iUserm }>()
 );
 
-export const user_delete = createAction(
-  '[User Master] Delete',
+export const delete_record = createAction(
+  prefix + 'Delete',
   props<{ id: number }>()
 );
 
-export const user_delete_complete = createAction(
-  '[User Master] Delete Complete',
+export const delete_complete = createAction(
+  prefix + 'Delete Complete',
   props<{ id: number }>()
 );
 
-export const user_sort = createAction(
-  '[User Master] Sort Column',
+export const sort_records = createAction(
+  prefix + 'Sort Column',
   props<{ sort_column: string, sort_order: string }>()
 );

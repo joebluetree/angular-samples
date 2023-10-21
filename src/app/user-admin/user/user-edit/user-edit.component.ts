@@ -6,7 +6,7 @@ import { iUserm } from '../../models/iuserm';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
-import { user_upsert_row } from '../../store/user/user.actions';
+import { upsert_row } from '../../store/user/user.actions';
 import { UserState } from '../../store/user/user.reducer';
 import { iBranchm } from '../../models/ibranchm';
 import { iUserBranches } from '../../models/iuserbranches';
@@ -172,7 +172,7 @@ export class UserEditComponent {
           this.gs.updateURL(param);
 
         };
-        this.store.dispatch(user_upsert_row({ record: rec }));
+        this.store.dispatch(upsert_row({ record: rec }));
 
         this.gs.showScreen(["Save Complete"]);
 
