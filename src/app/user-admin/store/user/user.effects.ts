@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as  user_actions from './user.actions';
+import * as  allActions from './user.actions';
 import { UserService } from '../../services/user.service';
 import { catchError, switchMap, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { select_Page, select_Search_Record } from './user.selectors';
 export class UserEffects {
   List$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(user_actions.load_records),
+      ofType(allActions.load_records),
       withLatestFrom(
         this.store.select(select_Search_Record),
         this.store.select(select_Page)
@@ -23,18 +23,18 @@ export class UserEffects {
         return data;
       }),
       tap((result: any) => {
-        return this.store.dispatch(user_actions.load_success({ records: result.records, page: result.page }));
+        return this.store.dispatch(allActions.load_success({ records: result.records, page: result.page }));
       })
     );
   }, { dispatch: false });
 
   Delete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(user_actions.delete_record),
+      ofType(allActions.delete_record),
       switchMap((action: any) => this.service.delete(action.id)),
       tap((result: any) => {
         if (result.status)
-          this.store.dispatch(user_actions.delete_complete({ id: result.id }));
+          this.store.dispatch(allActions.delete_complete({ id: result.id }));
         else {
           throw new Error(result.message);
         }

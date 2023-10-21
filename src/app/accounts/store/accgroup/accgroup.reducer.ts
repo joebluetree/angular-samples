@@ -1,7 +1,7 @@
 import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iAccGroupm, iAccGroupm_Search } from '../../models/iaccgroupm';
-import * as all_actions from './accgroup.actions';
+import * as allActions from './accgroup.actions';
 import { iPage } from 'ngx-jrt-controls';
 
 export interface AccGroupState extends EntityState<iAccGroupm> {
@@ -29,25 +29,25 @@ export const initialState: AccGroupState = adapter.getInitialState({
 
 export const Reducer = createReducer<AccGroupState>(
   initialState,
-  on(all_actions.load_success, (state, action) => {
+  on(allActions.load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
-  on(all_actions.load_failure, (state, action) => {
+  on(allActions.load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
   }),
-  on(all_actions.update_selected_rowid, (state, action) => {
+  on(allActions.update_selected_rowid, (state, action) => {
     return { ...state, selectid: action.id };
   }),
-  on(all_actions.update_search, (state, action) => {
+  on(allActions.update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
   }),
-  on(all_actions.upsert_row, (state, action) => {
+  on(allActions.upsert_row, (state, action) => {
     return adapter.upsertOne(action.record, state)
   }),
-  on(all_actions.delete_complete, (state, action) => {
+  on(allActions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(all_actions.sort_records, (state, action) => {
+  on(allActions.sort_records, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )

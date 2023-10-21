@@ -6,7 +6,7 @@ export const select_Records = createSelector(
   selectAll
 )
 
-export const selectState = createSelector(
+export const select_State = createSelector(
   Feature,
   (state: AccGroupState) => state
 )

@@ -1,7 +1,7 @@
 import { createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { iBranchm, iBranchm_Search } from '../../models/ibranchm';
-import * as branch_actions from './branch.actions';
+import * as allActions from './branch.actions';
 import { iPage } from 'ngx-jrt-controls';
 
 export interface BranchState extends EntityState<iBranchm> {
@@ -29,25 +29,25 @@ export const initialState: BranchState = adapter.getInitialState({
 
 export const Reducer = createReducer<BranchState>(
   initialState,
-  on(branch_actions.load_success, (state, action) => {
+  on(allActions.load_success, (state, action) => {
     return adapter.setAll(action.records, { ...state, page: action.page, error: '' });
   }),
-  on(branch_actions.load_failure, (state, action) => {
+  on(allActions.load_failure, (state, action) => {
     return adapter.removeAll({ ...state, error: action.erorr })
   }),
-  on(branch_actions.update_selected_rowid, (state, action) => {
+  on(allActions.update_selected_rowid, (state, action) => {
     return { ...state, selectid: action.id };
   }),
-  on(branch_actions.update_search, (state, action) => {
+  on(allActions.update_search, (state, action) => {
     return { ...state, search_record: action.search_record }
   }),
-  on(branch_actions.upsert_row, (state, action) => {
+  on(allActions.upsert_row, (state, action) => {
     return adapter.upsertOne(action.record, state)
   }),
-  on(branch_actions.delete_complete, (state, action) => {
+  on(allActions.delete_complete, (state, action) => {
     return adapter.removeOne(action.id, state);
   }),
-  on(branch_actions.sort_records, (state, action) => {
+  on(allActions.sort_records, (state, action) => {
     return { ...state, sort_column: action.sort_column, sort_order: action.sort_order }
   })
 )

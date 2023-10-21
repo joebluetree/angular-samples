@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, switchMap, tap, withLatestFrom } from 'rxjs';
 
-import * as  all_actions from './accgroup.actions';
+import * as  allActions from './accgroup.actions';
 import { AccGroupService } from '../../services/accgroupm.service';
 import { AccGroupState } from './accgroup.reducer';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -13,7 +13,7 @@ import { select_Page, select_Search_Record } from './accgroup.selectors';
 export class AccGroupEffects {
   List$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(all_actions.load_records),
+      ofType(allActions.load_records),
       withLatestFrom(
         this.store.select(select_Search_Record),
         this.store.select(select_Page)
@@ -23,18 +23,18 @@ export class AccGroupEffects {
         return data;
       }),
       tap((result: any) => {
-        return this.store.dispatch(all_actions.load_success({ records: result.records, page: result.page }));
+        return this.store.dispatch(allActions.load_success({ records: result.records, page: result.page }));
       })
     );
   }, { dispatch: false });
 
   Delete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(all_actions.delete_record),
+      ofType(allActions.delete_record),
       switchMap((action: any) => this.service.delete(action.id)),
       tap((result: any) => {
         if (result.status)
-          this.store.dispatch(all_actions.delete_complete({ id: result.id }));
+          this.store.dispatch(allActions.delete_complete({ id: result.id }));
         else {
           throw new Error(result.message);
         }

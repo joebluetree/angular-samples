@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as  all_actions from './company.actions';
+import * as  allActions from './company.actions';
 import { CompanyService } from '../../services/company.service';
 import { catchError, switchMap, tap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { select_Page, select_Search_Record } from './company.selectors';
 export class CompanyEffects {
   List$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(all_actions.load_records),
+      ofType(allActions.load_records),
       withLatestFrom(
         this.store.select(select_Search_Record),
         this.store.select(select_Page)
@@ -22,18 +22,18 @@ export class CompanyEffects {
         return data;
       }),
       tap((result: any) => {
-        return this.store.dispatch(all_actions.load_success({ records: result.records, page: result.page }));
+        return this.store.dispatch(allActions.load_success({ records: result.records, page: result.page }));
       })
     );
   }, { dispatch: false });
 
   Delete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(all_actions.delete_records),
+      ofType(allActions.delete_records),
       switchMap((action: any) => this.service.delete(action.id)),
       tap((result: any) => {
         if (result.status)
-          this.store.dispatch(all_actions.delete_complete({ id: result.id }));
+          this.store.dispatch(allActions.delete_complete({ id: result.id }));
         else {
           throw new Error(result.message);
         }
