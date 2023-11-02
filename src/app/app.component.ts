@@ -10,7 +10,7 @@ import { GlobalService } from './core/services/global.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'myApp';
+  title = 'My App';
 
   constructor(
     private router: Router,
