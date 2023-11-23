@@ -1,22 +1,22 @@
-import * as allSelectors from '../../store/accgroup/accgroup.selectors';
+import * as allSelectors from '../../store/acctm/acctm.selectors';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as allActions from '../../store/accgroup/accgroup.actions';
+import * as allActions from '../../store/acctm/acctm.actions';
 import { Observable } from 'rxjs';
-import { iAccGroupm, iAccGroupm_Search } from '../../models/iaccgroupm';
+import { iAcctm, iAcctm_Search } from '../../models/iacctm';
 import { iPage } from 'ngx-jrt-controls';
-import { AccGroupState } from '../../store/accgroup/accgroup.reducer';
+import { AcctmGroupState } from '../../store/acctm/acctm.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { iMenum } from 'src/app/user-admin/models/imenum';
 
 @Component({
-  selector: 'app-accgroup-list',
-  templateUrl: './accgroup-list.component.html',
-  styleUrls: ['./accgroup-list.component.css']
+  selector: 'app-acctm-list',
+  templateUrl: './acctm-list.component.html',
+  styleUrls: ['./acctm-list.component.css']
 })
-export class AccGroupListComponent {
+export class AcctmListComponent {
   appid = '';
   menuid = '';
   title = '';
@@ -30,8 +30,8 @@ export class AccGroupListComponent {
 
   menum: iMenum | null;
 
-  search_record$: Observable<iAccGroupm_Search>;
-  records$: Observable<iAccGroupm[]>;
+  search_record$: Observable<iAcctm_Search>;
+  records$: Observable<iAcctm[]>;
   selected_id$: Observable<number>;
   sort_column$: Observable<string>;
   sort_order$: Observable<string>;
@@ -41,14 +41,11 @@ export class AccGroupListComponent {
   table_data: any[] = [];
 
   constructor(
-    private store: Store<AccGroupState>,
+    private store: Store<AcctmGroupState>,
     private route: ActivatedRoute,
     private location: Location,
     private gs: GlobalService
-  ) { }
-
-  ngOnInit(): void {
-
+  ) {
     this.route.queryParams.forEach(rec => {
       this.appid = rec["appid"];
       this.menuid = rec["menuid"];
@@ -69,12 +66,11 @@ export class AccGroupListComponent {
 
     const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
-      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/accounts/accgroupEdit', col_param: param, col_show: this.bEdit || this.bView },
-      { col_name: "grp_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "grp_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "grp_main_group", col_caption: "GROUP", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "grp_order", col_caption: "ORDER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-
+      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/accounts/acctmEdit', col_param: param, col_show: this.bEdit || this.bView },
+      { col_name: "acc_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "acc_code", col_caption: "CODE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "acc_short_name", col_caption: "SHORT-NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "acc_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
 
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
@@ -91,28 +87,34 @@ export class AccGroupListComponent {
     this.sort_order$ = this.store.select(allSelectors.select_Page_SortOrder);
     this.page$ = this.store.select(allSelectors.select_Page);
 
+
   }
 
-  search(search_record: iAccGroupm_Search) {
-    this.store.dispatch(allActions.update_search({ search_record: search_record }))
+  ngOnInit(): void {
+
+
+  }
+
+  search(search_record: iAcctm_Search) {
+    this.store.dispatch(allActions.update_search({ search_record: search_record, row_type: this.type }))
     this.pageEvents({ 'action': 'search' });
   }
 
   pageEvents(_action: any) {
-    this.store.dispatch(allActions.load_records({ action: _action.action }))
+    this.store.dispatch(allActions.load_records({ action: _action.action, row_type: this.type }))
   }
 
   callback_table(data: any) {
     if (data.action == 'SORT') {
-      this.store.dispatch(allActions.sort_records({ sort_column: data.sort_column, sort_order: data.sort_order }));
+      this.store.dispatch(allActions.sort_records({ sort_column: data.sort_column, sort_order: data.sort_order, row_type: this.type }));
     }
     if (data.action == 'ROW-SELECTED') {
-      this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id }));
+      this.store.dispatch(allActions.update_selected_rowid({ id: data.row_id, row_type: this.type }));
     }
     if (data.action == 'DELETE') {
-      if (!confirm(`Delete ${data.rec.grp_name} y/n`))
+      if (!confirm(`Delete ${data.rec.acc_name} y/n`))
         return;
-      this.store.dispatch(allActions.delete_record({ id: data.rec.grp_id }));
+      this.store.dispatch(allActions.delete_record({ id: data.rec.acc_id, row_type: this.type }));
     }
   }
 

@@ -1,0 +1,90 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/accounts/acctmEdit"
+    [queryParams]="{id :0, _id:id+1,menuid:menuid,type:type,appid:appid}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<div class="page-body">
+
+  <div class="container-fluid">
+    <form [formGroup]="mform">
+      <div class="row">
+
+        <div class="col-sm-6">
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Code</label>
+            <div class="col-sm-8">
+              <app-input maxlength="15" formControlName="acc_code" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Short Name</label>
+            <div class="col-sm-8">
+              <app-input maxlength="15" formControlName="acc_short_name" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Name</label>
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="acc_name" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-label-sm" for="">Type</label>
+            <div class="col-sm-8">
+              <app-combobox [dataSource]="dataList" [displayColumn]="'value'" [valueColumn]="'key'"
+                formControlName="acc_type"></app-combobox>
+            </div>
+          </div>
+
+
+
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">A/c Group</label>
+            <div class="col-sm-8">
+              <auto-complete formControlName="acc_grp_name" (CallBack)="callBack_AccGroup($event)" [table]="'accgroupm'"
+                [company_id]="getCompanyId()" [display_column]="'grp_name'" [url]="url" [filter]="{}"
+                required></auto-complete>
+            </div>
+          </div>
+
+
+
+
+          <div class="form-group row" *ngIf="type == 'ACC-CODE'">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
+            <div class="col-sm-8">
+              <auto-complete formControlName="acc_maincode_temp_name" (CallBack)="callBack_Acctm($event)"
+                [table]="'acctm_maincode'" [company_id]="getCompanyId()" [display_column]="'acc_name'" [url]="url"
+                [filter]="{acc_row_type : 'MAIN-CODE'}"></auto-complete>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<div class="page-footer line-bottom">
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div>
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

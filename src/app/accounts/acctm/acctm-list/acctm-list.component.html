@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-success btn-sm" routerLink="/accounts/acctmEdit"
+    [queryParams]="{id :0,menuid:menuid,type:type,  appid:appid}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<div class="page-search">
+  <ng-container *ngIf="(search_record$ | async) as record">
+    <app-acctm-search [input]="record" (output)="search($event)"></app-acctm-search>
+  </ng-container>
+</div>
+
+<div class="page-pagination" *ngIf="(page$ | async) as page">
+  <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
+</div>
+
+<div class="page-body">
+  <app-table [table]="table_data" [data]="records$ | ngrxPush" (callback_table)="callback_table($event)"
+    [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'acc_id'"
+    [selected_id]="selected_id$ | ngrxPush">
+  </app-table>
+</div>
+
+<div class="page-pagination line-bottom" *ngIf="(page$ | async) as page">
+  <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
+</div>

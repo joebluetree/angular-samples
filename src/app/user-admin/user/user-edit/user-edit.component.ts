@@ -70,9 +70,6 @@ export class UserEditComponent {
     })
   }
 
-  public get url() {
-    return this.gs.url;
-  }
 
   ngOnInit() {
     this.id = 0;
@@ -186,17 +183,16 @@ export class UserEditComponent {
   }
 
   callBack(action: { id: string, rec: iBranchm }) {
-
     if (action.id == 'rec_branch_name') {
-
       this.mform.patchValue({
         rec_branch_id: action.rec ? action.rec.branch_id : 0,
         rec_branch_name: action.rec ? action.rec.branch_name : '',
       })
-
     }
   }
-
+  public get url() {
+    return this.gs.url;
+  }
   getCompanyId() {
     return this.gs.user.user_company_id;
   }
