@@ -63,7 +63,7 @@
           <div class="form-group row" *ngIf="type == 'ACC-CODE'">
             <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
             <div class="col-sm-8">
-              <auto-complete formControlName="acc_maincode_temp_name" (CallBack)="callBack_Acctm($event)"
+              <auto-complete formControlName="acc_maincode_name" (CallBack)="callBack_Acctm($event)"
                 [table]="'acctm_maincode'" [company_id]="getCompanyId()" [display_column]="'acc_name'" [url]="url"
                 [filter]="{acc_row_type : 'MAIN-CODE'}"></auto-complete>
             </div>

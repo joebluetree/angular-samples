@@ -71,7 +71,9 @@ export class AcctmListComponent {
       { col_name: "acc_code", col_caption: "CODE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "acc_short_name", col_caption: "SHORT-NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "acc_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-
+      { col_name: "acc_type", col_caption: "TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "acc_grp_name", col_caption: "GROUP", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "acc_maincode_name", col_caption: "MAIN CODE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: this.type == 'ACC-CODE' },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

@@ -61,9 +61,9 @@ export class AcctmEditComponent {
       acc_name: ['', [Validators.required, Validators.maxLength(100)]],
       acc_type: ['NA', [Validators.required, Validators.maxLength(100)]],
       acc_row_type: [this.type],
-      acc_maincode_temp_id: [0],
-      acc_maincode_temp_name: [''],
-      acc_grp_id: [0, [Validators.required]],
+      acc_maincode_id: [null],
+      acc_maincode_name: [''],
+      acc_grp_id: [null, [Validators.required]],
       acc_grp_name: ['', [Validators.required]],
     })
   }
@@ -108,8 +108,8 @@ export class AcctmEditComponent {
           acc_grp_id: rec.acc_grp_id,
           acc_grp_name: rec.acc_grp_name,
           acc_row_type: rec.acc_row_type,
-          acc_maincode_temp_id: rec.acc_maincode_temp_id,
-          acc_maincode_temp_name: rec.acc_maincode_temp_name,
+          acc_maincode_id: rec.acc_maincode_id,
+          acc_maincode_name: rec.acc_maincode_name,
         });
       },
       error: (e) => {
@@ -180,14 +180,14 @@ export class AcctmEditComponent {
   callBack_Acctm(action: { id: string, rec: iAcctm }) {
     if (action.rec == null) {
       this.mform.patchValue({
-        acc_maincode_temp_id: null,
-        acc_maincode_temp_name: '',
+        acc_maincode_id: null,
+        acc_maincode_name: '',
       });
     }
     else {
       this.mform.patchValue({
-        acc_maincode_temp_id: action.rec.acc_id,
-        acc_maincode_temp_name: action.rec.acc_name,
+        acc_maincode_id: action.rec.acc_id,
+        acc_maincode_name: action.rec.acc_name,
       });
     }
   }
