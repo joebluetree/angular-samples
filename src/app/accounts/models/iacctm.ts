@@ -11,6 +11,7 @@ export interface iAcctm {
   acc_maincode_temp_name: string;
 
   acc_maincode_id: number;
+  acc_maincode: string;
   acc_maincode_name: string;
 
   acc_grp_id: number;
