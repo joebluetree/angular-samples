@@ -26,13 +26,21 @@ import * as branchReducer from './store/branch/branch.reducer';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserSearchComponent } from './user/user-search/user-search.component';
+
 import * as userReducer from './store/user/user.reducer';
 import { UserEffects } from './store/user/user.effects';
-import { RightsEffects } from './store/rights/rights.effects';
+
 import * as  rightsReducer from './store/rights/rights.reducer';
+import { RightsEffects } from './store/rights/rights.effects';
+
+import * as settingsReducer from './store/settings/settings.reducer';
+import { SettingsEffects } from './store/settings/settings.effects';
+
 import { RightsSearchComponent } from './rights/rights-search/rights-search.component';
 import { RightsListComponent } from './rights/rights-list/rights-list.component';
 import { RightsEditComponent } from './rights/rights-edit/rights-edit.component';
+import { SettingsSearchComponent } from './settings/settings-search/settings-search.component';
+import { SettingsListComponent } from './settings/settings-list/settings-list.component';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
@@ -47,6 +55,7 @@ const routes: Routes = [
   { path: 'userEdit', component: UserEditComponent },
   { path: 'rightsList', component: RightsListComponent },
   { path: 'rightsEdit', component: RightsEditComponent },
+  { path: 'settingsList', component: SettingsListComponent },
 
 ]
 
@@ -69,7 +78,9 @@ const routes: Routes = [
     UserSearchComponent,
     RightsSearchComponent,
     RightsListComponent,
-    RightsEditComponent
+    RightsEditComponent,
+    SettingsSearchComponent,
+    SettingsListComponent
   ],
   imports: [
     SharedModule,
@@ -80,7 +91,8 @@ const routes: Routes = [
     StoreModule.forFeature(moduleReducer.FeatureName, moduleReducer.Reducer),
     StoreModule.forFeature(menuReducer.FeatureName, menuReducer.Reducer),
     StoreModule.forFeature(rightsReducer.FeatureName, rightsReducer.Reducer),
-    EffectsModule.forFeature([CompanyEffects, BranchEffects, UserEffects, ModuleEffects, MenuEffects, RightsEffects]),
+    StoreModule.forFeature(settingsReducer.FeatureName, settingsReducer.Reducer),
+    EffectsModule.forFeature([CompanyEffects, BranchEffects, UserEffects, ModuleEffects, MenuEffects, RightsEffects, SettingsEffects]),
   ]
 })
 export class UserAdminModule { }
