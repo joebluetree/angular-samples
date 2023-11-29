@@ -1,0 +1,25 @@
+<div class="container-fluid">
+
+  <form [formGroup]="mform">
+
+    <div class="row">
+
+      <div class="col-sm-12">
+        <div class="form-group row">
+          <div class="col-sm-8">
+            <ng-container *ngIf="format=='input'">
+              <app-input formControlName="value" [type]="inputType"></app-input>
+            </ng-container>
+          </div>
+          <div class="col-sm-4">
+            <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()">Save</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

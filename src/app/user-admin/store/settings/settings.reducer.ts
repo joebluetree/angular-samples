@@ -12,6 +12,7 @@ export interface SettingsState extends EntityState<iSettings> {
   sort_column: string;
   sort_order: string;
   error: string;
+  format: string;
 };
 
 const adapter: EntityAdapter<iSettings> = createEntityAdapter<iSettings>({
@@ -25,7 +26,8 @@ export const initialSettingsState: SettingsState = adapter.getInitialState({
   page: <iPage>{ currentPageNo: 1, pages: 0, pageSize: 10, rows: 0 },
   sort_column: '',
   sort_order: '',
-  error: ''
+  error: '',
+  format: 'READ'
 });
 
 export interface SettingsGroupState {
@@ -76,7 +78,12 @@ export const Reducer = createReducer<SettingsGroupState>(
       ...state,
       [action.category]: { ...state[action.category], sort_column: action.sort_column, sort_order: action.sort_order }
     }
-  })
+  }),
+  on(allActions.update_format, (state, action) => {
+    const format = state[action.category].format;
+    return { ...state, [action.category]: { ...state[action.category], format: format == 'READ' ? 'WRITE' : 'READ' } };
+  }),
+
 
 )
 

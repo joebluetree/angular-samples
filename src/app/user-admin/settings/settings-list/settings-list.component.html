@@ -1,7 +1,9 @@
 <div class="page-header">
   <h5>{{title}}</h5>
   <button *ngIf="bAdd" class="btn btn-sm btn-success" (click)="save()">Re-Update</button>
+  <button class="btn btn-success btn-sm" (click)="changeFormat()">Toggle Format</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+
 </div>
 
 <div class="page-search" *ngIf="(search_record$ | async) as record">
@@ -12,12 +14,37 @@
   <app-page [page]="page" (pageEvents)="pageEvents($event)"></app-page>
 </div>
 
-<div class="page-body">
+<div class="page-body" *ngrxLet="format$ as format">
   <ng-container *ngIf="(records$ | async) as records">
-    <app-table [table]="table_data" [data]="records" (callback_table)="callback_table($event)"
-      [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'id'"
-      [selected_id]="selected_id$ | ngrxPush">
-    </app-table>
+
+    <ng-container *ngIf="format=='READ'">
+      <app-table [table]="table_data" [data]="records" (callback_table)="callback_table($event)"
+        [sort_column]="sort_column$ | ngrxPush" [sort_order]="sort_order$ | ngrxPush" [row_id_name]="'id'"
+        [selected_id]="selected_id$ | ngrxPush">
+      </app-table>
+    </ng-container>
+
+    <ng-container *ngIf="format=='WRITE'">
+      <div class="table-responsive">
+        <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>CAPTION</th>
+              <th>VALUE</th>
+            </tr>
+          </thead>
+          <tbody *ngrxLet="selected_id$ as id">
+            <tr *ngFor="let rec  of records" [ngClass]="{'table-info' : rec.id == id }" (click)="selectRow(rec)">
+              <td>{{rec.caption}}</td>
+              <td>
+                <app-settings-edit [appid]="appid" [menuid]="menuid" [type]="type" [rec]="rec"></app-settings-edit>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+
   </ng-container>
 
 </div>

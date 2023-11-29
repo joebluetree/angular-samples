@@ -51,3 +51,7 @@ export const select_Page_SortOrder = createSelector(
   select_GroupState,
   (a) => a.sort_order
 )
+export const select_Format = createSelector(
+  select_GroupState,
+  (a) => a.format
+)

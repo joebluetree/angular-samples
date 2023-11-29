@@ -48,3 +48,8 @@ export const sort_records = createAction(
   prefix + 'Sort Column',
   props<{ sort_column: string, sort_order: string, category: string }>()
 );
+
+export const update_format = createAction(
+  prefix + 'Update Format',
+  props<{ category: string }>()
+)

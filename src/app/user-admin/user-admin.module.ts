@@ -41,6 +41,7 @@ import { RightsListComponent } from './rights/rights-list/rights-list.component'
 import { RightsEditComponent } from './rights/rights-edit/rights-edit.component';
 import { SettingsSearchComponent } from './settings/settings-search/settings-search.component';
 import { SettingsListComponent } from './settings/settings-list/settings-list.component';
+import { SettingsEditComponent } from './settings/settings-edit/settings-edit.component';
 
 const routes: Routes = [
   { path: 'moduleList', component: ModuleListComponent },
@@ -80,7 +81,8 @@ const routes: Routes = [
     RightsListComponent,
     RightsEditComponent,
     SettingsSearchComponent,
-    SettingsListComponent
+    SettingsListComponent,
+    SettingsEditComponent
   ],
   imports: [
     SharedModule,

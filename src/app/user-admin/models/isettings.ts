@@ -1,6 +1,6 @@
 export interface iSettings {
   id: number;
-  categroy: string;
+  category: string;
   caption: string;
   remarks: string;
   type: string;

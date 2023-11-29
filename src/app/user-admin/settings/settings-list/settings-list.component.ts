@@ -31,12 +31,14 @@ export class SettingsListComponent {
 
   menum: iMenum | null;
 
+
   search_record$: Observable<iSettings_Search>;
   records$: Observable<iSettings[]>;
   page$: Observable<any>;
   selected_id$: Observable<number>;
   sort_column$: Observable<string>;
   sort_order$: Observable<string>;
+  format$: Observable<string>;
   table_data: any[] = [];
 
   constructor(
@@ -72,11 +74,13 @@ export class SettingsListComponent {
     this.sort_column$ = this.store.select(allSelectors.select_Page_SortColumn);
     this.sort_order$ = this.store.select(allSelectors.select_Page_SortOrder);
     this.page$ = this.store.select(allSelectors.select_Page);
+    this.format$ = this.store.select(allSelectors.select_Format);
+
+    //this.store.dispatch(allActions.update_format({ category: this.type }));
 
     const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
       { col_name: "id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "category", col_caption: "CATEGORY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "caption", col_caption: "CAPTION", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "type", col_caption: "TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "table", col_caption: "TABLE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
@@ -137,7 +141,13 @@ export class SettingsListComponent {
 
   }
 
+  changeFormat() {
+    this.store.dispatch(allActions.update_format({ category: this.type }));
+  }
 
+  selectRow(rec: any) {
+    this.store.dispatch(allActions.update_selected_rowid({ id: rec.id, category: this.type }));
+  }
 
 }
 
