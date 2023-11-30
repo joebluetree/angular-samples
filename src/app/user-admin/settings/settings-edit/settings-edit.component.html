@@ -10,6 +10,14 @@
             <ng-container *ngIf="format=='input'">
               <app-input formControlName="value" [type]="inputType"></app-input>
             </ng-container>
+            <ng-container *ngIf="format=='table'">
+              <auto-complete formControlName="name" (CallBack)="callBack($event)" [table]="table_name"
+                [company_id]="getCompanyId()" [display_column]="display_column2" [url]="url"></auto-complete>
+            </ng-container>
+            <ng-container *ngIf="format=='boolean'">
+              <app-checkbox formControlName="value"></app-checkbox>
+              <label class="ms-1 form-label form-label-sm"> Yes/No</label>
+            </ng-container>
           </div>
           <div class="col-sm-4">
             <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()">Save</button>

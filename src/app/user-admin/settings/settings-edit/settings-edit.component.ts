@@ -24,9 +24,7 @@ export class SettingsEditComponent {
   @Input() type: string = '';
   @Input() rec: any = {};
 
-
   inputType = 'text';
-
   format = "";
 
   //@Output() output = new EventEmitter<iSettings_Search>();
@@ -46,6 +44,15 @@ export class SettingsEditComponent {
   code = '';
   name = '';
   value = '';
+
+
+
+  table_name = '';
+
+  value_column = '';
+  display_column1 = '';
+  display_column2 = '';
+
 
   mform: FormGroup;
   constructor(
@@ -74,6 +81,7 @@ export class SettingsEditComponent {
       this.bDelete = this.menum.rights_delete == "Y" ? true : false;
     }
     const mrec = JSON.parse(this.rec.value.replaceAll("'", '"'));
+
     if (this.rec.type == "INT" || this.rec.type == "NUMBER" || this.rec.type == "STRING") {
       this.format = 'input';
       if (this.rec.type == "INT" || this.rec.type == "NUMBER")
@@ -85,6 +93,60 @@ export class SettingsEditComponent {
         value: this.value
       })
     }
+
+    if (this.rec.type == "TABLE") {
+      this.format = 'table';
+      let col = this.rec.table.toString().split(",");
+
+      this.table_name = col[0];
+      this.value_column = col[1].trim();
+      this.display_column1 = col[2].trim();
+      this.display_column2 = col[3].trim();
+
+      this.value = mrec.value;
+      this.code = mrec.code;
+      this.name = mrec.name;
+      this.mform.patchValue({
+        value: this.value,
+        code: this.code,
+        name: this.name
+      })
+    }
+
+    if (this.rec.type == "BOOLEAN") {
+      this.format = 'boolean';
+      this.inputType = 'boolean';
+      this.value = mrec.value;
+      this.mform.patchValue({
+        value: this.value
+      })
+    }
+
+
+
+  }
+
+  callBack(action: { id: string, rec: any }) {
+
+
+    this.mform.patchValue({
+      value: action.rec ? action.rec[this.value_column] : '',
+      code: action.rec ? action.rec[this.display_column2] : '',
+      name: action.rec ? action.rec[this.display_column2] : '',
+    });
+
+
+
+
+  }
+
+
+  getCompanyId() {
+    return this.gs.user.user_company_id;
+  }
+
+  public get url() {
+    return this.gs.url;
   }
 
 
@@ -96,8 +158,13 @@ export class SettingsEditComponent {
 
     let data = <iSettings>{ ...this.rec };
 
-    if (this.format == 'input') {
+    if (this.format == 'input' || this.format == 'boolean') {
       const _value = { 'value': this.mform.value.value }
+      data.value = JSON.stringify(_value);
+    }
+
+    if (this.format == 'table') {
+      const _value = { 'value': this.mform.value.value, 'code': this.mform.value.code, 'name': this.mform.value.name }
       data.value = JSON.stringify(_value);
     }
 
