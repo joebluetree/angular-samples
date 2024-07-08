@@ -31,7 +31,7 @@ export class GlobalService {
     private router: Router
   ) {
     this.url = "https:/jsonplaceholder.typicode.com";
-    this.url = "http://localhost:5153";
+    this.url = "http://localhost:7001";
   }
 
   public getUrl(path: string = '') {

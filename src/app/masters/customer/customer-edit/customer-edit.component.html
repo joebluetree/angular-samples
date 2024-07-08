@@ -1,0 +1,90 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/masters/customerEdit"
+    [queryParams]="{id :0, _id:id+1,menuid:menuid,type:type,appid:appid}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<div class="page-body">
+
+  <div class="container-fluid">
+    <form [formGroup]="mform">
+      <div class="row">
+
+        <div class="col-sm-6">
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Code</label>
+            <div class="col-sm-8">
+              <app-input maxlength="15" formControlName="cust_code" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Short Name</label>
+            <div class="col-sm-8">
+              <app-input maxlength="15" formControlName="cust_short_name" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Name</label>
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="cust_name" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Display Name</label>
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="cust_display_name" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Address</label>
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="cust_address1" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="cust_address2" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="cust_address3" [case]="'UPPER'" required></app-input>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
+            <div class="col-sm-8">
+              <auto-complete formControlName="cust_parent_name" (CallBack)="callBack_Customer($event)"
+                [table]="'customerm'" [company_id]="getCompanyId()" [display_column]="'cust_name'" [url]="url"
+                [filter]="{cust_is_parent : 'Y'}"></auto-complete>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<div class="page-footer line-bottom">
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div>
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

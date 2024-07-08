@@ -1,23 +1,22 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AcctmService } from '../../services/acctm.service';
-import { iAcctm } from '../../models/iacctm';
+import { CustomermService } from '../../services/customerm.service';
+import { iCustomerm } from '../../models/icustomerm';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { Store } from '@ngrx/store';
-import { upsert_row } from '../../store/acctm/acctm.actions';
-import { AcctmState } from '../../store/acctm/acctm.reducer';
+import { upsert_row } from '../../store/customer/customer.actions';
+import { CustomermState } from '../../store/customer/customer.reducer';
 import { iMenum } from 'src/app/user-admin/models/imenum';
-import { iAccGroupm } from '../../models/iaccgroupm';
 
 
 @Component({
-  selector: 'app-acctm-edit',
-  templateUrl: './acctm-edit.component.html',
-  styleUrls: ['./acctm-edit.component.css']
+  selector: 'app-customer-edit',
+  templateUrl: './customer-edit.component.html',
+  styleUrls: ['./customer-edit.component.css']
 })
-export class AcctmEditComponent {
+export class CustomerEditComponent {
   id = 0;
   appid = '';
   menuid = '';
@@ -35,7 +34,8 @@ export class AcctmEditComponent {
   showModel = true;
   mform: FormGroup;
 
-  filter = { acc_row_type: this.type };
+  filter = { cust_row_type: this.type };
+
 
 
   dataList = [
@@ -47,23 +47,28 @@ export class AcctmEditComponent {
 
   constructor(
     private gs: GlobalService,
-    private service: AcctmService,
+    private service: CustomermService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private location: Location,
-    private store: Store<AcctmState>
+    private store: Store<CustomermState>
   ) {
     this.mform = this.fb.group({
-      acc_id: [0],
-      acc_code: ['', [Validators.required, Validators.maxLength(15)]],
-      acc_short_name: ['', [Validators.maxLength(15)]],
-      acc_name: ['', [Validators.required, Validators.maxLength(100)]],
-      acc_type: ['NA', [Validators.required, Validators.maxLength(100)]],
-      acc_row_type: [this.type],
-      acc_maincode_id: [null],
-      acc_maincode_name: [''],
-      acc_grp_id: [null, [Validators.required]],
-      acc_grp_name: ['', [Validators.required]],
+      cust_id: [0],
+      cust_code: ['', [Validators.required, Validators.maxLength(15)]],
+      cust_short_name: ['', [Validators.maxLength(15)]],
+      cust_name: ['', [Validators.required, Validators.maxLength(100)]],
+
+      cust_display_name: ['', [Validators.required, Validators.maxLength(100)]],
+      cust_address1: ['', [Validators.required, Validators.maxLength(100)]],
+      cust_address2: ['', [Validators.required, Validators.maxLength(100)]],
+      cust_address3: [''],
+
+
+      cust_type: [''],
+      cust_row_type: [this.type],
+      cust_parent_id: [null],
+      cust_parent_name: [''],
     })
   }
 
@@ -99,16 +104,18 @@ export class AcctmEditComponent {
       next: (rec) => {
         console.log(rec);
         this.mform.setValue({
-          acc_id: rec.acc_id,
-          acc_code: rec.acc_code,
-          acc_short_name: rec.acc_short_name,
-          acc_name: rec.acc_name,
-          acc_type: rec.acc_type,
-          acc_grp_id: rec.acc_grp_id,
-          acc_grp_name: rec.acc_grp_name,
-          acc_row_type: rec.acc_row_type,
-          acc_maincode_id: rec.acc_maincode_id,
-          acc_maincode_name: rec.acc_maincode_name,
+          cust_id: rec.cust_id,
+          cust_code: rec.cust_code,
+          cust_short_name: rec.cust_short_name,
+          cust_name: rec.cust_name,
+          cust_display_name: rec.cust_display_name,
+          cust_address1: rec.cust_address1,
+          cust_address2: rec.cust_address2,
+          cust_address3: rec.cust_address3,
+          cust_type: rec.cust_type,
+          cust_row_type: rec.cust_row_type,
+          cust_parent_id: rec.cust_parent_id,
+          cust_parent_name: rec.cust_parent_name,
         });
       },
       error: (e) => {
@@ -127,23 +134,23 @@ export class AcctmEditComponent {
       alert('Invalid Form')
       return;
     }
-    const data = <iAcctm>this.mform.value;
+    const data = <iCustomerm>this.mform.value;
 
-    if (data.acc_id == null)
-      data.acc_id = 0;
+    if (data.cust_id == null)
+      data.cust_id = 0;
 
-    data.acc_row_type = this.type;
+    data.cust_row_type = this.type;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
 
     this.service.save(this.id, data).subscribe({
-      next: (v: iAcctm) => {
-        if (data.acc_id == 0) {
-          this.id = v.acc_id;
-          data.acc_id = this.id;
-          this.mform.patchValue({ acc_id: this.id });
+      next: (v: iCustomerm) => {
+        if (data.cust_id == 0) {
+          this.id = v.cust_id;
+          data.cust_id = this.id;
+          this.mform.patchValue({ cust_id: this.id });
           const param = {
             id: this.id.toString()
           };
@@ -162,31 +169,18 @@ export class AcctmEditComponent {
     })
   }
 
-  callBack_AccGroup(action: { id: string, rec: iAccGroupm }) {
+
+  callBack_Customer(action: { id: string, rec: iCustomerm }) {
     if (action.rec == null) {
       this.mform.patchValue({
-        acc_grp_id: null,
-        acc_grp_name: '',
+        cust_parent_id: null,
+        cust_parent_name: '',
       });
     }
     else {
       this.mform.patchValue({
-        acc_grp_id: action.rec.grp_id,
-        acc_grp_name: action.rec.grp_name,
-      });
-    }
-  }
-  callBack_Acctm(action: { id: string, rec: iAcctm }) {
-    if (action.rec == null) {
-      this.mform.patchValue({
-        acc_maincode_id: null,
-        acc_maincode_name: '',
-      });
-    }
-    else {
-      this.mform.patchValue({
-        acc_maincode_id: action.rec.acc_id,
-        acc_maincode_name: action.rec.acc_name,
+        cust_parent_id: action.rec.cust_id,
+        cust_parent_name: action.rec.cust_name,
       });
     }
   }

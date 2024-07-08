@@ -11,6 +11,12 @@ import { finalize, Observable } from 'rxjs';
 import { LoginService } from './services/login.service';
 import { GlobalService } from './services/global.service';
 
+/*
+providers: [
+  { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true }
+]
+*/
+
 @Injectable()
 export class httpInterceptor implements HttpInterceptor {
 
